@@ -2,356 +2,816 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Alaa Erfan – Cybersecurity Portfolio</title>
+  <title>Ala'a Alsheikh Ali | Cybersecurity Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Optional Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    /* Global */
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0b1020;
-      color: #f5f5f5;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, #1f2937 0, transparent 50%),
+        radial-gradient(circle at 100% 0%, #1d4ed8 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #0f172a 0, #020617 55%);
+      color: #e5e7eb;
       line-height: 1.6;
-    }
-
-    header {
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      background: radial-gradient(circle at top, #1f3bff33, #0b1020);
-      border-bottom: 1px solid #222842;
-    }
-
-    header h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.1rem;
-    }
-
-    header p {
-      margin: 0.2rem 0;
-      max-width: 730px;
-      margin-left: auto;
-      margin-right: auto;
-      color: #c7cbe8;
-    }
-
-    .tagline {
-      font-weight: 500;
-      color: #e2e4ff;
-    }
-
-    nav {
-      margin-top: 1.5rem;
-    }
-
-    nav a {
-      display: inline-block;
-      margin: 0 0.5rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid #3b4b8a;
-      text-decoration: none;
-      color: #e2e4ff;
-      font-size: 0.9rem;
-    }
-
-    nav a:hover {
-      background: #1b2344;
-    }
-
-    main {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
-    }
-
-    section {
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid #1a2139;
-    }
-
-    section:last-of-type {
-      border-bottom: none;
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      color: #f3f4ff;
-    }
-
-    h3 {
-      margin-bottom: 0.3rem;
-      font-size: 1.05rem;
-      color: #f3f4ff;
-    }
-
-    .project {
-      margin-bottom: 1.3rem;
-      padding: 0.9rem 1rem;
-      border-radius: 0.75rem;
-      background: #10172f;
-      border: 1px solid #222842;
-    }
-
-    .project small {
-      display: inline-block;
-      font-size: 0.78rem;
-      color: #9ca3db;
-      margin-bottom: 0.25rem;
-    }
-
-    .project ul {
-      margin: 0.3rem 0 0.2rem 1.1rem;
-      padding: 0;
-      font-size: 0.9rem;
-    }
-
-    .project p {
-      margin: 0.3rem 0;
-      font-size: 0.93rem;
-      color: #d3d6f5;
-    }
-
-    .pill-row {
-      margin-top: 0.4rem;
-    }
-
-    .pill {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid #343f70;
-      margin-right: 0.4rem;
-      margin-top: 0.25rem;
-      color: #c7caec;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 1.5rem;
-    }
-
-    .about-list {
-      margin: 0.25rem 0 0.5rem 1.1rem;
-      padding: 0;
-      font-size: 0.93rem;
+      min-height: 100vh;
     }
 
     a {
-      color: #8fb4ff;
+      color: inherit;
+      text-decoration: none;
     }
 
-    a:hover {
-      color: #bcd2ff;
+    /* Layout helpers */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
-    footer {
-      text-align: center;
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: rgba(2, 6, 23, 0.82);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .nav-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #38bdf8, #6366f1);
+      box-shadow: 0 0 18px rgba(129, 140, 248, 0.8);
+    }
+
+    .nav-name {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: #cbd5f5;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: 0.1rem;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22c55e, #38bdf8);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.18s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
       font-size: 0.8rem;
-      padding: 1.5rem 1rem 2rem;
-      color: #7f85b3;
-      border-top: 1px solid #111628;
-      background: #050713;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a5b4fc;
+      margin-bottom: 0.7rem;
     }
 
-    @media (max-width: 720px) {
-      header h1 {
-        font-size: 1.7rem;
-      }
-      .about-grid {
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      background: linear-gradient(to right, #f9fafb, #a5b4fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 1.8rem;
+      color: #c7d2fe;
+      max-width: 34rem;
+      font-size: 0.98rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      color: #020617;
+      box-shadow: 0 18px 45px rgba(56, 189, 248, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      filter: brightness(1.05);
+      box-shadow: 0 24px 60px rgba(56, 189, 248, 0.55);
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.5rem 1.3rem;
+      font-size: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.75);
+      color: #e5e7eb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(148, 163, 184, 0.8);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost span {
+      font-size: 1rem;
+    }
+
+    .hero-note {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .hero-card {
+      border-radius: 1.25rem;
+      padding: 1.4rem 1.5rem;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.13), transparent 60%),
+                  rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a5b4fc;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0 0 0.4rem;
+    }
+
+    .hero-card-text {
+      font-size: 0.86rem;
+      color: #cbd5f5;
+      margin: 0 0 0.7rem;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.7rem;
+    }
+
+    .metric {
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.9rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(51, 65, 85, 0.85);
+      font-size: 0.8rem;
+    }
+
+    .metric span {
+      display: block;
+    }
+
+    .metric-label {
+      color: #9ca3af;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .hero-blur-orb {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.36), transparent 65%);
+      top: -40px;
+      right: -40px;
+      filter: blur(4px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    /* Sections */
+    section {
+      padding: 2.5rem 0 2.9rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.6rem;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin: 0 0 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      max-width: 34rem;
+    }
+
+    /* Project cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      border-radius: 1rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      padding: 1rem 1.1rem 1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(0) scale(1);
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        border-color 0.18s ease-out,
+        background 0.18s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.9);
+      border-color: rgba(129, 140, 248, 0.9);
+      background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.19), rgba(15, 23, 42, 0.96));
+    }
+
+    .card-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card-pill {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #cbd5f5;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.86rem;
+      color: #cbd5f5;
+    }
+
+    .card-footer {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-footer span.icon {
+      font-size: 1rem;
+    }
+
+    /* About section */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr);
+      gap: 1.8rem;
+    }
+
+    .about-text {
+      font-size: 0.93rem;
+      color: #e5e7eb;
+    }
+
+    .about-list {
+      margin: 0.5rem 0 0;
+      padding-left: 1rem;
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    .about-card {
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 0.86rem;
+      color: #cbd5f5;
+    }
+
+    .about-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Contact */
+    .contact-text {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-links {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+    }
+
+    .contact-links a {
+      color: #a5b4fc;
+    }
+
+    .contact-links a:hover {
+      color: #c7d2fe;
+      text-decoration: underline;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.4);
+      padding: 1.5rem 0 2rem;
+      font-size: 0.78rem;
+      text-align: center;
+      color: #9ca3af;
+      background: rgba(2, 6, 23, 0.96);
+      margin-top: 1.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero-grid {
         grid-template-columns: 1fr;
       }
-      main {
-        padding: 1.5rem 1.1rem 2.5rem;
+
+      .hero {
+        padding-top: 3.4rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        padding-inline: 1.1rem;
+      }
+
+      .hero-grid {
+        gap: 2rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Hi, I'm Alaa – Cybersecurity Graduate</h1>
-    <p class="tagline">Security+ certified, with hands-on projects in network security, ARP attack detection, and security operations.</p>
-    <p>
-      MSc Cybersecurity &amp; BSc Networks and Cybersecurity graduate who enjoys turning theory
-      into practical tools – from ARP spoofing detection to SIEM tuning and secure network design.
-    </p>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="nav-left">
+        <div class="nav-logo"></div>
+        <div class="nav-name">Alaa Erfan</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="projects">
-      <h2>Selected Projects</h2>
-
-      <div class="project">
-        <small>Network Security · Python · SDN</small>
-        <h3>Dynamic ARP Cache Poisoning Detection &amp; Prevention</h3>
-        <p>
-          Designed and implemented a system to detect and block ARP spoofing in virtual networks using
-          Python (Scapy) and Software Defined Networking.
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-kicker">Cybersecurity · Networks · Python</div>
+        <h1 class="hero-title">
+          Building secure networks and practical security tools with a human focus.
+        </h1>
+        <p class="hero-subtitle">
+          Cybersecurity graduate with hands on work in ARP attack detection, secure network design,
+          SIEM tuning and research on how people really behave with security.
         </p>
-        <ul>
-          <li>Monitored ARP traffic for anomalies such as multiple MACs mapping to a single IP.</li>
-          <li>Integrated with an SDN controller to automatically update flow rules and block malicious hosts.</li>
-          <li>Tested against multiple ARP attack tools as well as my own custom attack script.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">Python</span>
-          <span class="pill">Scapy</span>
-          <span class="pill">SDN</span>
-          <span class="pill">Network Security</span>
+
+        <div class="hero-badges">
+          <span class="badge">MSc Cybersecurity</span>
+          <span class="badge">BSc Networks &amp; Cybersecurity (First Class)</span>
+          <span class="badge">CompTIA Security+</span>
         </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+            View selected work
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            <span>↓</span> Get in touch
+          </button>
+        </div>
+        <p class="hero-note">
+          Currently interested in roles in security operations, network security and technical consulting.
+        </p>
       </div>
 
-      <div class="project">
-        <small>Human Factors · Web · Research</small>
-        <h3>Password Security &amp; UX Behaviour Study</h3>
-        <p>
-          Built a password creation interface with real-time strength feedback and studied how design
-          choices influence security behaviour.
+      <aside class="hero-card reveal">
+        <div class="hero-blur-orb"></div>
+        <div class="hero-card-tag">Snapshot</div>
+        <h2 class="hero-card-title">From packets to people</h2>
+        <p class="hero-card-text">
+          I have worked on both the technical and human sides of security:
+          detecting ARP spoofing in virtual networks, redesigning resilient Cisco topologies,
+          reducing noisy SIEM alerts and studying password behaviour.
         </p>
-        <ul>
-          <li>Implemented a Flask-based web portal with strength meters and time-to-crack estimates.</li>
-          <li>Ran a user study to compare password strength and user perception under different UX designs.</li>
-          <li>Analysed results with statistical methods and aligned recommendations with NIST SP 800-63.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">Flask</span>
-          <span class="pill">UX &amp; Security</span>
-          <span class="pill">NIST 800-63</span>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <span class="metric-label">Key tools</span>
+            <span class="metric-value">Python, Scapy, Wireshark, Splunk, Nessus, Cisco</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Focus areas</span>
+            <span class="metric-value">Network security, SOC, human centred security</span>
+          </div>
         </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Selected work</div>
+        <h2 class="section-title">Projects that show how I think about security</h2>
+        <p class="section-subtitle">
+          A mix of academic projects, self directed work and competition experience. 
+          Each one is focused on solving a clear problem and explaining the reasoning behind it.
+        </p>
       </div>
 
-      <div class="project">
-        <small>Network Design · Cisco · Resilience</small>
-        <h3>Enterprise Network Redesign for Security &amp; High Availability</h3>
-        <p>
-          Redesigned a growing organisation’s network to improve segmentation, resilience, and
-          disaster recovery.
-        </p>
-        <ul>
-          <li>Introduced VLANs, firewalls, and site-to-site VPNs for secure segmentation and remote access.</li>
-          <li>Used HSRP, EtherChannel, and STP to remove single points of failure and improve uptime.</li>
-          <li>Aligned design with maximum tolerable downtime requirements and future scalability.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">Cisco</span>
-          <span class="pill">VLANs</span>
-          <span class="pill">HSRP</span>
-          <span class="pill">VPN</span>
-        </div>
-      </div>
-
-      <div class="project">
-        <small>SIEM · Incident Handling</small>
-        <h3>Reducing False Positives in SIEM Alerts</h3>
-        <p>
-          Investigated a client environment where users were overwhelmed by security pop-ups and alerts
-          from test malware (EICAR), then tuned alerting to keep protection high while noise was reduced.
-        </p>
-        <ul>
-          <li>Identified that frequent alerts were caused by benign test files used across the environment.</li>
-          <li>Adjusted detection rules and alert thresholds to differentiate routine testing from real threats.</li>
-          <li>Documented changes and communicated impact in clear language for non-technical stakeholders.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">SIEM</span>
-          <span class="pill">Alert Tuning</span>
-          <span class="pill">False Positives</span>
-        </div>
-      </div>
-
-      <div class="project">
-        <small>Python · Data Engineering</small>
-        <h3>Multi-Format Data Merge with Dynamic Identifiers</h3>
-        <p>
-          Created a Python system to merge JSON, XML, and CSV records while handling missing data and
-          changing identifiers over time.
-        </p>
-        <ul>
-          <li>Standardised attribute names across files and ensured a consistent structure for all records.</li>
-          <li>Used a unique identifier as the key and the full record as the value, with logic to refresh IDs when key attributes changed.</li>
-          <li>Designed the process to distinguish true zero values from missing data to keep business logic accurate.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">Python</span>
-          <span class="pill">Data Cleaning</span>
-          <span class="pill">JSON · XML · CSV</span>
-        </div>
-      </div>
-
-      <div class="project">
-        <small>CTF · Teamwork</small>
-        <h3>Capture the Flag Security Competition</h3>
-        <p>
-          Took a coordination role in a CTF, assigning challenges based on each teammate’s strengths and
-          making sure we stayed focused under time pressure.
-        </p>
-        <ul>
-          <li>Mapped cryptography tasks to the teammate experienced in it, scripting tasks to the one strong in automation.</li>
-          <li>Balanced speed and accuracy so flags were submitted correctly on the first attempt where possible.</li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill">Teamwork</span>
-          <span class="pill">CTF</span>
-          <span class="pill">Problem Solving</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="about-grid">
-        <div>
+      <div class="grid-3">
+        <!-- ARP project -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">Python</span>
+            <span class="card-pill">Scapy</span>
+            <span class="card-pill">SDN</span>
+          </div>
+          <h3>Dynamic ARP cache poisoning detection</h3>
           <p>
-            I’m a cybersecurity graduate with a background in both network engineering and security.
-            I enjoy understanding how systems really work – then breaking them (safely) and defending them.
+            Built a system that monitors ARP traffic for anomalies, then uses an SDN controller to block
+            spoofed hosts in real time. Tested against custom and off the shelf ARP attack tools.
+          </p>
+          <div class="card-footer">
+            <span>Network defence · Virtual lab</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+
+        <!-- Password UX -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">Flask</span>
+            <span class="card-pill">UX research</span>
+            <span class="card-pill">NIST 800-63</span>
+          </div>
+          <h3>Password security and behaviour study</h3>
+          <p>
+            Designed a password creation portal with strength meters and time to crack feedback, then ran
+            a user study to see how design nudges change the strength of real passwords.
+          </p>
+          <div class="card-footer">
+            <span>Security & user experience</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+
+        <!-- Network redesign -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">Cisco</span>
+            <span class="card-pill">VLANs</span>
+            <span class="card-pill">HSRP</span>
+          </div>
+          <h3>Secure network redesign for a growing company</h3>
+          <p>
+            Redesigned an enterprise network to remove single points of failure, introduce segmentation
+            and provide secure remote access with VPNs and firewalls, aligned with downtime targets.
+          </p>
+          <div class="card-footer">
+            <span>Design, resilience and security</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+
+        <!-- SIEM tuning -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">SIEM</span>
+            <span class="card-pill">Alert tuning</span>
+          </div>
+          <h3>Reducing noisy SIEM alerts from test malware</h3>
+          <p>
+            Investigated a client setup where EICAR test files caused constant alerts.
+            Tuned rules so teams still had strong coverage without alert fatigue.
+          </p>
+          <div class="card-footer">
+            <span>Practical operations focus</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+
+        <!-- Data merge project -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">Python</span>
+            <span class="card-pill">Data cleaning</span>
+          </div>
+          <h3>Merging JSON, XML and CSV with dynamic identifiers</h3>
+          <p>
+            Created a pipeline that standardised fields across formats, used a smart identifier as the key,
+            and refreshed IDs safely when attributes like age changed over time.
+          </p>
+          <div class="card-footer">
+            <span>Data quality & integrity</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+
+        <!-- CTF -->
+        <article class="card reveal">
+          <div class="card-pill-row">
+            <span class="card-pill">CTF</span>
+            <span class="card-pill">Teamwork</span>
+          </div>
+          <h3>Capture the Flag competition coordination</h3>
+          <p>
+            Helped direct our team under time pressure by assigning tasks by strength
+            and keeping track of which flags were close to solved, which needed a new angle.
+          </p>
+          <div class="card-footer">
+            <span>Leadership in a technical setting</span>
+            <span class="icon">↗</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Background</div>
+        <h2 class="section-title">A security path grounded in networks and people</h2>
+      </div>
+
+      <div class="about-layout">
+        <div class="about-text reveal">
+          <p>
+            I started with networks, learning how routing, switching and protocols behave in the real world.
+            From there I moved into cybersecurity, where the same packets now carry risk as well as data.
           </p>
           <p>
-            My interests include network security, security operations, and the human side of security –
-            especially how design and behaviour influence real-world risk.
+            I like projects where I can combine hands on labs, scripting and clear explanations. 
+            For example, building an ARP detection tool, then writing documentation that a non technical 
+            stakeholder can understand.
           </p>
-        </div>
-        <div>
-          <h3>Snapshot</h3>
           <ul class="about-list">
-            <li>MSc Cybersecurity</li>
-            <li>BSc Networks &amp; Cybersecurity (First Class)</li>
-            <li>CompTIA Security+ certified</li>
-            <li>Experience with Splunk, Wireshark, Nessus, Cisco, Python</li>
+            <li>MSc Cybersecurity, University of Sunderland</li>
+            <li>BSc Networks and Cybersecurity, First Class</li>
+            <li>CompTIA Security+</li>
+            <li>Experience with Splunk, Wireshark, Nessus, Cisco networking, Python</li>
           </ul>
         </div>
-      </div>
-    </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        I’m open to opportunities in cybersecurity, security operations, and related technical roles.
+        <aside class="about-card reveal">
+          <div class="about-tag">What I enjoy</div>
+          <p>
+            • Turning messy traffic or logs into a clear story.<br>
+            • Designing networks that fail gracefully instead of all at once.<br>
+            • Tuning security tools so they support people instead of overwhelming them.<br>
+            • Explaining technical work in a way that recruiters, managers and users can follow.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Contact</div>
+        <h2 class="section-title">Let us talk</h2>
+        <p class="section-subtitle">
+          Open to internships, graduate roles and junior positions in security operations, network security
+          and consulting.
+        </p>
+      </div>
+
+      <p class="contact-text">
+        The fastest way to reach me is by email or LinkedIn. I am happy to share code, reports or 
+        diagrams from the projects listed above if you want to see more detail.
       </p>
-      <p>
-        📧 Email: <a href="mailto:YOUR.EMAIL@here.com">alaa@alsheikhali.com</a><br />
-        💼 LinkedIn: <a href="https://www.linkedin.com/">https://www.linkedin.com/in/ala-a-alsheikh-ali-7124191b8?trk=contact-info</a><br />
-        🐙 GitHub: <a href="https://github.com/alaaerfan7">github.com/alaaerfan7</a>
-      </p>
-      <p style="font-size:0.85rem; color:#9ea3d0;">
-        (Replace the email and LinkedIn link above with your real details.)
-      </p>
-    </section>
-  </main>
+
+      <div class="contact-links">
+        📧 Email:
+        <a href="mailto:YOUR.EMAIL@here.com">YOUR.EMAIL@here.com</a><br>
+        💼 LinkedIn:
+        <a href="https://www.linkedin.com/">your-profile-link</a><br>
+        🐙 GitHub:
+        <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer">
+          github.com/alaaerfan7
+        </a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    © <span id="year"></span> Alaa Erfan – Cybersecurity Portfolio
+    © <span id="year"></span> Alaa Erfan. Built with HTML, CSS and a bit of JavaScript.
   </footer>
 
   <script>
-    // Set current year automatically
+    // Current year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple scroll reveal for elements with .reveal
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
