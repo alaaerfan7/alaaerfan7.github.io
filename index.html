@@ -1,10 +1,357 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Cybersecurity Portfolio</title>
+  <meta charset="UTF-8" />
+  <title>Alaa Erfan – Cybersecurity Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1020;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: radial-gradient(circle at top, #1f3bff33, #0b1020);
+      border-bottom: 1px solid #222842;
+    }
+
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.1rem;
+    }
+
+    header p {
+      margin: 0.2rem 0;
+      max-width: 730px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #c7cbe8;
+    }
+
+    .tagline {
+      font-weight: 500;
+      color: #e2e4ff;
+    }
+
+    nav {
+      margin-top: 1.5rem;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #3b4b8a;
+      text-decoration: none;
+      color: #e2e4ff;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      background: #1b2344;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #1a2139;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #f3f4ff;
+    }
+
+    h3 {
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+      color: #f3f4ff;
+    }
+
+    .project {
+      margin-bottom: 1.3rem;
+      padding: 0.9rem 1rem;
+      border-radius: 0.75rem;
+      background: #10172f;
+      border: 1px solid #222842;
+    }
+
+    .project small {
+      display: inline-block;
+      font-size: 0.78rem;
+      color: #9ca3db;
+      margin-bottom: 0.25rem;
+    }
+
+    .project ul {
+      margin: 0.3rem 0 0.2rem 1.1rem;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .project p {
+      margin: 0.3rem 0;
+      font-size: 0.93rem;
+      color: #d3d6f5;
+    }
+
+    .pill-row {
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid #343f70;
+      margin-right: 0.4rem;
+      margin-top: 0.25rem;
+      color: #c7caec;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 1.5rem;
+    }
+
+    .about-list {
+      margin: 0.25rem 0 0.5rem 1.1rem;
+      padding: 0;
+      font-size: 0.93rem;
+    }
+
+    a {
+      color: #8fb4ff;
+    }
+
+    a:hover {
+      color: #bcd2ff;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 1.5rem 1rem 2rem;
+      color: #7f85b3;
+      border-top: 1px solid #111628;
+      background: #050713;
+    }
+
+    @media (max-width: 720px) {
+      header h1 {
+        font-size: 1.7rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 1.5rem 1.1rem 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to my Portfolio</h1>
-  <p>This is where my cybersecurity projects will go.</p>
+  <header>
+    <h1>Hi, I'm Alaa – Cybersecurity Graduate</h1>
+    <p class="tagline">Security+ certified, with hands-on projects in network security, ARP attack detection, and security operations.</p>
+    <p>
+      MSc Cybersecurity &amp; BSc Networks and Cybersecurity graduate who enjoys turning theory
+      into practical tools – from ARP spoofing detection to SIEM tuning and secure network design.
+    </p>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="projects">
+      <h2>Selected Projects</h2>
+
+      <div class="project">
+        <small>Network Security · Python · SDN</small>
+        <h3>Dynamic ARP Cache Poisoning Detection &amp; Prevention</h3>
+        <p>
+          Designed and implemented a system to detect and block ARP spoofing in virtual networks using
+          Python (Scapy) and Software Defined Networking.
+        </p>
+        <ul>
+          <li>Monitored ARP traffic for anomalies such as multiple MACs mapping to a single IP.</li>
+          <li>Integrated with an SDN controller to automatically update flow rules and block malicious hosts.</li>
+          <li>Tested against multiple ARP attack tools as well as my own custom attack script.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">Python</span>
+          <span class="pill">Scapy</span>
+          <span class="pill">SDN</span>
+          <span class="pill">Network Security</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <small>Human Factors · Web · Research</small>
+        <h3>Password Security &amp; UX Behaviour Study</h3>
+        <p>
+          Built a password creation interface with real-time strength feedback and studied how design
+          choices influence security behaviour.
+        </p>
+        <ul>
+          <li>Implemented a Flask-based web portal with strength meters and time-to-crack estimates.</li>
+          <li>Ran a user study to compare password strength and user perception under different UX designs.</li>
+          <li>Analysed results with statistical methods and aligned recommendations with NIST SP 800-63.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">Flask</span>
+          <span class="pill">UX &amp; Security</span>
+          <span class="pill">NIST 800-63</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <small>Network Design · Cisco · Resilience</small>
+        <h3>Enterprise Network Redesign for Security &amp; High Availability</h3>
+        <p>
+          Redesigned a growing organisation’s network to improve segmentation, resilience, and
+          disaster recovery.
+        </p>
+        <ul>
+          <li>Introduced VLANs, firewalls, and site-to-site VPNs for secure segmentation and remote access.</li>
+          <li>Used HSRP, EtherChannel, and STP to remove single points of failure and improve uptime.</li>
+          <li>Aligned design with maximum tolerable downtime requirements and future scalability.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">Cisco</span>
+          <span class="pill">VLANs</span>
+          <span class="pill">HSRP</span>
+          <span class="pill">VPN</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <small>SIEM · Incident Handling</small>
+        <h3>Reducing False Positives in SIEM Alerts</h3>
+        <p>
+          Investigated a client environment where users were overwhelmed by security pop-ups and alerts
+          from test malware (EICAR), then tuned alerting to keep protection high while noise was reduced.
+        </p>
+        <ul>
+          <li>Identified that frequent alerts were caused by benign test files used across the environment.</li>
+          <li>Adjusted detection rules and alert thresholds to differentiate routine testing from real threats.</li>
+          <li>Documented changes and communicated impact in clear language for non-technical stakeholders.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">SIEM</span>
+          <span class="pill">Alert Tuning</span>
+          <span class="pill">False Positives</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <small>Python · Data Engineering</small>
+        <h3>Multi-Format Data Merge with Dynamic Identifiers</h3>
+        <p>
+          Created a Python system to merge JSON, XML, and CSV records while handling missing data and
+          changing identifiers over time.
+        </p>
+        <ul>
+          <li>Standardised attribute names across files and ensured a consistent structure for all records.</li>
+          <li>Used a unique identifier as the key and the full record as the value, with logic to refresh IDs when key attributes changed.</li>
+          <li>Designed the process to distinguish true zero values from missing data to keep business logic accurate.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">Python</span>
+          <span class="pill">Data Cleaning</span>
+          <span class="pill">JSON · XML · CSV</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <small>CTF · Teamwork</small>
+        <h3>Capture the Flag Security Competition</h3>
+        <p>
+          Took a coordination role in a CTF, assigning challenges based on each teammate’s strengths and
+          making sure we stayed focused under time pressure.
+        </p>
+        <ul>
+          <li>Mapped cryptography tasks to the teammate experienced in it, scripting tasks to the one strong in automation.</li>
+          <li>Balanced speed and accuracy so flags were submitted correctly on the first attempt where possible.</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill">Teamwork</span>
+          <span class="pill">CTF</span>
+          <span class="pill">Problem Solving</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div>
+          <p>
+            I’m a cybersecurity graduate with a background in both network engineering and security.
+            I enjoy understanding how systems really work – then breaking them (safely) and defending them.
+          </p>
+          <p>
+            My interests include network security, security operations, and the human side of security –
+            especially how design and behaviour influence real-world risk.
+          </p>
+        </div>
+        <div>
+          <h3>Snapshot</h3>
+          <ul class="about-list">
+            <li>MSc Cybersecurity</li>
+            <li>BSc Networks &amp; Cybersecurity (First Class)</li>
+            <li>CompTIA Security+ certified</li>
+            <li>Experience with Splunk, Wireshark, Nessus, Cisco, Python</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        I’m open to opportunities in cybersecurity, security operations, and related technical roles.
+      </p>
+      <p>
+        📧 Email: <a href="mailto:YOUR.EMAIL@here.com">alaa@alsheikhali.com</a><br />
+        💼 LinkedIn: <a href="https://www.linkedin.com/">https://www.linkedin.com/in/ala-a-alsheikh-ali-7124191b8?trk=contact-info</a><br />
+        🐙 GitHub: <a href="https://github.com/alaaerfan7">github.com/alaaerfan7</a>
+      </p>
+      <p style="font-size:0.85rem; color:#9ea3d0;">
+        (Replace the email and LinkedIn link above with your real details.)
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Alaa Erfan – Cybersecurity Portfolio
+  </footer>
+
+  <script>
+    // Set current year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
