@@ -1,3 +1,18 @@
+I apologize for removing your specific content. I got too excited about the design upgrade and used placeholder text instead of your actual hard work.
+
+Here is the **complete fix**. I have taken the **new design** (VS Code style, full-width skills, timeline tree) and populated it with **YOUR original text, your specific projects (ARP, Password, etc.), your work experience (Flags Technology, Sports Direct), and your education details.**
+
+This is your full portfolio, with the new design applied to your content.
+
+### Instructions
+
+1.  Copy the code below.
+2.  Ensure your profile picture is saved as `assets/profile.JPG` (or update line 228).
+3.  Ensure your CV is saved as `Alaa_Alsheikh_Alis_CV.pdf`.
+
+<!-- end list -->
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +30,8 @@
   <style>
     :root {
       /* Base Colors - Deep Cyber/Space Theme */
-      --bg: #030712; /* Very dark blue/black */
-      --card-bg: #0b1120;
+      --bg: #020617; 
+      --card-bg: #0f172a;
       --card-border: #1e293b;
       --text-main: #f3f4f6;
       --text-soft: #9ca3af;
@@ -24,15 +39,14 @@
       /* Accents */
       --primary: #8b5cf6; /* Violet */
       --secondary: #3b82f6; /* Blue */
-      --accent: #10b981; /* Emerald/Green for security success */
-      --danger: #ef4444; /* Red for threats */
+      --accent: #10b981; /* Emerald */
       
       /* Code Theme Colors */
-      --code-bg: #0f1117;
-      --code-keyword: #c678dd;
-      --code-func: #61afef;
-      --code-string: #98c379;
-      --code-comment: #5c6370;
+      --code-bg: #0d1117;
+      --code-keyword: #ff7b72;
+      --code-func: #d2a8ff;
+      --code-string: #a5d6ff;
+      --code-comment: #8b949e;
     }
 
     * { box-sizing: border-box; }
@@ -43,8 +57,8 @@
       font-family: "Inter", sans-serif;
       background-color: var(--bg);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
@@ -54,23 +68,17 @@
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
 
     a { text-decoration: none; color: inherit; transition: 0.2s; }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
     /* --- Navigation --- */
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(3, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      background: rgba(2, 6, 23, 0.85);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .nav-inner {
@@ -81,374 +89,244 @@
     }
     .nav-logo {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
       background: linear-gradient(to right, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
+      text-transform: uppercase;
     }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    .nav-links a:hover { color: var(--primary); }
-    
-    @media(max-width: 768px) {
-      .nav-links { display: none; } /* Simplified for mobile */
-    }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-soft); }
+    .nav-links a:hover { color: #fff; transform: translateY(-1px); }
+    @media(max-width: 768px) { .nav-links { display: none; } }
 
     /* --- Hero Section --- */
     .hero {
-      padding: 8rem 0 6rem;
+      padding: 7rem 0 5rem;
       text-align: center;
-      position: relative;
     }
-    .hero-badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      background: rgba(139, 92, 246, 0.1);
-      border: 1px solid rgba(139, 92, 246, 0.2);
-      color: var(--primary);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.05em;
+    .hero-role {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
     }
     .hero-title {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
-      line-height: 1.1;
-      margin: 0 auto 1.5rem;
-      background: linear-gradient(to bottom right, #ffffff, #94a3b8);
+      margin: 0 auto 1rem;
+      background: linear-gradient(to right, #fff, #94a3b8);
       -webkit-background-clip: text;
       color: transparent;
-      max-width: 900px;
+      line-height: 1.1;
+    }
+    .hero-meta {
+      color: var(--secondary);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
     }
     .hero-subtitle {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-soft);
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto 2.5rem;
     }
-    .hero-btns {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
     .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      padding: 0.7rem 1.8rem;
+      border-radius: 999px;
       font-weight: 600;
-      font-size: 0.95rem;
       cursor: pointer;
-      display: flex;
+      border: none;
+      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      transition: all 0.2s;
     }
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      border: none;
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
     }
-    .btn-primary:hover { background: #7c3aed; transform: translateY(-2px); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4); }
     .btn-outline {
-      background: transparent;
-      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
       color: var(--text-main);
     }
-    .btn-outline:hover { border-color: var(--text-soft); background: rgba(255,255,255,0.03); }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
 
-    /* --- Skills Marquee (Full Width) --- */
-    .skills-section {
-      padding: 4rem 0;
-      border-top: 1px solid rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      background: #02040a;
-      overflow: hidden;
+    /* --- About Section --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin: 4rem 0;
     }
-    .marquee-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .profile-frame {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
       position: relative;
     }
-    .marquee-fade {
+    .profile-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-frame::after {
+      content: "";
       position: absolute;
-      top: 0; bottom: 0; left: 0; width: 100px;
-      background: linear-gradient(to right, #02040a, transparent);
-      z-index: 10;
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg), transparent);
     }
-    .marquee-fade.right {
-      left: auto; right: 0;
-      background: linear-gradient(to left, #02040a, transparent);
+    @media(max-width: 800px) { .about-grid { grid-template-columns: 1fr; } .profile-frame { max-width: 300px; margin: 0 auto; } }
+
+    /* --- Skills Marquee --- */
+    .skills-section {
+      padding: 3rem 0;
+      border-block: 1px solid rgba(255,255,255,0.05);
+      background: #02040a;
+      overflow: hidden;
+      margin: 4rem 0;
     }
+    .marquee-container { display: flex; flex-direction: column; gap: 1rem; }
     .marquee-row {
       display: flex;
       width: max-content;
       animation: scroll 40s linear infinite;
     }
-    .marquee-row:nth-child(even) {
-      animation-direction: reverse; /* Alternate direction */
-    }
+    .marquee-row:nth-child(even) { animation-direction: reverse; }
     .marquee-row:hover { animation-play-state: paused; }
-    
     @keyframes scroll { to { transform: translateX(-50%); } }
-
-    .skill-item {
+    
+    .skill-pill {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       padding: 0.5rem 1.2rem;
       margin: 0 0.5rem;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 6px;
+      border-radius: 99px;
       color: var(--text-soft);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       white-space: nowrap;
     }
-    .skill-item i { font-size: 1.2rem; }
-    .skill-item:hover {
-      background: rgba(255,255,255,0.08);
-      color: var(--text-main);
-      border-color: var(--primary);
+    .skill-pill i { font-size: 1.1rem; }
+    .skill-pill:hover { border-color: var(--primary); color: #fff; background: rgba(139, 92, 246, 0.1); }
+
+    /* --- Experience & Education (Timeline Tree) --- */
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-kicker { color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.8rem; font-weight: 700; }
+    .section-title { font-size: 2rem; margin: 0.5rem 0; }
+    
+    .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+    .timeline::after {
+      content: ''; position: absolute; width: 2px; background: #1e293b;
+      top: 0; bottom: 0; left: 50%; margin-left: -1px;
+    }
+    .timeline-item { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
+    .timeline-item.left { left: 0; text-align: right; }
+    .timeline-item.right { left: 50%; text-align: left; }
+    
+    .timeline-item::after {
+      content: ''; position: absolute; width: 14px; height: 14px;
+      right: -7px; top: 24px; background: var(--bg);
+      border: 3px solid var(--primary); border-radius: 50%; z-index: 10;
+    }
+    .timeline-item.right::after { left: -7px; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 1.5rem;
+      border-radius: 12px;
+      position: relative;
+      transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    
+    .card-role { font-size: 1.05rem; font-weight: 600; color: #fff; }
+    .card-org { color: var(--secondary); font-size: 0.9rem; margin-bottom: 0.4rem; font-weight: 500; }
+    .card-date { font-size: 0.8rem; color: #64748b; margin-bottom: 0.8rem; text-transform: uppercase; }
+    .card-desc { font-size: 0.9rem; color: var(--text-soft); }
+    .card-tag { 
+      display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px;
+      margin-top: 0.5rem; background: rgba(16, 185, 129, 0.1); color: var(--accent);
     }
 
-    /* --- "Code Showcase" Projects --- */
-    .showcase-section { padding: 6rem 0; }
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    .section-desc {
-      text-align: center;
-      color: var(--text-soft);
-      max-width: 600px;
-      margin: 0 auto 3rem;
-    }
-
-    .ide-container {
+    /* --- Code Showcase (VS Code Style) --- */
+    .ide-wrapper {
       background: #0d1117;
       border: 1px solid #30363d;
       border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       display: grid;
-      grid-template-columns: 250px 1fr;
-      height: 600px;
+      grid-template-columns: 240px 1fr;
+      height: 650px;
       overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
-
-    /* Sidebar */
-    .ide-sidebar {
-      background: #010409;
-      border-right: 1px solid #30363d;
-      display: flex;
-      flex-direction: column;
-    }
-    .ide-header {
-      padding: 1rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #7d8590;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .file-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .file-item {
+    .ide-sidebar { background: #010409; border-right: 1px solid #30363d; display: flex; flex-direction: column; }
+    .ide-title { padding: 1rem; font-size: 0.8rem; font-weight: 600; color: #7d8590; text-transform: uppercase; }
+    .file-btn {
       padding: 0.6rem 1rem;
       cursor: pointer;
-      color: #c9d1d9;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.9rem;
-      border-left: 2px solid transparent;
-      transition: 0.1s;
-    }
-    .file-item:hover { background: #161b22; }
-    .file-item.active {
-      background: #161b22;
-      border-left-color: var(--primary);
-      color: #58a6ff;
-    }
-    .file-icon { width: 16px; text-align: center; }
-
-    /* Main Editor Area */
-    .ide-main { display: flex; flex-direction: column; }
-    
-    /* Tabs */
-    .ide-tabs {
-      display: flex;
-      background: #010409;
-      border-bottom: 1px solid #30363d;
-    }
-    .ide-tab {
-      padding: 0.7rem 1.2rem;
-      font-size: 0.85rem;
-      color: #7d8590;
-      cursor: pointer;
-      border-right: 1px solid #30363d;
+      color: #8b949e;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-size: 0.85rem;
+      transition: 0.1s;
+      border-left: 2px solid transparent;
     }
-    .ide-tab.active { background: #0d1117; color: #c9d1d9; border-top: 2px solid var(--primary); }
+    .file-btn:hover { background: #161b22; color: #c9d1d9; }
+    .file-btn.active { background: #161b22; color: #fff; border-left-color: var(--primary); }
     
-    /* Content */
-    .ide-content {
-      padding: 1.5rem;
-      overflow-y: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: #c9d1d9;
-      height: 100%;
+    .ide-main { display: flex; flex-direction: column; background: #0d1117; overflow: hidden; }
+    .ide-tabs { display: flex; background: #010409; border-bottom: 1px solid #30363d; }
+    .tab {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      color: #8b949e;
+      border-right: 1px solid #30363d;
+      border-top: 2px solid transparent;
     }
+    .tab.active { background: #0d1117; color: #c9d1d9; border-top-color: var(--primary); }
     
-    /* Syntax Highlighting Simulation */
-    .kwd { color: var(--code-keyword); }
-    .func { color: var(--code-func); }
-    .str { color: var(--code-string); }
-    .com { color: var(--code-comment); font-style: italic; }
-    .project-meta {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #30363d;
-    }
-    .project-badges { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-    .badge {
-      background: rgba(56, 189, 248, 0.1);
-      color: #38bdf8;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-family: "Inter", sans-serif;
-    }
+    .ide-content { padding: 1.5rem; overflow-y: auto; height: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+    .project-header { margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #30363d; }
+    .project-title { color: #fff; font-size: 1.1rem; font-weight: 600; }
+    .project-tags { color: #8b949e; font-size: 0.8rem; margin-top: 0.3rem; font-family: "Inter", sans-serif; }
+    .project-desc { color: #c9d1d9; margin-top: 1rem; font-family: "Inter", sans-serif; font-size: 0.95rem; }
 
-    /* --- Education Tree (Timeline) --- */
-    .edu-section { padding: 6rem 0; position: relative; }
-    
-    .timeline {
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    /* The Central Line */
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      background-color: #30363d;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -1px;
-    }
+    /* Syntax Highlighting Mockup */
+    .c-kwd { color: var(--code-keyword); }
+    .c-func { color: var(--code-func); }
+    .c-str { color: var(--code-string); }
+    .c-com { color: var(--code-comment); font-style: italic; }
 
-    .timeline-item {
-      padding: 10px 40px;
-      position: relative;
-      background-color: inherit;
-      width: 50%;
+    /* --- Contact --- */
+    .contact { text-align: center; padding: 5rem 0; }
+    .social-row { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+    .social-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-soft); font-size: 1.4rem; transition: 0.2s;
     }
+    .social-icon:hover { transform: translateY(-4px); color: #fff; border-color: var(--primary); background: var(--card-border); }
 
-    /* Left side */
-    .timeline-item.left { left: 0; text-align: right; }
-    /* Right side */
-    .timeline-item.right { left: 50%; text-align: left; }
-
-    /* The Dot */
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      right: -8px;
-      background-color: var(--bg);
-      border: 3px solid var(--primary);
-      top: 22px;
-      border-radius: 50%;
-      z-index: 1;
-      transition: 0.2s;
-    }
-    .timeline-item.right::after { left: -8px; }
-    .timeline-item:hover::after { background-color: var(--primary); box-shadow: 0 0 15px var(--primary); }
-
-    .edu-content {
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      position: relative;
-      transition: 0.3s;
-    }
-    .edu-content:hover { transform: translateY(-3px); border-color: var(--primary); }
-    
-    .edu-degree { font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .edu-school { color: var(--secondary); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .edu-grade { 
-      display: inline-block; 
-      font-size: 0.8rem; 
-      background: rgba(16, 185, 129, 0.15); 
-      color: #34d399; 
-      padding: 0.2rem 0.6rem; 
-      border-radius: 4px; 
-      margin-bottom: 0.8rem; 
-    }
-    .edu-desc { font-size: 0.9rem; color: var(--text-soft); }
-
-    /* --- Contact & Socials --- */
-    .contact-section { padding: 5rem 0; text-align: center; }
-    .social-row {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .social-btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--text-soft);
-      transition: 0.3s;
-    }
-    .social-btn:hover {
-      transform: translateY(-5px);
-      color: #fff;
-    }
-    .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
-    .social-btn.github:hover { background: #333; border-color: #333; }
-    .social-btn.email:hover { background: var(--primary); border-color: var(--primary); }
-
-    /* Responsive Timeline */
-    @media screen and (max-width: 768px) {
-      .ide-container { grid-template-columns: 1fr; height: auto; }
-      .ide-sidebar { display: none; } /* Hide file list on mobile, usually better to use dropdown but keeping simple */
-      .hero-title { font-size: 2.5rem; }
-      
-      .timeline::after { left: 31px; }
-      .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-      .timeline-item.left { text-align: left; }
-      .timeline-item.left::after { left: 23px; }
-      .timeline-item.right { left: 0%; }
-      .timeline-item.right::after { left: 23px; }
+    /* Mobile */
+    @media(max-width: 768px) {
+      .ide-wrapper { grid-template-columns: 1fr; height: auto; }
+      .ide-sidebar { overflow-x: auto; flex-direction: row; border-bottom: 1px solid #30363d; }
+      .ide-main { height: 500px; }
+      .timeline::after { left: 20px; }
+      .timeline-item { width: 100%; padding-left: 50px; text-align: left; }
+      .timeline-item.right { left: 0; }
+      .timeline-item::after { left: 13px; }
     }
   </style>
 </head>
@@ -456,385 +334,399 @@
 
   <nav class="nav">
     <div class="container nav-inner">
-      <div class="nav-logo">
-        <i class="fa-solid fa-shield-halved"></i> ALA'A ALSHEIKH ALI
-      </div>
+      <div class="nav-logo"><i class="fa-solid fa-shield-halved"></i> ALA'A ALSHEIKH ALI</div>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
-        <a href="#showcase">Code Showcase</a>
-        <a href="#path">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
   <section class="hero container" id="about">
-    <div class="hero-badge">Available for Hire</div>
-    <h1 class="hero-title">Building Secure Networks &<br>Breaking Vulnerabilities.</h1>
+    <div class="hero-role">Future Network Security Analyst</div>
+    <h1 class="hero-title">Hi, I'm Ala'a.</h1>
+    <div class="hero-meta">
+      MSc Cybersecurity (Distinction) · BSc Networks & Cybersecurity · CompTIA Security+
+    </div>
     <p class="hero-subtitle">
-      Network Security Analyst & Cybersecurity Specialist. I design resilient infrastructures, 
-      simulate advanced threats, and create tools to automate defense.
+      I like building and breaking security labs to see how networks actually behave under pressure – 
+      then turning that into clear designs, playbooks and tools that make life easier for analysts and engineers.
     </p>
-    <div class="hero-btns">
-      <a href="#showcase" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Code</a>
+    <div>
+      <a href="#projects" class="btn btn-primary">See my Code</a>
       <a href="Alaa_Alsheikh_Alis_CV.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-download"></i> Download CV</a>
     </div>
-  </section>
-
-  <section class="skills-section" id="skills">
-    <div class="marquee-container">
-      <div class="marquee-fade"></div>
-      <div class="marquee-fade right"></div>
-
-      <div class="marquee-row">
-        <div class="skill-item"><i class="devicon-python-plain colored"></i> Python</div>
-        <div class="skill-item"><i class="devicon-bash-plain"></i> Bash Scripting</div>
-        <div class="skill-item"><i class="devicon-linux-plain colored"></i> Linux (Ubuntu/CentOS)</div>
-        <div class="skill-item"><i class="devicon-windows8-original colored"></i> Windows Server</div>
-        <div class="skill-item"><i class="devicon-csharp-plain colored"></i> C#</div>
-        <div class="skill-item"><i class="devicon-mysql-plain colored"></i> SQL</div>
-        <div class="skill-item"><i class="devicon-javascript-plain colored"></i> JavaScript</div>
-        <div class="skill-item"><i class="devicon-python-plain colored"></i> Python</div>
-        <div class="skill-item"><i class="devicon-bash-plain"></i> Bash Scripting</div>
-        <div class="skill-item"><i class="devicon-linux-plain colored"></i> Linux (Ubuntu/CentOS)</div>
-        <div class="skill-item"><i class="devicon-windows8-original colored"></i> Windows Server</div>
-        <div class="skill-item"><i class="devicon-csharp-plain colored"></i> C#</div>
-        <div class="skill-item"><i class="devicon-mysql-plain colored"></i> SQL</div>
-        <div class="skill-item"><i class="devicon-javascript-plain colored"></i> JavaScript</div>
+    
+    <div class="about-grid">
+      <div class="profile-frame">
+        <img src="assets/profile.JPG" alt="Ala'a Alsheikh Ali">
       </div>
-
-      <div class="marquee-row">
-        <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
-        <div class="skill-item"><i class="devicon-azure-plain colored"></i> Azure Entra ID</div>
-        <div class="skill-item"><i class="fa-solid fa-network-wired" style="color:#f59e0b"></i> Cisco IOS</div>
-        <div class="skill-item"><i class="fa-solid fa-shield-virus" style="color:#ef4444"></i> Wireshark</div>
-        <div class="skill-item"><i class="devicon-splunk-original-wordmark colored"></i> Splunk (SIEM)</div>
-        <div class="skill-item"><i class="fa-solid fa-server" style="color:#3b82f6"></i> Intune</div>
-        <div class="skill-item"><i class="devicon-docker-plain colored"></i> Docker</div>
-        <div class="skill-item"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
-        <div class="skill-item"><i class="devicon-azure-plain colored"></i> Azure Entra ID</div>
-        <div class="skill-item"><i class="fa-solid fa-network-wired" style="color:#f59e0b"></i> Cisco IOS</div>
-        <div class="skill-item"><i class="fa-solid fa-shield-virus" style="color:#ef4444"></i> Wireshark</div>
-        <div class="skill-item"><i class="devicon-splunk-original-wordmark colored"></i> Splunk (SIEM)</div>
-        <div class="skill-item"><i class="fa-solid fa-server" style="color:#3b82f6"></i> Intune</div>
-        <div class="skill-item"><i class="devicon-docker-plain colored"></i> Docker</div>
-      </div>
-
-      <div class="marquee-row">
-        <div class="skill-item"><i class="fa-solid fa-lock"></i> CompTIA Security+</div>
-        <div class="skill-item"><i class="fa-solid fa-book-open"></i> NIST Framework</div>
-        <div class="skill-item"><i class="fa-solid fa-file-shield"></i> ISO 27001</div>
-        <div class="skill-item"><i class="fa-solid fa-bug"></i> OWASP Top 10</div>
-        <div class="skill-item"><i class="fa-solid fa-user-secret"></i> Metasploit</div>
-        <div class="skill-item"><i class="fa-solid fa-radar"></i> Nessus</div>
-        <div class="skill-item"><i class="fa-solid fa-fingerprint"></i> Digital Forensics</div>
-        <div class="skill-item"><i class="fa-solid fa-lock"></i> CompTIA Security+</div>
-        <div class="skill-item"><i class="fa-solid fa-book-open"></i> NIST Framework</div>
-        <div class="skill-item"><i class="fa-solid fa-file-shield"></i> ISO 27001</div>
-        <div class="skill-item"><i class="fa-solid fa-bug"></i> OWASP Top 10</div>
-        <div class="skill-item"><i class="fa-solid fa-user-secret"></i> Metasploit</div>
-        <div class="skill-item"><i class="fa-solid fa-radar"></i> Nessus</div>
-        <div class="skill-item"><i class="fa-solid fa-fingerprint"></i> Digital Forensics</div>
+      <div style="text-align: left;">
+        <div class="section-kicker">About Me</div>
+        <h2 style="margin-top:0.5rem;">Who I am and how I like to work</h2>
+        <p style="color:var(--text-soft);">
+          I started from the network side – routing, switching and topologies – and then moved deeper into 
+          cybersecurity. Most of my learning happens inside labs: virtual networks, Linux servers, packet captures, 
+          SIEM dashboards and Python scripts.
+        </p>
+        <p style="color:var(--text-soft);">
+          I enjoy understanding what the network and the user are actually doing, then designing security controls 
+          that make sense in that context. That might be a detection rule, a redesign or a small script that 
+          automates something analysts do manually.
+        </p>
       </div>
     </div>
   </section>
 
-  <section class="showcase-section container" id="showcase">
-    <h2 class="section-title">Code Showcase</h2>
-    <p class="section-desc">Explore my coding style and project architecture through these interactive snippets. Click the files on the left to inspect the logic.</p>
-
-    <div class="ide-container">
-      <div class="ide-sidebar">
-        <div class="ide-header">Explorer</div>
-        <ul class="file-list">
-          <li class="file-item active" onclick="loadProject('arp')">
-            <span class="file-icon"><i class="devicon-python-plain" style="color:#f59e0b"></i></span>
-            arp_spoof_detector.py
-          </li>
-          <li class="file-item" onclick="loadProject('network')">
-            <span class="file-icon"><i class="fa-solid fa-network-wired" style="color:#3b82f6"></i></span>
-            secure_topology_vlan.cfg
-          </li>
-          <li class="file-item" onclick="loadProject('siem')">
-            <span class="file-icon"><i class="devicon-splunk-original" style="color:#10b981"></i></span>
-            siem_alert_rules.spl
-          </li>
-          <li class="file-item" onclick="loadProject('pass')">
-            <span class="file-icon"><i class="devicon-python-plain" style="color:#8b5cf6"></i></span>
-            password_strength_ai.py
-          </li>
-        </ul>
-      </div>
-
-      <div class="ide-main">
-        <div class="ide-tabs">
-          <div class="ide-tab active" id="tab-name">
-            <i class="devicon-python-plain" style="color:#f59e0b"></i> arp_spoof_detector.py
-          </div>
-        </div>
-        <div class="ide-content" id="ide-code-area">
-          </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="edu-section" id="path">
+  <section id="experience" style="padding: 4rem 0;">
     <div class="container">
-      <h2 class="section-title">Academic & Professional Path</h2>
-      <p class="section-desc">A timeline of my formal education and industry certifications.</p>
-      
+      <div class="section-header">
+        <div class="section-kicker">Experience</div>
+        <h2 class="section-title">Where I’ve been</h2>
+        <p style="color:var(--text-soft)">A simple timeline of what I’ve done so far.</p>
+      </div>
+
       <div class="timeline">
-        
         <div class="timeline-item left">
-          <div class="edu-content">
-            <div class="edu-degree">MSc Cybersecurity (Distinction)</div>
-            <div class="edu-school">University of Sunderland · 2023 - 2024</div>
-            <div class="edu-grade">Distinction Grade</div>
-            <div class="edu-desc">
-              Specialized in network security, incident response, and secure design. 
-              Dissertation focused on SDN-based detection of ARP Cache Poisoning.
+          <div class="card" style="border-color: var(--primary); background: rgba(139, 92, 246, 0.05);">
+            <div class="card-role">Network Security Analyst (Target Role)</div>
+            <div class="card-org">Education Training Collective · Digital Services</div>
+            <div class="card-desc">
+              The kind of work I’m working towards: monitoring and responding to security alerts, 
+              investigating incidents, managing vulnerabilities and keeping infrastructure secure.
             </div>
+            <div class="card-tag">Goal</div>
           </div>
         </div>
 
         <div class="timeline-item right">
-          <div class="edu-content">
-            <div class="edu-degree">BSc (Hons) Networks & Cybersecurity</div>
-            <div class="edu-school">University of Sunderland · 2020 - 2023</div>
-            <div class="edu-grade">First Class Honours</div>
-            <div class="edu-desc">
-              Core focus on routing/switching (CCNP level), secure architecture, VPNs, 
-              firewalls, and hands-on infrastructure deployment.
+          <div class="card">
+            <div class="card-role">Cybersecurity Intern</div>
+            <div class="card-org">Flags Technology</div>
+            <div class="card-date">Internship</div>
+            <div class="card-desc">
+              Supported security activities such as analysing phishing examples, exploring lab-style attacks 
+              and documenting how to respond. Connected theory from Security+ to real incidents.
             </div>
           </div>
         </div>
 
         <div class="timeline-item left">
-          <div class="edu-content">
-            <div class="edu-degree">CompTIA Security+</div>
-            <div class="edu-school">CompTIA Certification</div>
-            <div class="edu-desc">
-              Validated baseline skills in risk management, cryptography, identity management, and security infrastructure.
+          <div class="card">
+            <div class="card-role">Sales Assistant</div>
+            <div class="card-org">Sports Direct</div>
+            <div class="card-date">Part-time</div>
+            <div class="card-desc">
+              Customer-facing role handling busy periods. Developed communication skills under pressure 
+              and teamwork—useful behaviours for security work with stakeholders.
             </div>
           </div>
         </div>
-
-        <div class="timeline-item right">
-          <div class="edu-content">
-            <div class="edu-degree">IT Technical Bootcamp</div>
-            <div class="edu-school">Just IT (Microsoft Partner)</div>
-            <div class="edu-desc">
-              Intensive training on Microsoft 365, Endpoint Manager (Intune), Entra ID, and device compliance policies.
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <footer class="contact-section" id="contact">
-    <div class="container">
-      <h2 class="section-title">Let's Connect</h2>
-      <p class="section-desc">Currently looking for Network Security Analyst or SOC opportunities.</p>
-      
-      <div class="social-row">
-        <a href="https://github.com/alaaerfan7" target="_blank" class="social-btn github">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" class="social-btn linkedin">
-          <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a href="mailto:alaa@alsheikhali.com" class="social-btn email">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
+  <section id="skills" class="skills-section">
+    <div class="container" style="text-align: center; margin-bottom: 2rem;">
+      <div class="section-kicker">Skills</div>
+      <h2 class="section-title">What I’m comfortable working with</h2>
+    </div>
+    
+    <div class="marquee-container">
+      <div class="marquee-row">
+        <div class="skill-pill"><i class="devicon-linux-plain colored"></i> Linux (Ubuntu/CentOS)</div>
+        <div class="skill-pill"><i class="devicon-windows8-original colored"></i> Windows Server</div>
+        <div class="skill-pill"><i class="devicon-apple-original colored"></i> macOS</div>
+        <div class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
+        <div class="skill-pill"><i class="devicon-azure-plain colored"></i> Azure</div>
+        <div class="skill-pill"><i class="fa-brands fa-microsoft" style="color:#0ea5e9;"></i> Microsoft 365</div>
+        <div class="skill-pill"><i class="fa-solid fa-server" style="color:#3b82f6;"></i> Intune & Endpoint</div>
+        <div class="skill-pill"><i class="devicon-linux-plain colored"></i> Linux (Ubuntu/CentOS)</div>
+        <div class="skill-pill"><i class="devicon-windows8-original colored"></i> Windows Server</div>
+        <div class="skill-pill"><i class="devicon-apple-original colored"></i> macOS</div>
+        <div class="skill-pill"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
+        <div class="skill-pill"><i class="devicon-azure-plain colored"></i> Azure</div>
       </div>
+
+      <div class="marquee-row">
+        <div class="skill-pill"><i class="fa-solid fa-network-wired" style="color:#f59e0b"></i> Cisco IOS / ASA</div>
+        <div class="skill-pill"><i class="fa-solid fa-route"></i> BGP & OSPF</div>
+        <div class="skill-pill"><i class="fa-solid fa-layer-group"></i> VLANs & VPNs</div>
+        <div class="skill-pill"><i class="fa-solid fa-shield-virus" style="color:#ef4444"></i> Wireshark</div>
+        <div class="skill-pill"><i class="devicon-splunk-original-wordmark colored"></i> Splunk & SIEM</div>
+        <div class="skill-pill"><i class="fa-solid fa-radar"></i> Nessus & Nmap</div>
+        <div class="skill-pill"><i class="fa-solid fa-user-secret"></i> Metasploit</div>
+        <div class="skill-pill"><i class="fa-solid fa-fire"></i> Firewalls</div>
+        <div class="skill-pill"><i class="fa-solid fa-network-wired" style="color:#f59e0b"></i> Cisco IOS / ASA</div>
+        <div class="skill-pill"><i class="fa-solid fa-route"></i> BGP & OSPF</div>
+        <div class="skill-pill"><i class="fa-solid fa-layer-group"></i> VLANs & VPNs</div>
+        <div class="skill-pill"><i class="fa-solid fa-shield-virus" style="color:#ef4444"></i> Wireshark</div>
+      </div>
+
+      <div class="marquee-row">
+        <div class="skill-pill"><i class="devicon-python-plain colored"></i> Python</div>
+        <div class="skill-pill"><i class="devicon-bash-plain"></i> Bash Scripting</div>
+        <div class="skill-pill"><i class="devicon-mysql-plain colored"></i> SQL & NoSQL</div>
+        <div class="skill-pill"><i class="devicon-html5-plain colored"></i> HTML/CSS/JS</div>
+        <div class="skill-pill"><i class="fa-solid fa-book-open"></i> NIST & SANS</div>
+        <div class="skill-pill"><i class="fa-solid fa-file-contract"></i> ISO 27001</div>
+        <div class="skill-pill"><i class="fa-solid fa-check-double"></i> GDPR</div>
+        <div class="skill-pill"><i class="devicon-python-plain colored"></i> Python</div>
+        <div class="skill-pill"><i class="devicon-bash-plain"></i> Bash Scripting</div>
+        <div class="skill-pill"><i class="devicon-mysql-plain colored"></i> SQL & NoSQL</div>
+        <div class="skill-pill"><i class="devicon-html5-plain colored"></i> HTML/CSS/JS</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" style="padding: 4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Projects</div>
+        <h2 class="section-title">Code & Security Labs</h2>
+        <p style="color:var(--text-soft)">Select a file on the left to see my code and approach.</p>
+      </div>
+
+      <div class="ide-wrapper">
+        <div class="ide-sidebar">
+          <div class="ide-title">Explorer</div>
+          <div class="file-btn active" onclick="showProject('arp', this)">
+            <i class="devicon-python-plain" style="color:#f59e0b"></i> arp_spoofing_lab.py
+          </div>
+          <div class="file-btn" onclick="showProject('pass', this)">
+            <i class="devicon-python-plain" style="color:#8b5cf6"></i> password_portal.py
+          </div>
+          <div class="file-btn" onclick="showProject('net', this)">
+            <i class="fa-solid fa-network-wired" style="color:#3b82f6"></i> secure_redesign.cfg
+          </div>
+          <div class="file-btn" onclick="showProject('siem', this)">
+            <i class="devicon-splunk-original" style="color:#10b981"></i> siem_tuning.spl
+          </div>
+          <div class="file-btn" onclick="showProject('merge', this)">
+            <i class="devicon-python-plain" style="color:#eab308"></i> data_merge.py
+          </div>
+        </div>
+
+        <div class="ide-main">
+          <div class="ide-tabs">
+            <div class="tab active" id="tabTitle">arp_spoofing_lab.py</div>
+          </div>
+          <div class="ide-content" id="projectContent">
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" style="padding: 4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Path</div>
+        <h2 class="section-title">Education & Certifications</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item left">
+          <div class="card">
+            <div class="card-role">MSc Cybersecurity</div>
+            <div class="card-org">University of Sunderland · 2023–2024</div>
+            <div class="card-tag">Distinction</div>
+            <div class="card-desc" style="margin-top:0.5rem;">
+              Focus on network security, incident response and secure system design. 
+              Dissertation: detection and mitigation of ARP cache poisoning using Python and SDN.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="card">
+            <div class="card-role">BSc Networks & Cybersecurity</div>
+            <div class="card-org">University of Sunderland · 2020–2023</div>
+            <div class="card-tag">First Class Honours</div>
+            <div class="card-desc" style="margin-top:0.5rem;">
+              Routing & switching (CCNA/CCNP style), secure network architecture, VPNs, firewalls, and hands-on infrastructure design.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="card">
+            <div class="card-role">IT Technical Skills Bootcamp</div>
+            <div class="card-org">Just IT</div>
+            <div class="card-desc">
+              Endpoint management with Intune & Entra ID, secure configuration, device compliance and support.
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="card">
+            <div class="card-role">Certifications</div>
+            <div class="card-desc">
+              <ul style="padding-left:1.2rem; margin:0.5rem 0 0;">
+                <li>CompTIA Security+</li>
+                <li>McKinsey Forward Program</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-kicker">Get in Touch</div>
+      <h2 class="section-title">Ready to talk about security?</h2>
+      <p style="color:var(--text-soft); max-width:600px; margin:0 auto;">
+        I’m happy to share more detailed diagrams, configs or code samples for the projects on this page.
+      </p>
+
+      <div class="social-row">
+        <a href="mailto:alaa@alsheikhali.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://github.com/alaaerfan7" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+
+      <form onsubmit="sendMail(event)" style="max-width:400px; margin:2rem auto; text-align:left; background:var(--card-bg); padding:1.5rem; border-radius:12px; border:1px solid var(--card-border);">
+        <label style="color:var(--text-soft); font-size:0.85rem; display:block; margin-bottom:0.3rem;">Send me a quick email:</label>
+        <textarea id="msg" rows="3" placeholder="Hi Ala'a..." style="width:100%; background:#020617; border:1px solid #334155; color:#fff; padding:0.5rem; border-radius:6px; margin-bottom:1rem;"></textarea>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Open Email Client</button>
+      </form>
       
-      <p style="margin-top:3rem; font-size:0.8rem; color:#4b5563;">
-        &copy; 2025 Ala'a Alsheikh Ali. Built with custom HTML/CSS.
+      <p style="font-size:0.8rem; color:#4b5563; margin-top:3rem;">
+        © <span id="year"></span> Ala'a Alsheikh Ali.
       </p>
     </div>
-  </footer>
+  </section>
 
   <script>
-    // Project Data Structure
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function sendMail(e) {
+      e.preventDefault();
+      const body = document.getElementById("msg").value;
+      window.location.href = "mailto:alaa@alsheikhali.com?subject=Portfolio%20Contact&body=" + encodeURIComponent(body);
+    }
+
+    // Projects Data (Restoring your specific content)
     const projects = {
       arp: {
-        filename: "arp_spoof_detector.py",
-        icon: '<i class="devicon-python-plain" style="color:#f59e0b"></i>',
-        content: `
-<div class="project-meta">
-  <div style="font-weight:700; color:#fff; font-size:1.1rem;">SDN-Based ARP Spoofing Mitigation</div>
-  <div class="project-badges">
-    <span class="badge">Python</span>
-    <span class="badge">Scapy</span>
-    <span class="badge">OpenFlow</span>
-  </div>
-  <p style="margin-top:10px; color:#9ca3af;">
-    A real-time security module that inspects packet flows to detect MAC address inconsistencies. 
-    Unlike standard logging, this actively pushes block rules to the controller to isolate attackers.
-  </p>
-</div>
-<pre>
-<span class="kwd">from</span> scapy.all <span class="kwd">import</span> ARP, sniff
-<span class="kwd">import</span> logging
+        title: "Network-level ARP spoofing lab",
+        tags: "Python · Scapy · SDN · Virtual networks",
+        desc: "A lab that watches ARP traffic for suspicious IP/MAC changes and talks to a controller to push mitigation rules. The goal was to move beyond just logging and have the network react in real time when spoofing happens.",
+        code: `
+<span class="c-kwd">from</span> scapy.all <span class="c-kwd">import</span> ARP, sniff
 
-<span class="com"># Mapping IP to MAC to detect changes</span>
-ip_mac_table = {}
+ip_mac_map = {}
 
-<span class="kwd">def</span> <span class="func">detect_spoof</span>(pkt):
-    <span class="kwd">if</span> pkt[ARP].op == 2: <span class="com"># ARP Reply</span>
-        real_ip = pkt[ARP].psrc
-        response_mac = pkt[ARP].hwsrc
+<span class="c-kwd">def</span> <span class="c-func">handle_arp</span>(pkt):
+    <span class="c-kwd">if</span> ARP <span class="c-kwd">in</span> pkt <span class="c-kwd">and</span> pkt[ARP].op == 2:  <span class="c-com"># ARP reply</span>
+        ip = pkt[ARP].psrc
+        mac = pkt[ARP].hwsrc
 
-        <span class="kwd">if</span> real_ip <span class="kwd">in</span> ip_mac_table:
-            <span class="kwd">if</span> ip_mac_table[real_ip] != response_mac:
-                <span class="kwd">print</span>(<span class="str">f"[ALERT] SPOOF DETECTED: IP {real_ip} moved from {ip_mac_table[real_ip]} to {response_mac}"</span>)
-                <span class="func">trigger_sdn_block</span>(response_mac)
-        <span class="kwd">else</span>:
-            ip_mac_table[real_ip] = response_mac
+        <span class="c-kwd">if</span> ip <span class="c-kwd">in</span> ip_mac_map <span class="c-kwd">and</span> ip_mac_map[ip] != mac:
+            <span class="c-func">print</span>(<span class="c-str">f"[ALERT] Possible spoofing: {ip} now {mac}, was {ip_mac_map[ip]}"</span>)
+            <span class="c-com"># call SDN controller API here to block the new MAC</span>
+        <span class="c-kwd">else</span>:
+            ip_mac_map[ip] = mac
 
-<span class="kwd">def</span> <span class="func">trigger_sdn_block</span>(mac_address):
-    <span class="com"># API call to OpenDaylight/Ryu controller</span>
-    payload = {<span class="str">"action"</span>: <span class="str">"drop"</span>, <span class="str">"mac"</span>: mac_address}
-    <span class="func">push_flow_rule</span>(payload)
-
-<span class="com"># Start sniffing ARP traffic on interface</span>
-sniff(filter=<span class="str">"arp"</span>, prn=detect_spoof, store=0)
-</pre>`
-      },
-      network: {
-        filename: "secure_topology_vlan.cfg",
-        icon: '<i class="fa-solid fa-network-wired" style="color:#3b82f6"></i>',
-        content: `
-<div class="project-meta">
-  <div style="font-weight:700; color:#fff; font-size:1.1rem;">Enterprise Network Hardening</div>
-  <div class="project-badges">
-    <span class="badge">Cisco IOS</span>
-    <span class="badge">VLANs</span>
-    <span class="badge">ACLs</span>
-  </div>
-  <p style="margin-top:10px; color:#9ca3af;">
-    Transitioned a flat network into a segmented, resilient architecture. 
-    Configuration includes HSRP for gateway redundancy and strict ACLs between departments.
-  </p>
-</div>
-<pre>
-<span class="com">! Configure VLAN Segmentation</span>
-interface GigabitEthernet0/0.10
- encapsulation dot1Q 10
- ip address 192.168.10.1 255.255.255.0
- <span class="com">! HSRP Redundancy</span>
- standby 1 ip 192.168.10.254
- standby 1 priority 110
- standby 1 preempt
-
-<span class="com">! Secure Access Control Lists</span>
-ip access-list EXTENDED SECURE_HR
- permit tcp 192.168.10.0 0.0.0.255 host 10.0.0.5 eq 443
- deny ip any any log
-
-<span class="com">! Port Security on Access Switches</span>
-interface Range Fa0/1 - 24
- switchport mode access
- switchport port-security
- switchport port-security maximum 2
- switchport port-security violation shutdown
-</pre>`
-      },
-      siem: {
-        filename: "siem_alert_rules.spl",
-        icon: '<i class="devicon-splunk-original" style="color:#10b981"></i>',
-        content: `
-<div class="project-meta">
-  <div style="font-weight:700; color:#fff; font-size:1.1rem;">SIEM Noise Reduction & High Fidelity Alerts</div>
-  <div class="project-badges">
-    <span class="badge">Splunk</span>
-    <span class="badge">SPL</span>
-    <span class="badge">SOC Ops</span>
-  </div>
-  <p style="margin-top:10px; color:#9ca3af;">
-    Optimized query logic to reduce false positives by 40%. 
-    This query detects Brute Force attempts specifically targeting Administrator accounts, ignoring known safe subnets.
-  </p>
-</div>
-<pre>
-<span class="com">// Splunk Processing Language (SPL)</span>
-index=security sourcetype="win*security" EventCode=4625
-| <span class="kwd">where</span> User="Administrator" OR User="Root"
-| <span class="kwd">stats</span> count dc(Source_Network_Address) as SrcIPs BY User, dest_host
-| <span class="kwd">where</span> count > 15 AND SrcIPs > 1
-| <span class="kwd">search</span> NOT [ | inputlookup trusted_subnets.csv | fields src_ip ]
-| <span class="kwd">eval</span> Risk_Score = if(count > 50, "Critical", "High")
-| <span class="kwd">table</span> _time, User, dest_host, count, Risk_Score
-</pre>`
+<span class="c-func">sniff</span>(filter=<span class="c-str">"arp"</span>, prn=handle_arp, store=<span class="c-kwd">False</span>)
+        `
       },
       pass: {
-        filename: "password_strength_ai.py",
-        icon: '<i class="devicon-python-plain" style="color:#8b5cf6"></i>',
-        content: `
-<div class="project-meta">
-  <div style="font-weight:700; color:#fff; font-size:1.1rem;">Password Entropy Analysis Tool</div>
-  <div class="project-badges">
-    <span class="badge">Python</span>
-    <span class="badge">NIST 800-63</span>
-    <span class="badge">Math</span>
-  </div>
-  <p style="margin-top:10px; color:#9ca3af;">
-    Analyzes user behavior regarding password selection. 
-    Calculates entropy bits rather than just length, providing visual feedback to users based on NIST guidelines.
-  </p>
-</div>
-<pre>
-<span class="kwd">import</span> math
+        title: "Password security & behaviour",
+        tags: "Flask · UX · NIST 800-63-3",
+        desc: "A web portal that lets users create accounts while seeing real-time feedback: emoji reactions, colour-coded strength bars and time-to-crack estimates. Results were analysed with SPSS to see which patterns improved strength.",
+        code: `
+<span class="c-kwd">def</span> <span class="c-func">estimate_entropy</span>(password: str) -> int:
+    <span class="c-com">"""Very rough entropy estimate based on character types."""</span>
+    charset = 0
+    <span class="c-kwd">if</span> <span class="c-func">any</span>(c.islower() <span class="c-kwd">for</span> c <span class="c-kwd">in</span> password): charset += 26
+    <span class="c-kwd">if</span> <span class="c-func">any</span>(c.isupper() <span class="c-kwd">for</span> c <span class="c-kwd">in</span> password): charset += 26
+    <span class="c-kwd">if</span> <span class="c-func">any</span>(c.isdigit() <span class="c-kwd">for</span> c <span class="c-kwd">in</span> password): charset += 10
+    
+    <span class="c-kwd">import</span> math
+    <span class="c-kwd">return</span> <span class="c-func">int</span>(<span class="c-func">len</span>(password) * math.log2(charset <span class="c-kwd">or</span> 1))
+        `
+      },
+      net: {
+        title: "Secure network redesign",
+        tags: "Cisco · VLANs · VPN · High availability",
+        desc: "Redesigned a flat network into a segmented architecture. Added VLANs per department, inter-VLAN routing, firewalls, NAT/PAT, site-to-site VPN and HSRP for redundancy.",
+        code: `
+interface GigabitEthernet0/0
+ description Link to core switch
+ ip address 10.0.0.1 255.255.255.0
+ standby 1 ip 10.0.0.254
+ standby 1 priority 110
+ standby 1 preempt
+!
+interface Tunnel0
+ description Site-to-site VPN
+ ip address 172.16.0.1 255.255.255.252
+ tunnel source GigabitEthernet0/0
+ tunnel destination 203.0.113.10
+        `
+      },
+      siem: {
+        title: "SIEM alert tuning & noise reduction",
+        tags: "Splunk · Detections · SOC quality of life",
+        desc: "Tuned environments where harmless tests triggered constant alerts. Work included reviewing existing rules, improving context in alerts and adjusting thresholds so important events stand out.",
+        code: `
+index=security sourcetype=anti-malware
+| <span class="c-func">stats</span> count BY signature, host
+| <span class="c-kwd">where</span> count > 20
+| <span class="c-kwd">search</span> NOT signature=<span class="c-str">"EICAR_Test_File"</span>
+        `
+      },
+      merge: {
+        title: "Merging JSON, XML & CSV safely",
+        tags: "Python · Data cleaning · Identifiers",
+        desc: "Merging three different file formats into a single consistent dataset without losing track of identities. Standardised field names and added missing keys safely.",
+        code: `
+<span class="c-kwd">def</span> <span class="c-func">build_identifier</span>(record):
+    parts = [record.get(<span class="c-str">"first_name"</span>,<span class="c-str">""</span>),
+             record.get(<span class="c-str">"last_name"</span>,<span class="c-str">""</span>),
+             record.get(<span class="c-str">"postcode"</span>,<span class="c-str">""</span>)]
+    <span class="c-kwd">return</span> <span class="c-str">"_"</span>.join(p.lower().replace(<span class="c-str">" "</span>, <span class="c-str">""</span>) <span class="c-kwd">for</span> p <span class="c-kwd">in</span> parts <span class="c-kwd">if</span> p)
 
-<span class="kwd">def</span> <span class="func">calculate_entropy</span>(password):
-    pool_size = 0
-    <span class="kwd">if</span> any(c.islower() <span class="kwd">for</span> c <span class="kwd">in</span> password): pool_size += 26
-    <span class="kwd">if</span> any(c.isupper() <span class="kwd">for</span> c <span class="kwd">in</span> password): pool_size += 26
-    <span class="kwd">if</span> any(c.isdigit() <span class="kwd">for</span> c <span class="kwd">in</span> password): pool_size += 10
-    <span class="kwd">if</span> any(not c.isalnum() <span class="kwd">for</span> c <span class="kwd">in</span> password): pool_size += 32
-
-    <span class="com"># Shannon Entropy Formula</span>
-    entropy = len(password) * math.log2(pool_size)
-    <span class="kwd">return</span> entropy
-
-<span class="kwd">def</span> <span class="func">get_strength_label</span>(bits):
-    <span class="kwd">if</span> bits < 28: <span class="kwd">return</span> <span class="str">"Very Weak"</span>
-    <span class="kwd">if</span> bits < 60: <span class="kwd">return</span> <span class="str">"Weak"</span>
-    <span class="kwd">if</span> bits < 127: <span class="kwd">return</span> <span class="str">"Strong"</span>
-    <span class="kwd">return</span> <span class="str">"Very Strong"</span>
-</pre>`
+people = {}
+<span class="c-kwd">for</span> rec <span class="c-kwd">in</span> incoming_records:
+    ident = <span class="c-func">build_identifier</span>(rec)
+    existing = people.get(ident, {})
+    existing.update(rec)
+    people[ident] = existing
+        `
       }
     };
 
-    function loadProject(key) {
-      const p = projects[key];
-      // Update Tab
-      document.getElementById('tab-name').innerHTML = \`\${p.icon} \${p.filename}\`;
+    function showProject(id, btn) {
+      // Handle active state
+      document.querySelectorAll('.file-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const p = projects[id];
+      document.getElementById('tabTitle').textContent = id + (id === 'net' ? '.cfg' : (id === 'siem' ? '.spl' : '.py'));
       
-      // Update Content
-      document.getElementById('ide-code-area').innerHTML = p.content;
-      
-      // Update Sidebar Active State
-      document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
-      // Find the clicked element (in a real app we'd pass 'this', but here we iterate)
-      // For simplicity, we just reload the first one on init
+      const html = `
+        <div class="project-header">
+          <div class="project-title">${p.title}</div>
+          <div class="project-tags">${p.tags}</div>
+          <div class="project-desc">${p.desc}</div>
+        </div>
+        <pre>${p.code}</pre>
+      `;
+      document.getElementById('projectContent').innerHTML = html;
     }
 
-    // Attach click handlers to sidebar items
-    const listItems = document.querySelectorAll('.file-item');
-    listItems.forEach(item => {
-      item.addEventListener('click', function() {
-        listItems.forEach(li => li.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    // Load initial project
-    loadProject('arp');
-
+    // Init first project
+    showProject('arp', document.querySelector('.file-btn'));
   </script>
 </body>
 </html>
+```
