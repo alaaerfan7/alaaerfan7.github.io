@@ -13,7 +13,6 @@
   <style>
     :root {
       --bg: #020617;
-      --bg-soft: #020617;
       --card-bg: #020617;
       --card-border: rgba(31,41,55,1);
       --text-main: #e5e7eb;
@@ -27,7 +26,6 @@
 
     body.light {
       --bg: #ffffff;
-      --bg-soft: #f9fafb;
       --card-bg: #ffffff;
       --card-border: rgba(229,231,235,1);
       --text-main: #111827;
@@ -35,7 +33,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -51,12 +48,10 @@
       color: var(--text-main);
       line-height: 1.6;
     }
-
     body.light {
       background: #ffffff;
       animation: none;
     }
-
     body.loading { overflow: hidden; }
 
     @keyframes bg-shift {
@@ -149,31 +144,26 @@
       top: 3px;
       z-index: 50;
       backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.88));
-      border-bottom: 1px solid rgba(30,64,175,0.59);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.98), rgba(15,23,42,0.92));
+      border-bottom: 1px solid rgba(30,64,175,0.75);
     }
     body.light .nav {
       background: rgba(255,255,255,0.95);
       border-bottom-color: rgba(229,231,235,1);
     }
-
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.65rem 1.5rem;
     }
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .nav-left { display: flex; align-items: center; gap: 0.6rem; }
     .nav-logo {
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      background: conic-gradient(from 200deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
-      box-shadow: 0 0 20px rgba(56,189,248,0.9);
+      background: radial-gradient(circle at 30% 30%, #f97316, #a855f7);
+      box-shadow: 0 0 20px rgba(168,85,247,0.9);
     }
     .nav-name {
       font-weight: 600;
@@ -225,7 +215,7 @@
       border-color: #111827;
     }
 
-    /* Intro hero */
+    /* Hero */
     .intro {
       min-height: 100vh;
       display: flex;
@@ -239,7 +229,13 @@
       max-width: var(--hero-max-width);
       padding: 4.5rem 1.5rem 3.5rem;
     }
-
+    .intro-role {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+      margin-bottom: 0.5rem;
+    }
     .intro-title {
       font-size: clamp(2.6rem, 5vw, 3.8rem);
       font-weight: 700;
@@ -263,9 +259,7 @@
       justify-content: center;
       gap: 0.15rem;
     }
-    #typedText {
-      white-space: nowrap;
-    }
+    #typedText { white-space: nowrap; }
     .typed-cursor {
       display: inline-block;
       width: 2px;
@@ -275,18 +269,9 @@
       animation: blink 0.8s steps(1) infinite;
     }
     body.light .typed-cursor { background: #111827; }
-
     @keyframes blink {
       0%, 50% { opacity: 1; }
       50.01%, 100% { opacity: 0; }
-    }
-
-    .intro-role {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--text-soft);
-      margin-bottom: 0.5rem;
     }
 
     .intro-meta {
@@ -294,7 +279,6 @@
       color: var(--text-soft);
       margin-bottom: 0.9rem;
     }
-
     .intro-subtitle {
       margin: 0 auto 1.8rem;
       max-width: 32rem;
@@ -310,7 +294,6 @@
       justify-content: center;
       margin-bottom: 2.8rem;
     }
-
     .btn-primary {
       border-radius: 999px;
       border: none;
@@ -330,7 +313,6 @@
       filter: brightness(1.05);
       box-shadow: 0 22px 55px rgba(56,189,248,0.65);
     }
-
     .btn-ghost {
       border-radius: 999px;
       padding: 0.6rem 1.7rem;
@@ -398,7 +380,7 @@
       max-width: 36rem;
     }
 
-    /* About */
+    /* About photo */
     .hero-block { padding-top: 2.2rem; }
     .hero-grid {
       display: grid;
@@ -440,7 +422,6 @@
       object-fit: cover;
       display: block;
     }
-
     .hero-text-kicker {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -466,14 +447,56 @@
       margin-top: 0.4rem;
     }
 
-    /* Skills marquee */
+    /* Experience timeline */
+    .experience-card {
+      border-radius: 1.1rem;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(30,64,175,0.9);
+      padding: 1.2rem 1.2rem 1rem;
+      box-shadow: 0 26px 70px rgba(15,23,42,0.95);
+    }
+    body.light .experience-card {
+      background: #ffffff;
+      border-color: rgba(229,231,235,1);
+      box-shadow: 0 18px 45px rgba(148,163,184,0.6);
+    }
+    .exp-timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 0.4rem;
+      border-left: 1px solid rgba(55,65,81,0.9);
+    }
+    body.light .exp-timeline { border-left-color: rgba(229,231,235,1); }
+    .exp-item {
+      position: relative;
+      padding-left: 1rem;
+      padding-bottom: 1rem;
+    }
+    .exp-item::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent-4), var(--accent-2));
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.45);
+    }
+    .exp-role { font-weight: 600; font-size: 0.96rem; color: var(--text-main); }
+    .exp-org { font-size: 0.84rem; color: var(--text-soft); margin-top: 0.1rem; }
+    .exp-meta { font-size: 0.8rem; color: #cbd5f5; margin-top: 0.12rem; }
+    body.light .exp-meta { color: #4b5563; }
+    .exp-detail { font-size: 0.83rem; color: var(--text-soft); margin-top: 0.35rem; max-width: 40rem; }
+
+    /* Skills marquee with logo-style chips */
     .skills-wrapper {
       margin-top: 0.6rem;
       border-radius: 1.1rem;
       background: radial-gradient(circle at 0 0, rgba(56,189,248,0.25), transparent 65%),
                   rgba(15,23,42,0.95);
       border: 1px solid rgba(30,64,175,0.9);
-      padding: 1rem 1.1rem;
+      padding: 1rem 1.1rem 1.2rem;
       box-shadow: 0 22px 60px rgba(15,23,42,0.9);
       overflow: hidden;
     }
@@ -504,6 +527,7 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+
     .skill-pill {
       display: inline-flex;
       align-items: center;
@@ -511,7 +535,7 @@
       padding: 0.32rem 0.8rem;
       border-radius: 999px;
       font-size: 0.78rem;
-      background: rgba(15,23,42,0.95);
+      background: rgba(15,23,42,0.98);
       color: #e5e7eb;
       border: 1px solid rgba(55,65,81,0.9);
       transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
@@ -521,16 +545,6 @@
       color: #111827;
       border-color: rgba(229,231,235,1);
     }
-    .skill-pill-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #f9fafb, #1e293b);
-      font-size: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
     .skill-pill:hover {
       transform: translateY(-2px) scale(1.02);
       border-color: rgba(129,140,248,1);
@@ -538,7 +552,6 @@
                   rgba(15,23,42,0.98);
       box-shadow: 0 0 18px rgba(56,189,248,0.7);
     }
-
     .skill-pill-logo { text-decoration: none; }
     .skill-logo-svg { width: 16px; height: 16px; }
 
@@ -552,54 +565,59 @@
     .projects-list {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.75rem;
     }
     .project-item {
-      border-radius: 0.9rem;
-      padding: 0.75rem 0.9rem;
+      border-radius: 1rem;
+      padding: 0.85rem 0.9rem;
       background: rgba(15,23,42,0.98);
       border: 1px solid rgba(31,41,55,1);
       cursor: pointer;
       text-align: left;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-      font-size: 0.88rem;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      font-size: 0.86rem;
       color: #e5e7eb;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.7rem;
       align-items: center;
-      gap: 0.6rem;
     }
     body.light .project-item {
       background: #f9fafb;
       border-color: rgba(229,231,235,1);
       color: #111827;
     }
-    .project-item:hover {
-      background: rgba(30,64,175,0.9);
-      border-color: rgba(129,140,248,1);
-      transform: translateY(-1px);
+    .project-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at 30% 30%, #22c55e, #22c55e15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: #ecfdf5;
     }
-    body.light .project-item:hover {
-      background: #111827;
-      color: #f9fafb;
+    .project-item-title { font-weight: 500; margin-bottom: 0.15rem; }
+    .project-item-short {
+      font-size: 0.8rem;
+      color: #9ca3af;
     }
+    body.light .project-item-short { color: #6b7280; }
     .project-item.active {
-      background: linear-gradient(to right, #111827, #020617);
+      background: radial-gradient(circle at 0 0, rgba(129,140,248,0.4), transparent 65%),
+                  #020617;
       border-color: rgba(129,140,248,1);
+      box-shadow: 0 24px 60px rgba(30,64,175,0.9);
+      transform: translateY(-1px);
     }
     body.light .project-item.active {
       background: #111827;
       color: #f9fafb;
     }
-    .project-item-title { font-weight: 500; }
-    .project-item-tags {
-      font-size: 0.7rem;
-      color: #9ca3af;
-    }
-    body.light .project-item-tags { color: #d1d5db; }
 
     .project-preview {
-      border-radius: 1.1rem;
+      border-radius: 1.2rem;
       background: #020617;
       border: 1px solid #111827;
       padding: 0;
@@ -608,7 +626,6 @@
       font-size: 0.86rem;
     }
 
-    /* VS Code style header */
     .code-header {
       display: flex;
       align-items: center;
@@ -691,7 +708,6 @@
       background: #111827;
       color: #f9fafb;
     }
-
     .preview-body { margin-top: 0.4rem; }
     .preview-body p { margin-top: 0; }
 
@@ -747,7 +763,7 @@
       color: #9ca3af;
     }
 
-    /* Education */
+    /* Education & certs */
     .two-column {
       display: grid;
       grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr);
@@ -862,10 +878,6 @@
       color: #e5e7eb;
       padding: 3rem 0 2.5rem;
       margin-top: 2rem;
-    }
-    body.light .contact-section {
-      background: #020617;
-      color: #e5e7eb;
     }
     .contact-title {
       text-align: center;
@@ -1012,6 +1024,7 @@
       <nav class="nav-links">
         <a href="#home">Home</a>
         <a href="#about-block">About</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#education">Path</a>
@@ -1091,9 +1104,60 @@
           automates something analysts do manually.
         </p>
         <p class="hero-note">
-          This site brings together my projects, education and certifications. Over time I’ll add full write-ups with
+          This site brings together my projects, education and experience. Over time I’ll add full write-ups with
           diagrams, screenshots and code for the projects below.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience tree -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Experience</div>
+        <h2 class="section-title">Where I’ve been and where I’m heading</h2>
+        <p class="section-subtitle">
+          A simple timeline of what I’ve done so far, plus the kind of Network Security Analyst role I’m aiming for.
+        </p>
+      </div>
+
+      <div class="experience-card reveal">
+        <ul class="exp-timeline">
+          <li class="exp-item">
+            <div class="exp-role">Network Security Analyst (target role)</div>
+            <div class="exp-org">Education Training Collective – Digital Services · Stockton-on-Tees</div>
+            <div class="exp-meta">Based on REQ0001450 job profile · Cyber Essentials Plus, GDPR &amp; incident response</div>
+            <div class="exp-detail">
+              The kind of work I’m working towards: monitoring and responding to security alerts,
+              investigating incidents, managing vulnerabilities and helping to keep a multi-site college
+              infrastructure secure and compliant. A mix of Microsoft 365 / Azure security, firewalls,
+              endpoint protection, and explaining risk in plain language to non-technical staff.
+            </div>
+          </li>
+
+          <li class="exp-item">
+            <div class="exp-role">Cybersecurity Intern</div>
+            <div class="exp-org">Flags Technology</div>
+            <div class="exp-meta">Internship · Security operations &amp; incident-style case work</div>
+            <div class="exp-detail">
+              Supported security activities such as analysing phishing examples, exploring lab-style attacks
+              and documenting how to respond. This experience helped me connect theory from Security+,
+              NIST frameworks and my MSc to the way incidents are actually handled.
+            </div>
+          </li>
+
+          <li class="exp-item">
+            <div class="exp-role">Sales Assistant (Part-time)</div>
+            <div class="exp-org">Sports Direct</div>
+            <div class="exp-meta">Customer-facing · High-pressure retail environment</div>
+            <div class="exp-detail">
+              Not a technical role, but important for communication and people skills: handling busy periods,
+              helping customers with clear explanations and working with a team under time pressure –
+              all useful behaviours for security work with stakeholders and users.
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1105,82 +1169,120 @@
         <div class="section-kicker">Skills</div>
         <h2 class="section-title">What I’m comfortable working with</h2>
         <p class="section-subtitle">
-          A mix of networking, security tools, cloud and scripting that I’ve used across my BSc, MSc and personal labs.
-          Hover a skill to pause the row and highlight it.
+          A mix of networking, security tools, cloud and scripting from my BSc, MSc, internship and labs.
+          The badges below slide like a ticker; hover to pause and highlight them.
         </p>
       </div>
 
       <div class="skills-wrapper reveal">
-        <div class="skills-row-label">Operating systems &amp; platforms</div>
+        <div class="skills-row-label">Platforms &amp; endpoints</div>
         <div class="skills-row">
-          <div class="skill-pill"><span class="skill-pill-icon">🐧</span>Linux (Ubuntu, CentOS)</div>
-          <div class="skill-pill"><span class="skill-pill-icon">🪟</span>Windows Server</div>
-          <div class="skill-pill"><span class="skill-pill-icon">🍎</span>macOS</div>
+          <span class="skill-pill skill-pill-logo">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="4" fill="#111827"></rect>
+              <circle cx="12" cy="9" r="4" fill="#22c55e"></circle>
+              <path d="M7 19c.8-2.3 2.5-3.5 5-3.5s4.2 1.2 5 3.5" stroke="#22c55e" stroke-width="1.4" fill="none"/>
+            </svg>
+            <span>Linux (Ubuntu, CentOS)</span>
+          </span>
+
+          <span class="skill-pill skill-pill-logo">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="4" fill="#2563eb"></rect>
+              <rect x="7" y="7" width="10" height="10" rx="2" fill="#eff6ff"></rect>
+            </svg>
+            <span>Windows Server</span>
+          </span>
+
+          <span class="skill-pill skill-pill-logo">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="#020617"></circle>
+              <path d="M12 5a6 6 0 0 0 0 12 6 6 0 0 0 0-12z" fill="#f97316"/>
+            </svg>
+            <span>macOS</span>
+          </span>
+
           <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"
              class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="11" fill="#111827"></circle>
               <text x="12" y="14" text-anchor="middle" font-size="10" fill="#f97316" font-family="system-ui, sans-serif">AWS</text>
             </svg>
             <span>AWS</span>
           </a>
+
           <a href="https://azure.microsoft.com" target="_blank" rel="noreferrer"
              class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="11" fill="#0f172a"></circle>
               <text x="12" y="14" text-anchor="middle" font-size="9" fill="#38bdf8" font-family="system-ui, sans-serif">AZ</text>
             </svg>
             <span>Azure</span>
           </a>
-          <div class="skill-pill"><span class="skill-pill-icon">ID</span>Entra ID / Azure AD</div>
-          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Intune &amp; MDM</div>
 
-          <div class="skill-pill"><span class="skill-pill-icon">🐧</span>Linux (Ubuntu, CentOS)</div>
-          <div class="skill-pill"><span class="skill-pill-icon">🪟</span>Windows Server</div>
+          <span class="skill-pill"><svg class="skill-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#111827"/><text x="12" y="14" text-anchor="middle" font-size="8" fill="#facc15" font-family="system-ui,sans-serif">M365</text></svg>Microsoft 365</span>
+          <span class="skill-pill"><svg class="skill-logo-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#0f172a"/><text x="12" y="15" text-anchor="middle" font-size="8" fill="#38bdf8" font-family="system-ui,sans-serif">INT</text></svg>Intune &amp; Endpoint Manager</span>
+          <span class="skill-pill"><svg class="skill-logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#111827"/><text x="12" y="14" text-anchor="middle" font-size="8" fill="#a5b4fc" font-family="system-ui,sans-serif">ID</text></svg>Entra ID / Azure AD</span>
+
+          <!-- repeat for scroll -->
+          <span class="skill-pill">Linux (Ubuntu, CentOS)</span>
+          <span class="skill-pill">Windows Server</span>
         </div>
 
-        <div class="skills-row-label" style="margin-top:0.8rem;">Networking &amp; security</div>
+        <div class="skills-row-label" style="margin-top:0.8rem;">Networking &amp; security stack</div>
         <div class="skills-row">
-          <div class="skill-pill"><span class="skill-pill-icon">C</span>Cisco IOS / ASA</div>
-          <div class="skill-pill"><span class="skill-pill-icon">R</span>Routing &amp; Switching</div>
-          <div class="skill-pill"><span class="skill-pill-icon">B</span>BGP</div>
-          <div class="skill-pill"><span class="skill-pill-icon">O</span>OSPF</div>
-          <div class="skill-pill"><span class="skill-pill-icon">V</span>VLANs</div>
-          <div class="skill-pill"><span class="skill-pill-icon">FW</span>Firewalls</div>
-          <div class="skill-pill"><span class="skill-pill-icon">VPN</span>IPsec / VPNs</div>
-          <div class="skill-pill"><span class="skill-pill-icon">WS</span>Wireshark</div>
-          <div class="skill-pill"><span class="skill-pill-icon">DN</span>DNS / DHCP</div>
-          <div class="skill-pill"><span class="skill-pill-icon">SD</span>SDN concepts</div>
+          <span class="skill-pill">Cisco IOS · ASA</span>
+          <span class="skill-pill">Routing &amp; Switching</span>
+          <span class="skill-pill">BGP</span>
+          <span class="skill-pill">OSPF</span>
+          <span class="skill-pill">VLANs</span>
+          <span class="skill-pill">VPNs (IPsec, site-to-site)</span>
+          <span class="skill-pill">Firewalls</span>
+          <span class="skill-pill">DNS · DHCP</span>
+          <span class="skill-pill">Wireless networking</span>
+          <span class="skill-pill">SDN concepts</span>
+          <span class="skill-pill">Wireshark</span>
+
           <a href="https://www.splunk.com" target="_blank" rel="noreferrer"
              class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="11" fill="#020617"></circle>
               <text x="12" y="14" text-anchor="middle" font-size="8" fill="#22c55e" font-family="system-ui, sans-serif">SIEM</text>
             </svg>
             <span>Splunk · ELK · QRadar</span>
           </a>
-          <div class="skill-pill"><span class="skill-pill-icon">Vs</span>Nessus · Nmap · Metasploit</div>
 
-          <div class="skill-pill"><span class="skill-pill-icon">C</span>Cisco IOS / ASA</div>
-          <div class="skill-pill"><span class="skill-pill-icon">R</span>Routing &amp; Switching</div>
+          <span class="skill-pill">Nessus · Nmap · Metasploit</span>
+          <span class="skill-pill">Vulnerability scanning</span>
+          <span class="skill-pill">SOC-style alert triage</span>
+
+          <span class="skill-pill">Cisco IOS · ASA</span>
+          <span class="skill-pill">Routing &amp; Switching</span>
         </div>
 
-        <div class="skills-row-label" style="margin-top:0.8rem;">Programming, frameworks &amp; other</div>
+        <div class="skills-row-label" style="margin-top:0.8rem;">Programming, frameworks &amp; governance</div>
         <div class="skills-row">
-          <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
-          <div class="skill-pill"><span class="skill-pill-icon">B</span>Bash</div>
-          <div class="skill-pill"><span class="skill-pill-icon">S</span>SQL / NoSQL</div>
-          <div class="skill-pill"><span class="skill-pill-icon">JS</span>JavaScript · HTML · CSS</div>
-          <div class="skill-pill"><span class="skill-pill-icon">C#</span>C#</div>
-          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST · SANS · ISO 27001</div>
-          <div class="skill-pill"><span class="skill-pill-icon">OW</span>OWASP Top 10</div>
-          <div class="skill-pill"><span class="skill-pill-icon">GD</span>GDPR &amp; privacy</div>
-          <div class="skill-pill"><span class="skill-pill-icon">SP</span>Security+ domains</div>
-          <div class="skill-pill"><span class="skill-pill-icon">EN</span>English (Fluent)</div>
-          <div class="skill-pill"><span class="skill-pill-icon">AR</span>Arabic (Fluent)</div>
+          <span class="skill-pill skill-pill-logo">
+            <svg class="skill-logo-svg" viewBox="0 0 24 24">
+              <circle cx="9" cy="12" r="5" fill="#0f172a"></circle>
+              <circle cx="15" cy="12" r="5" fill="#1d4ed8"></circle>
+            </svg>
+            <span>Python</span>
+          </span>
+          <span class="skill-pill">Bash scripting</span>
+          <span class="skill-pill">SQL · NoSQL</span>
+          <span class="skill-pill">HTML · CSS · JavaScript</span>
+          <span class="skill-pill">C# basics</span>
+          <span class="skill-pill">NIST · SANS · ISO 27001</span>
+          <span class="skill-pill">OWASP Top 10</span>
+          <span class="skill-pill">GDPR &amp; data privacy</span>
+          <span class="skill-pill">CompTIA Security+ domains</span>
+          <span class="skill-pill">Agile &amp; project work</span>
+          <span class="skill-pill">English (Fluent)</span>
+          <span class="skill-pill">Arabic (Fluent)</span>
 
-          <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
-          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST · SANS</div>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">NIST · SANS</span>
         </div>
       </div>
     </div>
@@ -1191,64 +1293,64 @@
     <div class="container">
       <div class="section-header">
         <div class="section-kicker">Projects</div>
-        <h2 class="section-title">A few things I’ve built or analysed</h2>
+        <h2 class="section-title">Code &amp; security labs I’m proud of</h2>
         <p class="section-subtitle">
-          Left side: a quick list of projects. Right side: a VS Code-style preview with an overview,
-          images and a short code snippet. Full code and documents are available if needed.
+          On the left: a list of projects. On the right: a VS Code-style preview with an overview, image placeholders
+          and a short code snippet. Full configs and code are available if you’d like to see more.
         </p>
       </div>
 
       <div class="projects-layout">
         <div class="projects-list">
           <button class="project-item active" data-project="arp">
+            <div class="project-icon">🌐</div>
             <div>
               <div class="project-item-title">Network-level ARP spoofing lab</div>
-              <div class="project-item-tags">Python · Scapy · SDN</div>
+              <div class="project-item-short">Detecting and reacting to ARP poisoning in virtual networks.</div>
             </div>
-            <span>↳</span>
           </button>
 
           <button class="project-item" data-project="password">
+            <div class="project-icon">🔐</div>
             <div>
               <div class="project-item-title">Password security &amp; behaviour</div>
-              <div class="project-item-tags">Flask · UX · NIST 800-63-3</div>
+              <div class="project-item-short">Flask portal measuring how UX changes real passwords.</div>
             </div>
-            <span>↳</span>
           </button>
 
           <button class="project-item" data-project="network">
+            <div class="project-icon">🏢</div>
             <div>
               <div class="project-item-title">Secure network redesign</div>
-              <div class="project-item-tags">Cisco · VLANs · VPN</div>
+              <div class="project-item-short">From flat network to segmented, redundant design.</div>
             </div>
-            <span>↳</span>
           </button>
 
           <button class="project-item" data-project="siem">
+            <div class="project-icon">📊</div>
             <div>
               <div class="project-item-title">SIEM alert tuning &amp; noise reduction</div>
-              <div class="project-item-tags">Splunk · detections</div>
+              <div class="project-item-short">Keeping important alerts loud and false positives quiet.</div>
             </div>
-            <span>↳</span>
           </button>
 
           <button class="project-item" data-project="merge">
+            <div class="project-icon">🗂️</div>
             <div>
               <div class="project-item-title">Merging JSON, XML &amp; CSV safely</div>
-              <div class="project-item-tags">Python · identifiers</div>
+              <div class="project-item-short">Standardising attributes and identifiers across files.</div>
             </div>
-            <span>↳</span>
           </button>
         </div>
 
         <div class="project-preview reveal" id="projectPreview">
-          <!-- Filled by JS -->
+          <!-- filled by JS -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education & Certs -->
+  <!-- Education & certs -->
   <section id="education">
     <div class="container">
       <div class="section-header">
@@ -1282,7 +1384,7 @@
               </li>
               <li>
                 <div class="edu-degree">IT Technical Skills Bootcamp</div>
-                <div class="edu-inst">Microsoft 365 &amp; Endpoint / Just IT</div>
+                <div class="edu-inst">Microsoft 365 &amp; Endpoint · Just IT</div>
                 <div class="edu-note">
                   Endpoint management with Intune &amp; Entra ID, secure configuration, device compliance and support.
                 </div>
@@ -1326,11 +1428,11 @@
         <div>
           <p class="contact-text">
             I’m happy to share more detailed diagrams, configs or code samples for the projects on this page.
-            The form opens an email to me with your message so we can continue the conversation from there.
+            The form opens an email draft so we can continue the conversation from there.
           </p>
           <p class="contact-text">
-            Based between networking and security, I’m particularly interested in roles around
-            network security, SOC, and security engineering where labs and experimentation are part of the job.
+            I’m especially interested in network security, SOC and security engineering roles, where
+            labs and experimentation are part of the job.
           </p>
         </div>
 
@@ -1425,7 +1527,7 @@
       themeToggle.querySelector("span:last-child").textContent = isLight ? "Light" : "Dark";
     });
 
-    // Typed hero text
+    // Typed hero text (multi-language)
     const typedText = document.getElementById("typedText");
     const phrases = [
       "Hi, I'm Ala'a.",
@@ -1440,7 +1542,6 @@
       const current = phrases[phraseIndex];
 
       if (typing) {
-        // typing forward
         if (charIndex <= current.length) {
           typedText.textContent = current.slice(0, charIndex);
           charIndex++;
@@ -1450,7 +1551,6 @@
           setTimeout(typeLoop, 1600);
         }
       } else {
-        // deleting
         if (charIndex >= 0) {
           typedText.textContent = current.slice(0, charIndex);
           charIndex--;
@@ -1569,9 +1669,9 @@ def estimate_entropy(password: str) -> int:
           </p>
         `,
         images: [
-          "Replace with the main network topology diagram (core, distribution, access).",
-          "Replace with a VLAN / subnet plan diagram.",
-          "Replace with an ACL or firewall policy snippet showing segmentation rules."
+          "Main network topology diagram (core, distribution, access).",
+          "VLAN / subnet plan diagram.",
+          "ACL or firewall policy snippet showing segmentation rules."
         ],
         code: `
 interface GigabitEthernet0/0
@@ -1603,8 +1703,8 @@ interface Tunnel0
           </p>
         `,
         images: [
-          "Replace with a screenshot of a noisy dashboard before tuning.",
-          "Replace with a cleaner dashboard after tuning, highlighting fewer, higher quality alerts."
+          "Noisy dashboard before tuning.",
+          "Cleaner dashboard after tuning, highlighting fewer, higher quality alerts."
         ],
         code: `
 index=security sourcetype=anti-malware
@@ -1628,12 +1728,14 @@ index=security sourcetype=anti-malware
           </p>
         `,
         images: [
-          "Replace with a diagram showing JSON, XML and CSV inputs flowing into one normalised table.",
-          "Replace with a screenshot of the final merged dataset."
+          "Diagram showing JSON, XML and CSV inputs flowing into one normalised table.",
+          "Screenshot of the final merged dataset."
         ],
         code: `
 def build_identifier(record):
-    parts = [record.get("first_name",""), record.get("last_name",""), record.get("postcode","")]
+    parts = [record.get("first_name",""),
+             record.get("last_name",""),
+             record.get("postcode","")]
     return "_".join(p.lower().replace(" ", "") for p in parts if p)
 
 people = {}
@@ -1662,7 +1764,7 @@ for rec in incoming_records:
               <span class="code-dot"></span>
               <span class="code-dot"></span>
             </div>
-            <span>Projects / ${id}.py</span>
+            <span>Code Showcase / ${id}.py</span>
           </div>
           <div class="code-header-tabs">
             <div class="code-header-tab active">
