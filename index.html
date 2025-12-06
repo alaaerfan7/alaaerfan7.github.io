@@ -11,34 +11,100 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 0% 0%, #cffafe 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, #fce7f3 0, transparent 55%),
-        linear-gradient(to bottom, #fdfdfd, #f5f3ff 40%, #f9fafb 100%);
-      color: #020617;
+        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.3) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(16,185,129,0.3) 0, transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(139,92,246,0.35) 0, transparent 60%),
+        #020617;
+      background-size: 140% 140%;
+      animation: bg-shift 28s ease-in-out infinite alternate;
+      color: #e5e7eb;
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    @keyframes bg-shift {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 40%; }
+      100% { background-position: 20% 100%; }
     }
+
+    body.loading {
+      overflow: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
 
     .container {
       max-width: 1120px;
       margin: 0 auto;
       padding: 0 1.5rem;
+    }
+
+    /* LOADER */
+    #loader-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, #0f172a 0, #020617 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loader-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-inner {
+      text-align: center;
+      color: #e5e7eb;
+    }
+
+    .loader-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 999px;
+      background: conic-gradient(from 220deg, #22c55e, #06b6d4, #6366f1, #a855f7, #22c55e);
+      box-shadow: 0 0 32px rgba(56,189,248,0.9);
+      margin: 0 auto 1.1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader-ring {
+      position: absolute;
+      inset: 8px;
+      border-radius: 999px;
+      border: 2px solid rgba(15,23,42,0.95);
+      border-top-color: rgba(15,23,42,0.2);
+      animation: spin 1.2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loader-text-main {
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin-bottom: 0.35rem;
+    }
+
+    .loader-text-sub {
+      font-size: 0.9rem;
+      color: #cbd5f5;
     }
 
     /* NAVBAR */
@@ -47,8 +113,8 @@
       top: 0;
       z-index: 40;
       backdrop-filter: blur(18px);
-      background: rgba(253, 253, 254, 0.94);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.88));
+      border-bottom: 1px solid rgba(30,64,175,0.6);
     }
 
     .nav-inner {
@@ -68,8 +134,8 @@
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      background: conic-gradient(from 200deg, #22c55e, #06b6d4, #6366f1, #f97316, #22c55e);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.7);
+      background: conic-gradient(from 200deg, #22c55e, #06b6d4, #6366f1, #a855f7, #22c55e);
+      box-shadow: 0 0 24px rgba(56,189,248,0.9);
     }
 
     .nav-name {
@@ -77,14 +143,14 @@
       letter-spacing: 0.07em;
       font-size: 0.9rem;
       text-transform: uppercase;
-      color: #020617;
+      color: #f9fafb;
     }
 
     .nav-links {
       display: flex;
       gap: 0.75rem;
       font-size: 0.9rem;
-      color: #4b5563;
+      color: #9ca3af;
     }
 
     .nav-links a {
@@ -99,7 +165,7 @@
       position: absolute;
       left: 0.9rem;
       right: 0.9rem;
-      bottom: 0.2rem;
+      bottom: 0.22rem;
       height: 2px;
       border-radius: 999px;
       background: linear-gradient(to right, #22c55e, #06b6d4, #6366f1);
@@ -109,8 +175,8 @@
     }
 
     .nav-links a:hover {
-      background: rgba(226, 232, 240, 0.85);
-      color: #0f172a;
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
       transform: translateY(-1px);
     }
 
@@ -118,7 +184,7 @@
       transform: scaleX(1);
     }
 
-    /* FULL INTRO SECTION */
+    /* INTRO */
     .intro {
       height: 100vh;
       min-height: 540px;
@@ -144,32 +210,27 @@
     }
 
     .intro-title {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
       font-weight: 700;
       line-height: 1.08;
-      margin: 0 0 0.8rem;
-      background: linear-gradient(to right, #020617, #0f172a, #4b5563);
+      margin: 0 0 0.9rem;
+      background: linear-gradient(to right, #f9fafb, #e5e7eb, #a5b4fc);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .intro-highlight {
-      display: inline-block;
-      padding: 0.1rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(244, 244, 245, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
+    .intro-meta {
       font-size: 0.9rem;
-      color: #111827;
-      margin-bottom: 1rem;
+      color: #9ca3af;
+      margin-bottom: 1.1rem;
     }
 
     .intro-subtitle {
-      margin: 0 auto 1.6rem;
+      margin: 0 auto 1.8rem;
       max-width: 32rem;
       font-size: 0.98rem;
-      color: #4b5563;
+      color: #cbd5f5;
     }
 
     .intro-actions {
@@ -187,25 +248,27 @@
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
-      background: linear-gradient(135deg, #22c55e, #06b6d4, #6366f1);
+      background: radial-gradient(circle at 0 0, #22c55e, transparent 60%),
+                  radial-gradient(circle at 100% 0, #06b6d4, transparent 60%),
+                  linear-gradient(135deg, #0ea5e9, #6366f1);
       color: #f9fafb;
-      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.35);
+      box-shadow: 0 16px 40px rgba(15,118,110,0.55);
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     }
 
     .btn-primary:hover {
       transform: translateY(-1px) scale(1.01);
-      filter: brightness(1.04);
-      box-shadow: 0 20px 55px rgba(56, 189, 248, 0.5);
+      filter: brightness(1.05);
+      box-shadow: 0 22px 55px rgba(56,189,248,0.65);
     }
 
     .btn-ghost {
       border-radius: 999px;
       padding: 0.55rem 1.5rem;
       font-size: 0.9rem;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      background: rgba(248, 250, 252, 0.96);
-      color: #0f172a;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -214,38 +277,14 @@
     }
 
     .btn-ghost:hover {
-      background: #e5e7eb;
-      border-color: #94a3b8;
+      background: rgba(30,64,175,0.75);
+      border-color: rgba(129,140,248,0.95);
       transform: translateY(-1px);
-    }
-
-    .intro-orb {
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 60%);
-      top: 15%;
-      left: 8%;
-      filter: blur(2px);
-      pointer-events: none;
-    }
-
-    .intro-orb2 {
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(244, 114, 182, 0.3), transparent 60%);
-      bottom: 4%;
-      right: 10%;
-      filter: blur(2px);
-      pointer-events: none;
     }
 
     .scroll-indicator {
       position: absolute;
-      bottom: 1.8rem;
+      bottom: 1.7rem;
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.8rem;
@@ -262,48 +301,42 @@
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
+      0%,100% { transform: translateY(0); }
       50% { transform: translateY(4px); }
     }
 
-    /* MAIN SECTIONS */
-    section {
-      padding: 2.7rem 0;
-    }
+    /* SECTION */
+    section { padding: 3rem 0; }
 
-    .section-header {
-      margin-bottom: 1.6rem;
-    }
+    .section-header { margin-bottom: 1.6rem; }
 
     .section-kicker {
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: #9ca3af;
+      color: #6b7280;
       margin-bottom: 0.35rem;
     }
 
     .section-title {
       font-size: 1.45rem;
       margin: 0 0 0.35rem;
-      color: #0f172a;
+      color: #e5e7eb;
     }
 
     .section-subtitle {
       font-size: 0.9rem;
-      color: #6b7280;
+      color: #9ca3af;
       max-width: 36rem;
     }
 
-    /* ABOUT WITH PHOTO */
-    .hero-block {
-      padding: 3.2rem 0 2.5rem;
-    }
+    /* HERO ABOUT */
+    .hero-block { padding-top: 2.2rem; }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.4fr);
-      gap: 2.3rem;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.5fr);
+      gap: 2.6rem;
       align-items: center;
     }
 
@@ -317,17 +350,21 @@
       width: 260px;
       height: 260px;
       border-radius: 1.8rem;
-      padding: 0.6rem;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(236, 72, 153, 0.25));
-      box-shadow: 0 28px 80px rgba(148, 163, 184, 0.7);
+      padding: 0.55rem;
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.35), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(147,51,234,0.35), transparent 60%),
+        rgba(15,23,42,1);
+      box-shadow: 0 30px 90px rgba(15,23,42,0.9);
     }
 
     .hero-photo-inner {
       width: 100%;
       height: 100%;
-      border-radius: 1.4rem;
+      border-radius: 1.45rem;
       overflow: hidden;
-      background: #e5e7eb;
+      background: #020617;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -340,30 +377,23 @@
       display: block;
     }
 
-    .hero-photo-placeholder {
-      font-size: 0.85rem;
-      color: #6b7280;
-      padding: 0 1rem;
-      text-align: center;
-    }
-
     .hero-photo-tag {
       position: absolute;
-      bottom: 0.7rem;
-      left: 0.85rem;
+      bottom: 0.75rem;
+      left: 0.9rem;
       border-radius: 999px;
-      background: rgba(253, 253, 254, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.85);
-      padding: 0.2rem 0.7rem;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.9);
+      padding: 0.22rem 0.7rem;
       font-size: 0.72rem;
-      color: #111827;
+      color: #e5e7eb;
     }
 
     .hero-text-kicker {
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: #9ca3af;
+      color: #6b7280;
       margin-bottom: 0.7rem;
     }
 
@@ -371,71 +401,41 @@
       font-size: 1.6rem;
       font-weight: 600;
       margin: 0 0 0.7rem;
-      color: #0f172a;
+      color: #f9fafb;
     }
 
     .hero-text-body {
       font-size: 0.95rem;
-      color: #111827;
+      color: #d1d5db;
       margin-bottom: 1.1rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .badge {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.75);
-      padding: 0.25rem 0.8rem;
-      font-size: 0.78rem;
-      background: rgba(255, 255, 255, 0.9);
-      color: #111827;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
     }
 
     .hero-note {
       font-size: 0.86rem;
-      color: #6b7280;
+      color: #9ca3af;
       margin-top: 0.4rem;
     }
 
-    /* ABOUT MINI SECTION */
+    /* OVERVIEW ABOUT */
     .about-grid {
       display: grid;
-      grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.7fr);
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
       gap: 1.8rem;
     }
 
-    .about-text {
-      font-size: 0.93rem;
-      color: #111827;
-    }
+    .about-text { font-size: 0.93rem; color: #e5e7eb; }
 
-    .about-text p {
-      margin-top: 0;
-    }
+    .about-text p { margin-top: 0; }
 
     .about-card {
       border-radius: 1rem;
-      background: #ffffff;
-      border: 1px solid rgba(209, 213, 219, 0.95);
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.35), transparent 60%),
+                  rgba(15,23,42,0.98);
+      border: 1px solid rgba(37,99,235,0.7);
       padding: 1rem 1.1rem;
       font-size: 0.88rem;
-      color: #374151;
-      box-shadow: 0 18px 45px rgba(148, 163, 184, 0.35);
+      color: #cbd5f5;
+      box-shadow: 0 22px 60px rgba(15,23,42,0.9);
     }
 
     .about-tag {
@@ -448,9 +448,9 @@
 
     .about-list {
       margin: 0.45rem 0 0;
-      padding-left: 1.1rem;
+      padding-left: 1.2rem;
       font-size: 0.9rem;
-      color: #374151;
+      color: #e5e7eb;
     }
 
     /* PROJECT CARDS */
@@ -462,24 +462,27 @@
 
     .card {
       border-radius: 1rem;
-      background: #ffffff;
-      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 70%),
+                  rgba(15,23,42,0.98);
+      border: 1px solid rgba(30,64,175,0.9);
       padding: 1rem 1.15rem 0.9rem;
       position: relative;
       overflow: hidden;
       transform: translateY(0) scale(1);
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        border-color 0.18s ease-out,
-        background 0.18s ease-out;
+      transition: transform 0.18s ease-out,
+                  box-shadow 0.18s ease-out,
+                  border-color 0.18s ease-out,
+                  background 0.18s ease-out;
+      box-shadow: 0 18px 55px rgba(15,23,42,0.9);
     }
 
     .card:hover {
       transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 26px 70px rgba(148, 163, 184, 0.5);
-      border-color: rgba(129, 140, 248, 0.9);
-      background: linear-gradient(to bottom right, #ffffff, #eef2ff);
+      box-shadow: 0 26px 80px rgba(15,23,42,1);
+      border-color: rgba(129,140,248,1);
+      background:
+        radial-gradient(circle at 100% 0, rgba(147,51,234,0.35), transparent 60%),
+        rgba(15,23,42,1);
     }
 
     .card-pill-row {
@@ -493,51 +496,45 @@
       font-size: 0.7rem;
       padding: 0.16rem 0.5rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      color: #4b5563;
-      background: rgba(248, 250, 252, 0.95);
+      border: 1px solid rgba(55,65,81,0.9);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.95);
     }
 
     .card h3 {
       margin: 0 0 0.35rem;
       font-size: 1rem;
-      color: #111827;
+      color: #f9fafb;
     }
 
     .card p {
       margin: 0;
       font-size: 0.86rem;
-      color: #4b5563;
+      color: #cbd5f5;
     }
 
     .card-footer {
       margin-top: 0.7rem;
       font-size: 0.78rem;
-      color: #6b7280;
+      color: #9ca3af;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .card-footer span.icon {
-      font-size: 1rem;
-    }
+    .card-footer span.icon { font-size: 1rem; }
 
     .card-links {
       margin-top: 0.5rem;
       font-size: 0.8rem;
       display: flex;
       gap: 0.7rem;
-      color: #4b5563;
+      color: #cbd5f5;
     }
 
-    .card-links a {
-      color: #2563eb;
-    }
+    .card-links a { color: #60a5fa; }
 
-    .card-links a:hover {
-      text-decoration: underline;
-    }
+    .card-links a:hover { text-decoration: underline; }
 
     /* FEATURED ARP */
     .arp-layout {
@@ -547,16 +544,13 @@
       align-items: center;
     }
 
-    .arp-text {
-      font-size: 0.93rem;
-      color: #111827;
-    }
+    .arp-text { font-size: 0.93rem; color: #e5e7eb; }
 
     .arp-text ul {
       margin: 0.6rem 0 0.2rem 1.2rem;
       padding: 0;
       font-size: 0.9rem;
-      color: #374151;
+      color: #cbd5f5;
     }
 
     .arp-actions {
@@ -568,111 +562,30 @@
 
     .arp-media {
       border-radius: 1.2rem;
-      background: #ffffff;
-      border: 1px solid rgba(191, 219, 254, 0.9);
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(30,64,175,0.9);
       padding: 0.9rem;
-      box-shadow: 0 22px 60px rgba(148, 163, 184, 0.4);
+      box-shadow: 0 24px 70px rgba(15,23,42,1);
     }
 
     .arp-image-frame {
       border-radius: 1rem;
       overflow: hidden;
-      background: radial-gradient(circle at top, #e0f2fe, #e5e7eb);
+      background: radial-gradient(circle at top, #0f172a, #020617);
       height: 230px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #6b7280;
+      color: #9ca3af;
       font-size: 0.85rem;
       text-align: center;
       padding: 1rem;
     }
 
-    .arp-image-frame img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
     .arp-caption {
       margin-top: 0.4rem;
       font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    /* TIMELINE */
-    .timeline {
-      position: relative;
-      margin-top: 1.4rem;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, #bfdbfe, #c4b5fd);
-      opacity: 0.9;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin: 1.5rem 0;
-      display: flex;
-      justify-content: flex-start;
-    }
-
-    .timeline-item:nth-child(odd) {
-      justify-content: flex-end;
-    }
-
-    .timeline-card {
-      width: 46%;
-      background: #ffffff;
-      border-radius: 1rem;
-      padding: 0.9rem 1rem;
-      border: 1px solid rgba(209, 213, 219, 0.9);
-      box-shadow: 0 12px 32px rgba(148, 163, 184, 0.3);
-      font-size: 0.85rem;
-      color: #374151;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 50%;
-      top: 1.2rem;
-      transform: translate(-50%, -50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: #ffffff;
-      border: 3px solid #6366f1;
-      box-shadow: 0 0 0 4px rgba(191, 219, 254, 0.9);
-    }
-
-    .timeline-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
       color: #9ca3af;
-      margin-bottom: 0.1rem;
-    }
-
-    .timeline-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 0.1rem;
-    }
-
-    .timeline-meta {
-      font-size: 0.78rem;
-      color: #6b7280;
-      margin-bottom: 0.4rem;
     }
 
     /* EDUCATION & CERTS */
@@ -687,31 +600,24 @@
       padding: 0;
       margin: 0;
       font-size: 0.9rem;
-      color: #374151;
+      color: #e5e7eb;
     }
 
-    .edu-list li + li {
-      margin-top: 0.8rem;
-    }
+    .edu-list li + li { margin-top: 0.8rem; }
 
-    .edu-degree {
-      font-weight: 600;
-      color: #111827;
-    }
+    .edu-degree { font-weight: 600; color: #f9fafb; }
 
-    .edu-inst {
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
+    .edu-inst { font-size: 0.85rem; color: #9ca3af; }
 
     .cert-card {
       border-radius: 1rem;
-      background: #ffffff;
-      border: 1px solid rgba(209, 213, 219, 0.95);
+      background: radial-gradient(circle at 0 0, rgba(22,163,74,0.3), transparent 65%),
+                  rgba(15,23,42,0.98);
+      border: 1px solid rgba(21,128,61,0.9);
       padding: 1rem 1.1rem;
       font-size: 0.88rem;
-      color: #374151;
-      box-shadow: 0 18px 45px rgba(148, 163, 184, 0.35);
+      color: #d1fae5;
+      box-shadow: 0 22px 60px rgba(15,23,42,1);
     }
 
     .cert-row {
@@ -723,11 +629,11 @@
 
     .cert-pill {
       border-radius: 999px;
-      border: 1px solid rgba(74, 222, 128, 0.8);
+      border: 1px solid rgba(74,222,128,0.8);
       padding: 0.25rem 0.7rem;
       font-size: 0.78rem;
-      background: #ecfdf3;
-      color: #166534;
+      background: #022c22;
+      color: #bbf7d0;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -740,58 +646,31 @@
       background: #22c55e;
     }
 
-    .cert-links {
-      margin-top: 0.7rem;
-      font-size: 0.84rem;
-    }
+    .cert-links { margin-top: 0.7rem; font-size: 0.84rem; }
 
-    .cert-links a {
-      color: #2563eb;
-    }
+    .cert-links a { color: #60a5fa; }
 
-    .cert-links a:hover {
-      text-decoration: underline;
-    }
+    .cert-links a:hover { text-decoration: underline; }
 
-    .cv-link {
-      margin-top: 0.75rem;
-      font-size: 0.86rem;
-    }
+    .cv-link { margin-top: 0.75rem; font-size: 0.86rem; }
 
-    .cv-link a {
-      color: #2563eb;
-      font-weight: 500;
-    }
+    .cv-link a { color: #60a5fa; font-weight: 500; }
 
-    .cv-link a:hover {
-      text-decoration: underline;
-    }
+    .cv-link a:hover { text-decoration: underline; }
 
     /* CONTACT */
-    .contact-text {
-      font-size: 0.92rem;
-      color: #111827;
-      margin-bottom: 0.9rem;
-    }
+    .contact-text { font-size: 0.92rem; color: #e5e7eb; margin-bottom: 0.9rem; }
 
-    .contact-links {
-      font-size: 0.9rem;
-      color: #374151;
-    }
+    .contact-links { font-size: 0.9rem; color: #cbd5f5; }
 
-    .contact-links a {
-      color: #2563eb;
-    }
+    .contact-links a { color: #60a5fa; }
 
-    .contact-links a:hover {
-      color: #1d4ed8;
-      text-decoration: underline;
-    }
+    .contact-links a:hover { color: #93c5fd; text-decoration: underline; }
 
-    /* SCROLL REVEAL & TILT */
+    /* REVEAL & TILT */
     .reveal {
       opacity: 0;
-      transform: translateY(18px) scale(0.98);
+      transform: translateY(18px) scale(0.985);
       transition: opacity 0.45s ease-out, transform 0.45s ease-out;
     }
 
@@ -807,93 +686,51 @@
     }
 
     .tilt-card.hover-tilt:hover {
-      box-shadow: 0 28px 80px rgba(148, 163, 184, 0.55);
+      box-shadow: 0 32px 100px rgba(15,23,42,1);
     }
 
     /* FOOTER */
     footer {
-      border-top: 1px solid rgba(203, 213, 225, 0.9);
+      border-top: 1px solid rgba(30,64,175,0.7);
       padding: 1.5rem 0 2rem;
       font-size: 0.8rem;
       text-align: center;
       color: #6b7280;
-      background: #f9fafb;
+      background: #020617;
       margin-top: 1.5rem;
     }
 
     /* RESPONSIVE */
     @media (max-width: 960px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-block {
-        padding-top: 2.4rem;
-      }
-
-      .hero-photo-wrap {
-        order: -1;
-      }
-
-      .grid-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .arp-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline::before {
-        left: 16px;
-      }
-
-      .timeline-item,
-      .timeline-item:nth-child(odd) {
-        justify-content: flex-start;
-      }
-
-      .timeline-card {
-        width: 100%;
-        margin-left: 2.4rem;
-      }
-
-      .timeline-dot {
-        left: 16px;
-        transform: translate(-50%, -50%);
-      }
-
-      .two-column {
-        grid-template-columns: 1fr;
-      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-block { padding-top: 2.4rem; }
+      .hero-photo-wrap { order: -1; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .arp-layout { grid-template-columns: 1fr; }
+      .two-column { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
-      .nav-inner {
-        padding-inline: 1.1rem;
-      }
-
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      .intro-actions {
-        flex-direction: column;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
+      .nav-inner { padding-inline: 1.1rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .intro-actions { flex-direction: column; }
       .btn-primary,
-      .btn-ghost {
-        width: 100%;
-        justify-content: center;
-      }
+      .btn-ghost { width: 100%; justify-content: center; }
     }
   </style>
 </head>
-<body>
+<body class="loading">
+  <!-- LOADER -->
+  <div id="loader-overlay">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <div class="loader-ring"></div>
+      </div>
+      <div class="loader-text-main">Ala'a Alsheikh Ali</div>
+      <div class="loader-text-sub">Preparing your security lab…</div>
+    </div>
+  </div>
+
   <!-- NAV -->
   <header class="nav">
     <div class="container nav-inner">
@@ -904,41 +741,36 @@
       <nav class="nav-links">
         <a href="#intro">Home</a>
         <a href="#about-block">About</a>
-        <a href="#timeline">Path</a>
         <a href="#projects">Projects</a>
         <a href="#arp">ARP System</a>
         <a href="#education">Education</a>
-        <a href="#certs">Certs &amp; CV</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- FULL INTRO -->
+  <!-- INTRO -->
   <section class="intro" id="intro">
-    <div class="intro-orb"></div>
-    <div class="intro-orb2"></div>
-
     <div class="intro-inner">
       <div class="intro-kicker">Cybersecurity · Networks · Python</div>
       <h1 class="intro-title">
         Hi, I'm Ala'a.<br>
-        I work where packets, security and people intersect.
+        I like turning messy security problems into clear systems.
       </h1>
-      <div class="intro-highlight">
+      <div class="intro-meta">
         MSc Cybersecurity · BSc Networks &amp; Cybersecurity (First Class) · CompTIA Security+
       </div>
       <p class="intro-subtitle">
-        I like taking ideas like ARP cache poisoning, password behaviour and noisy alerts
-        and turning them into real labs, tools and clear explanations.
+        I enjoy building labs and tools around real attacks – from ARP cache poisoning to password
+        behaviour and noisy SIEM alerts – then explaining the story in a way people actually understand.
       </p>
 
       <div class="intro-actions">
         <button class="btn-primary" onclick="document.getElementById('about-block').scrollIntoView({behavior: 'smooth'})">
-          Start here
+          Start with who I am
         </button>
         <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
-          Jump to projects
+          Skip to projects
         </button>
       </div>
     </div>
@@ -949,62 +781,65 @@
     </div>
   </section>
 
-  <div class="hero-photo-wrap">
-  <div class="hero-photo-card tilt-card hover-tilt">
-    <div class="hero-photo-inner">
-      <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
-    </div>
-    <div class="hero-photo-tag">
-      Cybersecurity &amp; Networks
-    </div>
-  </div>
-</div>
-
-      
+  <!-- HERO ABOUT -->
+  <section class="hero-block" id="about-block">
+    <div class="container hero-grid">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-card tilt-card hover-tilt">
+          <div class="hero-photo-inner">
+            <!-- Make sure this file exists in assets/profile.JPG -->
+            <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
+          </div>
+          <div class="hero-photo-tag">
+            Cybersecurity &amp; Networks
+          </div>
+        </div>
+      </div>
 
       <div>
         <div class="hero-text-kicker">About</div>
         <h2 class="hero-text-title">Who I am and what I enjoy working on</h2>
         <p class="hero-text-body">
           I started with networks – routing, switching and topologies – and then moved deeper into
-          cybersecurity, building labs and tools around real attacks and defences. I like projects
-          where I can combine technical detail and human behaviour: ARP cache poisoning, password
-          UX, SIEM noise and secure network design.
+          cybersecurity. Most of my work lives inside labs: virtual networks with Open vSwitch and Ryu,
+          password portals in Flask, SIEM dashboards, packet captures and a lot of terminal windows.
         </p>
-
-        <div class="hero-badges">
-          <span class="badge"><span class="badge-dot"></span>MSc Cybersecurity</span>
-          <span class="badge"><span class="badge-dot"></span>BSc Networks &amp; Cybersecurity (First Class)</span>
-          <span class="badge"><span class="badge-dot"></span>CompTIA Security+</span>
-        </div>
-
+        <p class="hero-text-body">
+          I like problems where I can combine protocol-level detail with human behaviour: ARP cache
+          poisoning and how to block it, how password design nudges people into stronger choices, or
+          how to reduce alert noise so analysts focus on what matters.
+        </p>
         <p class="hero-note">
-          This site brings together my projects, dissertation work and experience. It will also host
-          my ARP cache poisoning paper and supporting diagrams once ready.
+          This site pulls together my dissertation, projects and experience. Over time, I’ll add
+          dedicated pages for the ARP system, password UX study and network consulting project.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- OVERVIEW ABOUT -->
+  <!-- OVERVIEW -->
   <section>
     <div class="container">
       <div class="section-header">
         <div class="section-kicker">Overview</div>
         <h2 class="section-title">How I like to approach security work</h2>
+        <p class="section-subtitle">
+          Understand the system, experiment in a safe environment, then design controls that are
+          realistic for the people who have to live with them.
+        </p>
       </div>
 
       <div class="about-grid">
         <div class="about-text reveal">
           <p>
-            I enjoy understanding how something really behaves first – the protocol, the topology,
-            the user – and then designing controls that make sense in that context. That can be a
-            detection rule, a network redesign or a small Python script that makes an analyst’s life easier.
+            Before adding more tools, I try to understand how the current network, app or team is
+            actually behaving. That might mean diagramming flows, looking at packet captures, or
+            walking through how a user really experiences a login page or alert.
           </p>
           <p>
-            A lot of my work lives in labs: virtual networks with Open vSwitch and Ryu, password
-            portals built with Flask, SIEM dashboards, packet captures in Wireshark and log exports
-            into Python or Excel for analysis.
+            From there, I like building small, focused things: a detection rule, a Python script, a
+            lab topology, or a new way of visualising logs. The goal is always the same: make it
+            easier to see what is happening, and easier to respond when something is wrong.
           </p>
         </div>
 
@@ -1012,83 +847,11 @@
           <div class="about-tag">Focus areas</div>
           <ul class="about-list">
             <li>Network security and secure network design.</li>
-            <li>Detection and response to network-level attacks (e.g. ARP spoofing).</li>
+            <li>Detection and response to network-level attacks, especially ARP spoofing.</li>
             <li>Security operations, SIEM tuning and reducing noisy alerts.</li>
-            <li>Password behaviour and the impact of UX on security choices.</li>
+            <li>Password behaviour and the impact of UX on security decisions.</li>
           </ul>
         </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- TIMELINE -->
-  <section id="timeline">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Path</div>
-        <h2 class="section-title">Education &amp; experience timeline</h2>
-        <p class="section-subtitle">
-          A combined view of how my studies and experience connect – from networking foundations
-          to cybersecurity projects and customer-facing work.
-        </p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card tilt-card">
-            <div class="timeline-label">Experience</div>
-            <div class="timeline-title">Sales Assistant – Sports Direct, UK</div>
-            <div class="timeline-meta">Dec 2024 – Apr 2025 · Sunderland</div>
-            <p>
-              Customer-facing role on a busy shop floor. It strengthened my communication, attention
-              to detail and ability to stay calm under pressure – all useful when explaining
-              technical security issues to people who are not security specialists.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card tilt-card">
-            <div class="timeline-label">Experience</div>
-            <div class="timeline-title">Cybersecurity Intern – Flags Technology</div>
-            <div class="timeline-meta">Jan 2022 – Jul 2022</div>
-            <p>
-              Helped monitor security events in a SIEM, assisted with firewall and VPN changes,
-              ran vulnerability scans with Nessus, and used Wireshark and Python to investigate
-              suspicious traffic and phishing incidents.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card tilt-card">
-            <div class="timeline-label">Education</div>
-            <div class="timeline-title">MSc Cybersecurity</div>
-            <div class="timeline-meta">2023 – 2024 · University of Sunderland</div>
-            <p>
-              Focused on ARP cache poisoning detection and mitigation, security engineering,
-              cyber resilience and incident response, and research into how design affects
-              password strength and user behaviour.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card tilt-card">
-            <div class="timeline-label">Education</div>
-            <div class="timeline-title">BSc Networks &amp; Cybersecurity (First Class)</div>
-            <div class="timeline-meta">2020 – 2023 · University of Sunderland</div>
-            <p>
-              Covered routing, switching, secure network design, network forensics and IT service
-              management. Completed a consultancy-style project redesigning an enterprise network
-              for resilience and security.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1100,13 +863,12 @@
         <div class="section-kicker">Projects</div>
         <h2 class="section-title">Selected projects</h2>
         <p class="section-subtitle">
-          Blocks below give a quick view. Each can later link to a dedicated page with code, diagrams
-          and full write-ups.
+          A snapshot of the work I’m most proud of. Later, each of these cards can become a full
+          write-up with diagrams, code and lab notes.
         </p>
       </div>
 
       <div class="grid-3">
-        <!-- ARP -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Python</span>
@@ -1115,13 +877,13 @@
           </div>
           <h3>Dynamic ARP cache poisoning detection</h3>
           <p>
-            Monitors ARP traffic for anomalous IP–MAC mappings and uses an SDN controller to push
-            mitigation rules in real time, blocking spoofed hosts while keeping normal traffic flowing.
+            Built a system that watches ARP traffic for suspicious IP/MAC changes and then asks an
+            SDN controller to push live mitigation rules – blocking spoofed hosts while keeping
+            normal traffic flowing.
           </p>
           <div class="card-links">
-            <!-- Update these when you have GitHub repos or pages -->
-            <a href="#" target="_blank" rel="noreferrer">View code</a>
-            <a href="#arp">Project details</a>
+            <a href="#arp">Read more below</a>
+            <a href="#" target="_blank" rel="noreferrer">Code (coming soon)</a>
           </div>
           <div class="card-footer">
             <span>Virtual lab · Open vSwitch</span>
@@ -1129,7 +891,6 @@
           </div>
         </article>
 
-        <!-- Password UX -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Flask</span>
@@ -1138,12 +899,13 @@
           </div>
           <h3>Password security &amp; UX analysis</h3>
           <p>
-            Built a password creation interface with emoji feedback, colour-coded strength meters
-            and time-to-crack estimates, then studied how design nudges change real passwords.
+            Created a login and sign-up flow with emoji feedback, colour strength bars and
+            time-to-crack estimates, then ran a user study to see how these nudges changed real
+            password choices.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">View code</a>
-            <a href="#">Read summary</a>
+            <a href="#" target="_blank" rel="noreferrer">Code (coming soon)</a>
+            <a href="#" target="_blank" rel="noreferrer">Research summary (planned)</a>
           </div>
           <div class="card-footer">
             <span>SPSS · ANOVA · Chi-Square</span>
@@ -1151,7 +913,6 @@
           </div>
         </article>
 
-        <!-- Network redesign -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Cisco</span>
@@ -1160,11 +921,12 @@
           </div>
           <h3>Secure network consulting project</h3>
           <p>
-            Redesigned a growing organisation’s network using VLANs, zone-based firewalls, NAT/PAT,
-            site-to-site VPNs and redundancy via HSRP and EtherChannel.
+            Treated a university project as a real client engagement: redesigned a growing
+            organisation’s network with segmentation, firewalls, NAT/PAT, site-to-site VPNs and
+            redundancy using HSRP and EtherChannel.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Topology / configs</a>
+            <a href="#" target="_blank" rel="noreferrer">Topology &amp; configs (planned)</a>
           </div>
           <div class="card-footer">
             <span>Design · Documentation</span>
@@ -1172,7 +934,6 @@
           </div>
         </article>
 
-        <!-- SIEM -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Splunk</span>
@@ -1180,11 +941,12 @@
           </div>
           <h3>Reducing noisy SIEM alerts</h3>
           <p>
-            Analysed environments where EICAR test files created constant pop-ups and alerts,
-            then tuned rules so coverage remained strong without alert fatigue.
+            Looked at environments where harmless EICAR tests created constant popups and alerts,
+            then tuned rules so coverage stayed strong without overwhelming the people using the
+            tools.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Rules / logic (planned)</a>
+            <a href="#" target="_blank" rel="noreferrer">Detection logic (planned)</a>
           </div>
           <div class="card-footer">
             <span>Security operations</span>
@@ -1192,7 +954,6 @@
           </div>
         </article>
 
-        <!-- Data merge -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Python</span>
@@ -1200,8 +961,9 @@
           </div>
           <h3>Merging JSON, XML &amp; CSV with dynamic IDs</h3>
           <p>
-            Standardised fields across formats, used a unique identifier as the key and refreshed IDs
-            safely when attributes like age changed over time – without breaking relationships.
+            Standardised fields across three different file formats, used a unique identifier as a
+            key, then built a safe way to refresh those IDs when attributes like age changed – without
+            breaking relationships.
           </p>
           <div class="card-links">
             <a href="#" target="_blank" rel="noreferrer">View code</a>
@@ -1212,7 +974,6 @@
           </div>
         </article>
 
-        <!-- CTF -->
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">CTF</span>
@@ -1220,11 +981,12 @@
           </div>
           <h3>Capture the Flag coordination</h3>
           <p>
-            Coordinated our CTF effort by assigning tasks by strengths, tracking progress
-            and rotating approaches when a flag stalled under time pressure.
+            Helped coordinate our team during a security CTF by assigning challenges based on
+            strengths, keeping an eye on progress and switching approaches when we got stuck under
+            time pressure.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Challenges (planned)</a>
+            <a href="#" target="_blank" rel="noreferrer">Challenge notes (planned)</a>
           </div>
           <div class="card-footer">
             <span>Leadership in technical setting</span>
@@ -1242,47 +1004,39 @@
         <div class="section-kicker">Featured project</div>
         <h2 class="section-title">ARP cache poisoning detection &amp; prevention</h2>
         <p class="section-subtitle">
-          MSc dissertation project: building and evaluating a system to detect ARP spoofing in
-          virtual networks and automatically push mitigation rules through an SDN controller.
+          MSc dissertation project: building and evaluating a system that spots ARP spoofing in
+          virtual networks and automatically updates the network to block the attack.
         </p>
       </div>
 
       <div class="arp-layout">
         <div class="arp-text reveal">
           <p>
-            The project combines low-level packet inspection with controller-level decisions.
-            Rather than only logging suspicious traffic, it updates the network’s behaviour
-            in real time when an attack is detected.
+            The aim was to go beyond “log and alert” and actually change how the network behaves when
+            a spoofing attempt is detected. The system ties together packet inspection, anomaly
+            detection and SDN-based mitigation.
           </p>
           <ul>
-            <li>Monitors ARP traffic with Scapy and flags suspicious IP–MAC changes.</li>
-            <li>Communicates with the Ryu SDN controller to install or update flow rules.</li>
-            <li>Works as a hybrid ARP proxy / watchdog so normal communication can continue.</li>
-            <li>Includes a custom ARP attack tool to test detection coverage and edge cases.</li>
-            <li>Evaluated with different tools and scenarios in an Open vSwitch lab.</li>
+            <li>Monitors ARP traffic with Scapy and flags suspicious IP/MAC changes.</li>
+            <li>Talks to a Ryu SDN controller to install or update flow rules in real time.</li>
+            <li>Acts as a hybrid ARP proxy / watchdog so legitimate traffic still works.</li>
+            <li>Includes a custom ARP attack tool to test edge cases and detection coverage.</li>
+            <li>Evaluated with different tools and scenarios inside an Open vSwitch lab.</li>
           </ul>
 
           <div class="arp-actions">
-            <button class="btn-ghost" type="button">
-              Dissertation PDF (coming soon)
-            </button>
-            <button class="btn-ghost" type="button">
-              ARP diagrams &amp; lab screenshots (coming soon)
-            </button>
+            <button class="btn-ghost" type="button">Dissertation PDF (coming soon)</button>
+            <button class="btn-ghost" type="button">Diagrams &amp; lab screenshots (coming soon)</button>
           </div>
         </div>
 
         <aside class="arp-media reveal tilt-card hover-tilt">
           <div class="arp-image-frame">
-            <!-- Replace this with your own diagram / screenshot -->
-            <!-- Example: <img src="assets/arp-architecture.png" alt="ARP detection architecture diagram"> -->
-            <span>
-              Space reserved for your ARP architecture diagram, SDN controller view or flow table screenshots.<br><br>
-              Add images in <code>assets/</code> and embed them here.
-            </span>
+            Space reserved for your ARP architecture diagram or controller flow table view.
+            Once you export diagrams, they can live here.
           </div>
           <div class="arp-caption">
-            This section can later link directly to your published paper and a dedicated ARP project page.
+            This section can later link straight to a full ARP project page and your final paper.
           </div>
         </aside>
       </div>
@@ -1299,7 +1053,7 @@
 
       <div class="two-column">
         <div class="reveal">
-          <h3 style="margin-top:0; font-size:1rem; color:#111827;">Education</h3>
+          <h3 style="margin-top:0; font-size:1rem; color:#f9fafb;">Education</h3>
           <ul class="edu-list">
             <li>
               <div class="edu-degree">MSc Cybersecurity (Distinction)</div>
@@ -1316,10 +1070,10 @@
           </ul>
         </div>
 
-        <aside id="certs" class="cert-card reveal">
+        <aside class="cert-card reveal">
           <div style="font-weight:600; margin-bottom:0.4rem;">Certifications &amp; structured learning</div>
           <p style="margin:0; font-size:0.88rem;">
-            A mix of formal certifications and programmes that support my technical projects.
+            Things that support the work you’ve seen above.
           </p>
 
           <div class="cert-row">
@@ -1335,17 +1089,14 @@
           </div>
 
           <div class="cert-links">
-            <!-- Replace # with real URLs when you have them -->
             <div>Security+ credential: <a href="#" target="_blank" rel="noreferrer">View certificate</a></div>
             <div>IT Bootcamp: <a href="#" target="_blank" rel="noreferrer">View details</a></div>
           </div>
 
           <div class="cv-link">
-            CV (PDF):  
-            <!-- Upload your CV to the repo (e.g. "Alaa-CV.pdf") and update href -->
-            <a href="Alaa-CV.pdf" target="_blank" rel="noreferrer">
-              Download my full CV
-            </a>
+            CV (PDF):
+            <!-- upload your CV as Alaa-CV.pdf to the repo root -->
+            <a href="Alaa-CV.pdf" target="_blank" rel="noreferrer">Download my full CV</a>
           </div>
         </aside>
       </div>
@@ -1359,14 +1110,14 @@
         <div class="section-kicker">Contact</div>
         <h2 class="section-title">Get in touch</h2>
         <p class="section-subtitle">
-          If you would like to talk about a project, my dissertation, or anything around cybersecurity
-          and networks, you can reach me here.
+          If you want to talk about a project, my dissertation, or anything around cybersecurity
+          and networks, feel free to reach out.
         </p>
       </div>
 
       <p class="contact-text">
-        I can share more detailed write-ups, code snippets and diagrams for the projects on this site
-        on request.
+        I’m happy to share more detailed write-ups, code samples or diagrams for any of the projects
+        on this site.
       </p>
 
       <div class="contact-links">
@@ -1385,12 +1136,21 @@
   </section>
 
   <footer>
-    © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS and JavaScript.
+    © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS &amp; JavaScript.
   </footer>
 
   <script>
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Loader
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.classList.remove("loading");
+        const overlay = document.getElementById("loader-overlay");
+        overlay.classList.add("hidden");
+      }, 1200); // how long the logo stays before revealing the site
+    });
 
     // Scroll reveal
     const observer = new IntersectionObserver(
@@ -1409,7 +1169,7 @@
     // Tilt effect
     const tiltElements = document.querySelectorAll(".tilt-card");
     tiltElements.forEach(card => {
-      const strength = 10;
+      const strength = 9;
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -1421,9 +1181,9 @@
         card.style.transform =
           `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
-
       card.addEventListener("mouseleave", () => {
-        card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+        card.style.transform =
+          "perspective(900px) rotateX(0deg) rotateY(0deg)";
       });
     });
   </script>
