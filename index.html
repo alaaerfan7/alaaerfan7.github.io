@@ -11,6 +11,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #020617;
+      --card-bg: #020617;
+      --card-border: rgba(31,41,55,1);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --accent-1: #22c55e;
+      --accent-2: #0ea5e9;
+      --accent-3: #6366f1;
+      --accent-4: #a855f7;
+    }
+
+    body.light {
+      --bg: #f3f4f6;
+      --bg-soft: #e5e7eb;
+      --card-bg: #ffffff;
+      --card-border: rgba(209,213,219,1);
+      --text-main: #111827;
+      --text-soft: #6b7280;
+    }
+
     * { box-sizing: border-box; }
 
     html { scroll-behavior: smooth; }
@@ -19,24 +41,24 @@
       margin: 0;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.3) 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(16,185,129,0.3) 0, transparent 55%),
-        radial-gradient(circle at 0% 100%, rgba(139,92,246,0.35) 0, transparent 60%),
-        #020617;
+        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.42) 0, transparent 55%),
+        radial-gradient(circle at 100% 5%, rgba(16,185,129,0.35) 0, transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(139,92,246,0.4) 0, transparent 65%),
+        var(--bg);
       background-size: 140% 140%;
-      animation: bg-shift 28s ease-in-out infinite alternate;
-      color: #e5e7eb;
+      animation: bg-shift 30s ease-in-out infinite alternate;
+      color: var(--text-main);
       line-height: 1.6;
-    }
-
-    @keyframes bg-shift {
-      0% { background-position: 0% 0%; }
-      50% { background-position: 100% 40%; }
-      100% { background-position: 20% 100%; }
     }
 
     body.loading {
       overflow: hidden;
+    }
+
+    @keyframes bg-shift {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 30%; }
+      100% { background-position: 20% 100%; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -45,6 +67,24 @@
       max-width: 1120px;
       margin: 0 auto;
       padding: 0 1.5rem;
+    }
+
+    /* SCROLL BAR */
+    #scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(15,23,42,0.7);
+      z-index: 60;
+    }
+
+    #scroll-bar-inner {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(to right, var(--accent-2), var(--accent-3), var(--accent-4));
+      transition: width 0.08s linear;
     }
 
     /* LOADER */
@@ -56,7 +96,7 @@
       align-items: center;
       justify-content: center;
       z-index: 100;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
     }
 
     #loader-overlay.hidden {
@@ -70,10 +110,10 @@
     }
 
     .loader-logo {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 999px;
-      background: conic-gradient(from 220deg, #22c55e, #06b6d4, #6366f1, #a855f7, #22c55e);
+      background: conic-gradient(from 220deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
       box-shadow: 0 0 32px rgba(56,189,248,0.9);
       margin: 0 auto 1.1rem;
       position: relative;
@@ -82,10 +122,10 @@
 
     .loader-ring {
       position: absolute;
-      inset: 8px;
+      inset: 10px;
       border-radius: 999px;
       border: 2px solid rgba(15,23,42,0.95);
-      border-top-color: rgba(15,23,42,0.2);
+      border-top-color: rgba(15,23,42,0.3);
       animation: spin 1.2s linear infinite;
     }
 
@@ -110,11 +150,16 @@
     /* NAVBAR */
     .nav {
       position: sticky;
-      top: 0;
-      z-index: 40;
+      top: 3px; /* sits below progress bar */
+      z-index: 50;
       backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.88));
-      border-bottom: 1px solid rgba(30,64,175,0.6);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.88));
+      border-bottom: 1px solid rgba(30,64,175,0.59);
+    }
+
+    body.light .nav {
+      background: rgba(249,250,251,0.9);
+      border-bottom-color: rgba(209,213,219,1);
     }
 
     .nav-inner {
@@ -127,15 +172,15 @@
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.6rem;
     }
 
     .nav-logo {
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      background: conic-gradient(from 200deg, #22c55e, #06b6d4, #6366f1, #a855f7, #22c55e);
-      box-shadow: 0 0 24px rgba(56,189,248,0.9);
+      background: conic-gradient(from 200deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
+      box-shadow: 0 0 20px rgba(56,189,248,0.9);
     }
 
     .nav-name {
@@ -146,11 +191,14 @@
       color: #f9fafb;
     }
 
+    body.light .nav-name { color: #111827; }
+
     .nav-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.8rem;
       font-size: 0.9rem;
       color: #9ca3af;
+      align-items: center;
     }
 
     .nav-links a {
@@ -165,10 +213,10 @@
       position: absolute;
       left: 0.9rem;
       right: 0.9rem;
-      bottom: 0.22rem;
+      bottom: 0.2rem;
       height: 2px;
       border-radius: 999px;
-      background: linear-gradient(to right, #22c55e, #06b6d4, #6366f1);
+      background: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3));
       transform: scaleX(0);
       transform-origin: center;
       transition: transform 0.18s ease-out;
@@ -180,14 +228,35 @@
       transform: translateY(-1px);
     }
 
-    .nav-links a:hover::after {
-      transform: scaleX(1);
+    body.light .nav-links a:hover {
+      background: rgba(229,231,235,0.9);
+      color: #111827;
+    }
+
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    body.light .theme-toggle {
+      background: #f9fafb;
+      color: #111827;
+      border-color: rgba(209,213,219,1);
     }
 
     /* INTRO */
     .intro {
-      height: 100vh;
-      min-height: 540px;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -198,19 +267,19 @@
 
     .intro-inner {
       max-width: 720px;
-      padding: 0 1.5rem;
+      padding: 4.5rem 1.5rem 3rem;
     }
 
     .intro-kicker {
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: #6b7280;
+      color: var(--text-soft);
       margin-bottom: 0.7rem;
     }
 
     .intro-title {
-      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
       font-weight: 700;
       line-height: 1.08;
       margin: 0 0 0.9rem;
@@ -218,12 +287,15 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      animation: intro-pop 0.9s ease-out forwards;
     }
 
     .intro-meta {
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: var(--text-soft);
       margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: intro-pop 0.9s ease-out 0.08s forwards;
     }
 
     .intro-subtitle {
@@ -231,6 +303,23 @@
       max-width: 32rem;
       font-size: 0.98rem;
       color: #cbd5f5;
+      opacity: 0;
+      animation: intro-pop 0.9s ease-out 0.12s forwards;
+    }
+
+    body.light .intro-subtitle { color: #4b5563; }
+
+    @keyframes intro-pop {
+      0%   { opacity: 0; transform: translateY(18px) scale(0.97); }
+      55%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .intro-dynamic {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      margin-bottom: 0.6rem;
+      height: 1.1rem;
     }
 
     .intro-actions {
@@ -244,13 +333,13 @@
     .btn-primary {
       border-radius: 999px;
       border: none;
-      padding: 0.6rem 1.7rem;
+      padding: 0.65rem 1.8rem;
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
-      background: radial-gradient(circle at 0 0, #22c55e, transparent 60%),
-                  radial-gradient(circle at 100% 0, #06b6d4, transparent 60%),
-                  linear-gradient(135deg, #0ea5e9, #6366f1);
+      background: radial-gradient(circle at 0 0, var(--accent-1), transparent 60%),
+                  radial-gradient(circle at 100% 0, var(--accent-2), transparent 60%),
+                  linear-gradient(135deg, var(--accent-2), var(--accent-3));
       color: #f9fafb;
       box-shadow: 0 16px 40px rgba(15,118,110,0.55);
       transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
@@ -264,7 +353,7 @@
 
     .btn-ghost {
       border-radius: 999px;
-      padding: 0.55rem 1.5rem;
+      padding: 0.6rem 1.7rem;
       font-size: 0.9rem;
       border: 1px solid rgba(75,85,99,0.9);
       background: rgba(15,23,42,0.95);
@@ -276,10 +365,18 @@
       transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
     }
 
+    .btn-ghost span.icon { font-size: 1rem; }
+
     .btn-ghost:hover {
       background: rgba(30,64,175,0.75);
       border-color: rgba(129,140,248,0.95);
       transform: translateY(-1px);
+    }
+
+    body.light .btn-ghost {
+      background: #f9fafb;
+      color: #111827;
+      border-color: rgba(209,213,219,1);
     }
 
     .scroll-indicator {
@@ -288,7 +385,7 @@
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.8rem;
-      color: #6b7280;
+      color: var(--text-soft);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -305,7 +402,7 @@
       50% { transform: translateY(4px); }
     }
 
-    /* SECTION */
+    /* SECTIONS */
     section { padding: 3rem 0; }
 
     .section-header { margin-bottom: 1.6rem; }
@@ -314,23 +411,23 @@
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: #6b7280;
+      color: var(--text-soft);
       margin-bottom: 0.35rem;
     }
 
     .section-title {
       font-size: 1.45rem;
       margin: 0 0 0.35rem;
-      color: #e5e7eb;
+      color: var(--text-main);
     }
 
     .section-subtitle {
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: var(--text-soft);
       max-width: 36rem;
     }
 
-    /* HERO ABOUT */
+    /* ABOUT */
     .hero-block { padding-top: 2.2rem; }
 
     .hero-grid {
@@ -340,29 +437,35 @@
       align-items: center;
     }
 
-    .hero-photo-wrap {
-      display: flex;
-      justify-content: center;
-    }
+    .hero-photo-wrap { display: flex; justify-content: center; }
 
     .hero-photo-card {
       position: relative;
       width: 320px;
       height: 320px;
-      border-radius: 1.8rem;
+      border-radius: 1.85rem;
       padding: 0.55rem;
       background:
         radial-gradient(circle at 0 0, rgba(34,197,94,0.35), transparent 55%),
         radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 55%),
         radial-gradient(circle at 0 100%, rgba(147,51,234,0.35), transparent 60%),
-        rgba(15,23,42,1);
+        #020617;
       box-shadow: 0 30px 90px rgba(15,23,42,0.9);
+    }
+
+    body.light .hero-photo-card {
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.25), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(56,189,248,0.25), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(147,51,234,0.25), transparent 60%),
+        #ffffff;
+      box-shadow: 0 24px 60px rgba(148,163,184,0.7);
     }
 
     .hero-photo-inner {
       width: 100%;
       height: 100%;
-      border-radius: 1.45rem;
+      border-radius: 1.5rem;
       overflow: hidden;
       background: #020617;
       display: flex;
@@ -389,11 +492,16 @@
       color: #e5e7eb;
     }
 
+    body.light .hero-photo-tag {
+      background: rgba(15,23,42,0.9);
+      color: #f9fafb;
+    }
+
     .hero-text-kicker {
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: #6b7280;
+      color: var(--text-soft);
       margin-bottom: 0.7rem;
     }
 
@@ -401,59 +509,110 @@
       font-size: 1.6rem;
       font-weight: 600;
       margin: 0 0 0.7rem;
-      color: #f9fafb;
+      color: var(--text-main);
     }
 
     .hero-text-body {
       font-size: 0.95rem;
       color: #d1d5db;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.7rem;
     }
+
+    body.light .hero-text-body { color: #4b5563; }
 
     .hero-note {
       font-size: 0.86rem;
-      color: #9ca3af;
+      color: var(--text-soft);
       margin-top: 0.4rem;
     }
 
-    /* OVERVIEW ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr);
-      gap: 1.8rem;
-    }
-
-    .about-text { font-size: 0.93rem; color: #e5e7eb; }
-
-    .about-text p { margin-top: 0; }
-
-    .about-card {
-      border-radius: 1rem;
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.35), transparent 60%),
-                  rgba(15,23,42,0.98);
-      border: 1px solid rgba(37,99,235,0.7);
+    /* SKILLS MARQUEE */
+    .skills-wrapper {
+      margin-top: 0.6rem;
+      border-radius: 1.1rem;
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.25), transparent 65%),
+                  rgba(15,23,42,0.95);
+      border: 1px solid rgba(30,64,175,0.9);
       padding: 1rem 1.1rem;
-      font-size: 0.88rem;
-      color: #cbd5f5;
       box-shadow: 0 22px 60px rgba(15,23,42,0.9);
+      overflow: hidden;
     }
 
-    .about-tag {
-      font-size: 0.75rem;
+    body.light .skills-wrapper {
+      background: #ffffff;
+      border-color: rgba(209,213,219,1);
+      box-shadow: 0 16px 40px rgba(148,163,184,0.6);
+    }
+
+    .skills-row-label {
+      font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: #9ca3af;
-      margin-bottom: 0.35rem;
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
     }
 
-    .about-list {
-      margin: 0.45rem 0 0;
-      padding-left: 1.2rem;
-      font-size: 0.9rem;
+    .skills-row {
+      display: flex;
+      gap: 0.5rem;
+      white-space: nowrap;
+      animation: skills-scroll 26s linear infinite;
+    }
+
+    .skills-row:nth-child(3) {
+      animation-duration: 32s;
+      animation-direction: reverse;
+    }
+
+    .skills-row:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes skills-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.32rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: rgba(15,23,42,0.95);
       color: #e5e7eb;
+      border: 1px solid rgba(55,65,81,0.9);
+      box-shadow: 0 0 0 rgba(59,130,246,0);
+      transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
-    /* PROJECT CARDS */
+    body.light .skill-pill {
+      background: #f9fafb;
+      color: #111827;
+      border-color: rgba(209,213,219,1);
+    }
+
+    .skill-pill-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f9fafb, #1e293b);
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skill-pill:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: rgba(129,140,248,1);
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.28), transparent 60%),
+                  rgba(15,23,42,0.98);
+      box-shadow: 0 0 18px rgba(56,189,248,0.7);
+    }
+
+    /* PROJECTS */
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -476,6 +635,12 @@
       box-shadow: 0 18px 55px rgba(15,23,42,0.9);
     }
 
+    body.light .card {
+      background: #ffffff;
+      border-color: rgba(209,213,219,1);
+      box-shadow: 0 16px 40px rgba(148,163,184,0.6);
+    }
+
     .card:hover {
       transform: translateY(-6px) scale(1.01);
       box-shadow: 0 26px 80px rgba(15,23,42,1);
@@ -483,6 +648,10 @@
       background:
         radial-gradient(circle at 100% 0, rgba(147,51,234,0.35), transparent 60%),
         rgba(15,23,42,1);
+    }
+
+    body.light .card:hover {
+      background: linear-gradient(to bottom right, #ffffff, #e5e7eb);
     }
 
     .card-pill-row {
@@ -501,10 +670,16 @@
       background: rgba(15,23,42,0.95);
     }
 
+    body.light .card-pill {
+      background: #f9fafb;
+      color: #111827;
+      border-color: rgba(209,213,219,1);
+    }
+
     .card h3 {
       margin: 0 0 0.35rem;
       font-size: 1rem;
-      color: #f9fafb;
+      color: var(--text-main);
     }
 
     .card p {
@@ -513,10 +688,12 @@
       color: #cbd5f5;
     }
 
+    body.light .card p { color: #4b5563; }
+
     .card-footer {
       margin-top: 0.7rem;
       font-size: 0.78rem;
-      color: #9ca3af;
+      color: var(--text-soft);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -536,58 +713,6 @@
 
     .card-links a:hover { text-decoration: underline; }
 
-    /* FEATURED ARP */
-    .arp-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .arp-text { font-size: 0.93rem; color: #e5e7eb; }
-
-    .arp-text ul {
-      margin: 0.6rem 0 0.2rem 1.2rem;
-      padding: 0;
-      font-size: 0.9rem;
-      color: #cbd5f5;
-    }
-
-    .arp-actions {
-      margin-top: 0.8rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .arp-media {
-      border-radius: 1.2rem;
-      background: rgba(15,23,42,0.98);
-      border: 1px solid rgba(30,64,175,0.9);
-      padding: 0.9rem;
-      box-shadow: 0 24px 70px rgba(15,23,42,1);
-    }
-
-    .arp-image-frame {
-      border-radius: 1rem;
-      overflow: hidden;
-      background: radial-gradient(circle at top, #0f172a, #020617);
-      height: 230px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ca3af;
-      font-size: 0.85rem;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .arp-caption {
-      margin-top: 0.4rem;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-
     /* EDUCATION & CERTS */
     .two-column {
       display: grid;
@@ -595,19 +720,66 @@
       gap: 1.8rem;
     }
 
-    .edu-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 0.9rem;
-      color: #e5e7eb;
+    .edu-card {
+      border-radius: 1rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(30,64,175,0.85);
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 22px 60px rgba(15,23,42,0.9);
     }
 
-    .edu-list li + li { margin-top: 0.8rem; }
+    body.light .edu-card {
+      background: #ffffff;
+      border-color: rgba(209,213,219,1);
+      box-shadow: 0 16px 40px rgba(148,163,184,0.6);
+    }
 
-    .edu-degree { font-weight: 600; color: #f9fafb; }
+    .edu-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.7rem;
+    }
 
-    .edu-inst { font-size: 0.85rem; color: #9ca3af; }
+    .edu-timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 0.4rem;
+      border-left: 1px solid rgba(55,65,81,0.9);
+    }
+
+    body.light .edu-timeline {
+      border-left-color: rgba(209,213,219,1);
+    }
+
+    .edu-timeline li {
+      position: relative;
+      padding-left: 1rem;
+      padding-bottom: 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-timeline li::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.35);
+    }
+
+    .edu-degree { font-weight: 600; color: var(--text-main); font-size: 0.92rem; }
+
+    .edu-inst { font-size: 0.82rem; color: var(--text-soft); margin-top: 0.1rem; }
+
+    .edu-note { font-size: 0.8rem; color: #cbd5f5; margin-top: 0.25rem; }
+
+    body.light .edu-note { color: #4b5563; }
 
     .cert-card {
       border-radius: 1rem;
@@ -620,11 +792,29 @@
       box-shadow: 0 22px 60px rgba(15,23,42,1);
     }
 
+    body.light .cert-card {
+      background: #ffffff;
+      color: #065f46;
+      border-color: rgba(34,197,94,0.8);
+      box-shadow: 0 16px 40px rgba(74,222,128,0.5);
+    }
+
+    .cert-heading {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 0.92rem;
+    }
+
+    .cert-intro {
+      margin: 0;
+      font-size: 0.86rem;
+    }
+
     .cert-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
     }
 
     .cert-pill {
@@ -639,6 +829,12 @@
       gap: 0.35rem;
     }
 
+    body.light .cert-pill {
+      background: #ecfdf3;
+      color: #166534;
+      border-color: rgba(34,197,94,0.9);
+    }
+
     .cert-pill span.dot {
       width: 7px;
       height: 7px;
@@ -648,9 +844,9 @@
 
     .cert-links { margin-top: 0.7rem; font-size: 0.84rem; }
 
-    .cert-links a { color: #60a5fa; }
+    .cert-links a { color: #bfdbfe; }
 
-    .cert-links a:hover { text-decoration: underline; }
+    body.light .cert-links a { color: #2563eb; }
 
     .cv-link { margin-top: 0.75rem; font-size: 0.86rem; }
 
@@ -659,13 +855,74 @@
     .cv-link a:hover { text-decoration: underline; }
 
     /* CONTACT */
+    .contact-wrapper {
+      border-radius: 1.2rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(30,64,175,0.9);
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 24px 70px rgba(15,23,42,1);
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 1.5rem;
+    }
+
+    body.light .contact-wrapper {
+      background: #ffffff;
+      border-color: rgba(209,213,219,1);
+      box-shadow: 0 18px 50px rgba(148,163,184,0.7);
+    }
+
     .contact-text { font-size: 0.92rem; color: #e5e7eb; margin-bottom: 0.9rem; }
+
+    body.light .contact-text { color: #374151; }
 
     .contact-links { font-size: 0.9rem; color: #cbd5f5; }
 
+    body.light .contact-links { color: #111827; }
+
     .contact-links a { color: #60a5fa; }
 
-    .contact-links a:hover { color: #93c5fd; text-decoration: underline; }
+    body.light .contact-links a { color: #2563eb; }
+
+    .contact-links a:hover { text-decoration: underline; }
+
+    .contact-form {
+      display: grid;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--text-soft);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.4rem 0.55rem;
+      border-radius: 0.55rem;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: #020617;
+      color: #e5e7eb;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    body.light .contact-form input,
+    body.light .contact-form textarea {
+      background: #f9fafb;
+      color: #111827;
+      border-color: rgba(209,213,219,1);
+    }
+
+    .contact-form textarea { resize: vertical; min-height: 90px; }
+
+    .contact-hint {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
 
     /* REVEAL & TILT */
     .reveal {
@@ -700,14 +957,20 @@
       margin-top: 1.5rem;
     }
 
+    body.light footer {
+      background: #f9fafb;
+      color: #6b7280;
+      border-top-color: rgba(209,213,219,1);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .hero-block { padding-top: 2.4rem; }
       .hero-photo-wrap { order: -1; }
       .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .arp-layout { grid-template-columns: 1fr; }
       .two-column { grid-template-columns: 1fr; }
+      .contact-wrapper { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -720,6 +983,9 @@
   </style>
 </head>
 <body class="loading">
+  <!-- SCROLL BAR -->
+  <div id="scroll-bar"><div id="scroll-bar-inner"></div></div>
+
   <!-- LOADER -->
   <div id="loader-overlay">
     <div class="loader-inner">
@@ -727,7 +993,7 @@
         <div class="loader-ring"></div>
       </div>
       <div class="loader-text-main">Ala'a Alsheikh Ali</div>
-      <div class="loader-text-sub">Preparing your security lab…</div>
+      <div class="loader-text-sub">Warming up the lab…</div>
     </div>
   </div>
 
@@ -739,30 +1005,37 @@
         <div class="nav-name">Ala'a Alsheikh Ali</div>
       </div>
       <nav class="nav-links">
-        <a href="#intro">Home</a>
+        <a href="#home">Home</a>
         <a href="#about-block">About</a>
+        <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
-        <a href="#arp">ARP System</a>
-        <a href="#education">Education</a>
+        <a href="#education">Path</a>
         <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" id="themeToggle">
+          <span id="themeIcon">🌙</span>
+          <span>Dark</span>
+        </button>
       </nav>
     </div>
   </header>
 
   <!-- INTRO -->
-  <section class="intro" id="intro">
+  <section class="intro" id="home">
     <div class="intro-inner">
-      <div class="intro-kicker">Cybersecurity · Networks · Python</div>
+      <div class="intro-kicker" id="dynamicKicker">Cybersecurity &amp; Networks</div>
+
       <h1 class="intro-title">
         Hi, I'm Ala'a.<br>
-        I like turning messy security problems into clear systems.
+        I build and break security labs to see how things really behave.
       </h1>
+
       <div class="intro-meta">
         MSc Cybersecurity · BSc Networks &amp; Cybersecurity (First Class) · CompTIA Security+
       </div>
+
       <p class="intro-subtitle">
-        I enjoy building labs and tools around real attacks – from ARP cache poisoning to password
-        behaviour and noisy SIEM alerts – then explaining the story in a way people actually understand.
+        I like taking real-world problems – noisy alerts, strange network traffic or weak passwords –
+        and turning them into clear labs, tools and explanations that actually help people.
       </p>
 
       <div class="intro-actions">
@@ -770,7 +1043,12 @@
           Start with who I am
         </button>
         <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
-          Skip to projects
+          <span class="icon">↘</span>
+          <span>See projects</span>
+        </button>
+        <button class="btn-ghost" onclick="window.open('Alaa-CV.pdf','_blank')">
+          <span class="icon">⬇</span>
+          <span>Download CV</span>
         </button>
       </div>
     </div>
@@ -781,11 +1059,11 @@
     </div>
   </section>
 
-  <!-- HERO ABOUT -->
+  <!-- ABOUT -->
   <section class="hero-block" id="about-block">
     <div class="container hero-grid">
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-card tilt-card hover-tilt">
+      <div class="hero-photo-wrap reveal tilt-card hover-tilt">
+        <div class="hero-photo-card">
           <div class="hero-photo-inner">
             <!-- Make sure this file exists in assets/profile.JPG -->
             <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
@@ -796,62 +1074,109 @@
         </div>
       </div>
 
-      <div>
+      <div class="reveal">
         <div class="hero-text-kicker">About</div>
-        <h2 class="hero-text-title">Who I am and what I enjoy working on</h2>
+        <h2 class="hero-text-title">Who I am and how I like to work</h2>
         <p class="hero-text-body">
-          I started with networks – routing, switching and topologies – and then moved deeper into
-          cybersecurity. Most of my work lives inside labs: virtual networks with Open vSwitch and Ryu,
-          password portals in Flask, SIEM dashboards, packet captures and a lot of terminal windows.
+          I started from the network side – routing, switching, topology – and then moved deeper
+          into cybersecurity. Most of my time is spent inside labs: virtual networks with Linux,
+          packet captures, SIEM dashboards, Python scripts and a lot of terminals.
         </p>
         <p class="hero-text-body">
-          I like problems where I can combine protocol-level detail with human behaviour: ARP cache
-          poisoning and how to block it, how password design nudges people into stronger choices, or
-          how to reduce alert noise so analysts focus on what matters.
+          I enjoy problems where I can mix protocols with people: understanding how an attack
+          actually looks on the wire, and then making the response simple enough that a team can
+          repeat it under pressure.
         </p>
         <p class="hero-note">
-          This site pulls together my dissertation, projects and experience. Over time, I’ll add
-          dedicated pages for the ARP system, password UX study and network consulting project.
+          This site brings together my projects, education and skills. Over time I’ll add deeper
+          write-ups for my ARP detection system, password security &amp; UX work, and network
+          consulting project.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- OVERVIEW -->
-  <section>
+  <!-- SKILLS -->
+  <section id="skills">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Overview</div>
-        <h2 class="section-title">How I like to approach security work</h2>
+        <div class="section-kicker">Skills</div>
+        <h2 class="section-title">What I’m comfortable working with</h2>
         <p class="section-subtitle">
-          Understand the system, experiment in a safe environment, then design controls that are
-          realistic for the people who have to live with them.
+          These are the tools, platforms and concepts I’ve used across labs, projects and my degrees.
+          Hover any skill to pause the line and highlight it.
         </p>
       </div>
 
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            Before adding more tools, I try to understand how the current network, app or team is
-            actually behaving. That might mean diagramming flows, looking at packet captures, or
-            walking through how a user really experiences a login page or alert.
-          </p>
-          <p>
-            From there, I like building small, focused things: a detection rule, a Python script, a
-            lab topology, or a new way of visualising logs. The goal is always the same: make it
-            easier to see what is happening, and easier to respond when something is wrong.
-          </p>
+      <div class="skills-wrapper reveal">
+        <div class="skills-row-label">Operating systems &amp; platforms</div>
+        <div class="skills-row">
+          <div class="skill-pill"><span class="skill-pill-icon">🐧</span>Linux (Ubuntu, CentOS)</div>
+          <div class="skill-pill"><span class="skill-pill-icon">🪟</span>Windows Server</div>
+          <div class="skill-pill"><span class="skill-pill-icon">🍎</span>macOS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>AWS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>Azure</div>
+          <div class="skill-pill"><span class="skill-pill-icon">ID</span>Entra ID / Azure AD</div>
+          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Microsoft Intune / MDM</div>
+
+          <!-- repeat for seamless scroll -->
+          <div class="skill-pill"><span class="skill-pill-icon">🐧</span>Linux (Ubuntu, CentOS)</div>
+          <div class="skill-pill"><span class="skill-pill-icon">🪟</span>Windows Server</div>
+          <div class="skill-pill"><span class="skill-pill-icon">🍎</span>macOS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>AWS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>Azure</div>
+          <div class="skill-pill"><span class="skill-pill-icon">ID</span>Entra ID / Azure AD</div>
+          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Microsoft Intune / MDM</div>
         </div>
 
-        <aside class="about-card reveal">
-          <div class="about-tag">Focus areas</div>
-          <ul class="about-list">
-            <li>Network security and secure network design.</li>
-            <li>Detection and response to network-level attacks, especially ARP spoofing.</li>
-            <li>Security operations, SIEM tuning and reducing noisy alerts.</li>
-            <li>Password behaviour and the impact of UX on security decisions.</li>
-          </ul>
-        </aside>
+        <div class="skills-row-label" style="margin-top:0.8rem;">Networking &amp; security</div>
+        <div class="skills-row">
+          <div class="skill-pill"><span class="skill-pill-icon">C</span>Cisco IOS / ASA</div>
+          <div class="skill-pill"><span class="skill-pill-icon">R</span>Routing &amp; Switching</div>
+          <div class="skill-pill"><span class="skill-pill-icon">B</span>BGP</div>
+          <div class="skill-pill"><span class="skill-pill-icon">O</span>OSPF</div>
+          <div class="skill-pill"><span class="skill-pill-icon">V</span>VLANs</div>
+          <div class="skill-pill"><span class="skill-pill-icon">FW</span>Firewalls</div>
+          <div class="skill-pill"><span class="skill-pill-icon">VPN</span>IPsec / VPNs</div>
+          <div class="skill-pill"><span class="skill-pill-icon">WS</span>Wireshark</div>
+          <div class="skill-pill"><span class="skill-pill-icon">DN</span>DNS / DHCP</div>
+          <div class="skill-pill"><span class="skill-pill-icon">SD</span>SDN concepts</div>
+
+          <div class="skill-pill"><span class="skill-pill-icon">SI</span>Splunk</div>
+          <div class="skill-pill"><span class="skill-pill-icon">EL</span>ELK Stack</div>
+          <div class="skill-pill"><span class="skill-pill-icon">QR</span>QRadar</div>
+          <div class="skill-pill"><span class="skill-pill-icon">Ns</span>Nessus</div>
+          <div class="skill-pill"><span class="skill-pill-icon">Nm</span>Nmap</div>
+          <div class="skill-pill"><span class="skill-pill-icon">Ms</span>Metasploit</div>
+
+          <!-- repeat -->
+          <div class="skill-pill"><span class="skill-pill-icon">C</span>Cisco IOS / ASA</div>
+          <div class="skill-pill"><span class="skill-pill-icon">R</span>Routing &amp; Switching</div>
+          <div class="skill-pill"><span class="skill-pill-icon">B</span>BGP</div>
+          <div class="skill-pill"><span class="skill-pill-icon">O</span>OSPF</div>
+          <div class="skill-pill"><span class="skill-pill-icon">V</span>VLANs</div>
+        </div>
+
+        <div class="skills-row-label" style="margin-top:0.8rem;">Programming, frameworks &amp; other</div>
+        <div class="skills-row">
+          <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
+          <div class="skill-pill"><span class="skill-pill-icon">B</span>Bash</div>
+          <div class="skill-pill"><span class="skill-pill-icon">S</span>SQL / NoSQL</div>
+          <div class="skill-pill"><span class="skill-pill-icon">JS</span>JavaScript, HTML, CSS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">C#</span>C#</div>
+          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST, SANS, ISO 27001</div>
+          <div class="skill-pill"><span class="skill-pill-icon">OW</span>OWASP Top 10</div>
+          <div class="skill-pill"><span class="skill-pill-icon">GD</span>GDPR</div>
+          <div class="skill-pill"><span class="skill-pill-icon">SP</span>Security+ domains</div>
+          <div class="skill-pill"><span class="skill-pill-icon">PM</span>Project work &amp; Agile</div>
+          <div class="skill-pill"><span class="skill-pill-icon">EN</span>English (Fluent)</div>
+          <div class="skill-pill"><span class="skill-pill-icon">AR</span>Arabic (Fluent)</div>
+
+          <!-- repeat small subset -->
+          <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
+          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST, SANS, ISO 27001</div>
+          <div class="skill-pill"><span class="skill-pill-icon">OW</span>OWASP Top 10</div>
+        </div>
       </div>
     </div>
   </section>
@@ -861,10 +1186,10 @@
     <div class="container">
       <div class="section-header">
         <div class="section-kicker">Projects</div>
-        <h2 class="section-title">Selected projects</h2>
+        <h2 class="section-title">A few things I’ve built or worked on</h2>
         <p class="section-subtitle">
-          A snapshot of the work I’m most proud of. Later, each of these cards can become a full
-          write-up with diagrams, code and lab notes.
+          Short snapshots first; later these cards can link to deeper write-ups with diagrams and
+          code samples.
         </p>
       </div>
 
@@ -873,20 +1198,19 @@
           <div class="card-pill-row">
             <span class="card-pill">Python</span>
             <span class="card-pill">Scapy</span>
-            <span class="card-pill">SDN · Ryu</span>
+            <span class="card-pill">SDN</span>
           </div>
-          <h3>Dynamic ARP cache poisoning detection</h3>
+          <h3>Network-level ARP spoofing lab</h3>
           <p>
-            Built a system that watches ARP traffic for suspicious IP/MAC changes and then asks an
-            SDN controller to push live mitigation rules – blocking spoofed hosts while keeping
-            normal traffic flowing.
+            Built a virtual lab that detects suspicious ARP behaviour and uses a controller to push
+            mitigation rules, so spoofed hosts are blocked without breaking normal traffic.
           </p>
           <div class="card-links">
-            <a href="#arp">Read more below</a>
+            <a href="#education">Mentioned in MSc dissertation</a>
             <a href="#" target="_blank" rel="noreferrer">Code (coming soon)</a>
           </div>
           <div class="card-footer">
-            <span>Virtual lab · Open vSwitch</span>
+            <span>Open vSwitch · Ryu</span>
             <span class="icon">↳</span>
           </div>
         </article>
@@ -894,21 +1218,19 @@
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Flask</span>
-            <span class="card-pill">UX research</span>
+            <span class="card-pill">UX</span>
             <span class="card-pill">NIST 800-63-3</span>
           </div>
-          <h3>Password security &amp; UX analysis</h3>
+          <h3>Password security &amp; behaviour</h3>
           <p>
-            Created a login and sign-up flow with emoji feedback, colour strength bars and
-            time-to-crack estimates, then ran a user study to see how these nudges changed real
-            password choices.
+            Designed a password creation page with visual feedback, emojis and crack-time estimates,
+            then analysed how these nudges changed real password choices.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Code (coming soon)</a>
-            <a href="#" target="_blank" rel="noreferrer">Research summary (planned)</a>
+            <a href="#" target="_blank" rel="noreferrer">Prototype (coming soon)</a>
           </div>
           <div class="card-footer">
-            <span>SPSS · ANOVA · Chi-Square</span>
+            <span>SPSS · Statistical analysis</span>
             <span class="icon">↳</span>
           </div>
         </article>
@@ -917,19 +1239,18 @@
           <div class="card-pill-row">
             <span class="card-pill">Cisco</span>
             <span class="card-pill">VLANs</span>
-            <span class="card-pill">HSRP · VPN</span>
+            <span class="card-pill">VPN</span>
           </div>
-          <h3>Secure network consulting project</h3>
+          <h3>Secure network redesign</h3>
           <p>
-            Treated a university project as a real client engagement: redesigned a growing
-            organisation’s network with segmentation, firewalls, NAT/PAT, site-to-site VPNs and
-            redundancy using HSRP and EtherChannel.
+            Treated a university network brief as a client project: designed segmentation, VPN,
+            firewall rules and redundancy while aiming for low downtime and clear documentation.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Topology &amp; configs (planned)</a>
+            <a href="#" target="_blank" rel="noreferrer">Topology (planned)</a>
           </div>
           <div class="card-footer">
-            <span>Design · Documentation</span>
+            <span>HSRP · EtherChannel</span>
             <span class="icon">↳</span>
           </div>
         </article>
@@ -939,17 +1260,16 @@
             <span class="card-pill">Splunk</span>
             <span class="card-pill">SIEM</span>
           </div>
-          <h3>Reducing noisy SIEM alerts</h3>
+          <h3>SIEM noise reduction</h3>
           <p>
-            Looked at environments where harmless EICAR tests created constant popups and alerts,
-            then tuned rules so coverage stayed strong without overwhelming the people using the
-            tools.
+            Looked at lab environments where harmless tests triggered constant alerts, then tuned
+            rules so they still caught real attacks without overwhelming analysts.
           </p>
           <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Detection logic (planned)</a>
+            <a href="#" target="_blank" rel="noreferrer">Use-case notes (planned)</a>
           </div>
           <div class="card-footer">
-            <span>Security operations</span>
+            <span>Detection engineering</span>
             <span class="icon">↳</span>
           </div>
         </article>
@@ -957,13 +1277,12 @@
         <article class="card reveal tilt-card hover-tilt">
           <div class="card-pill-row">
             <span class="card-pill">Python</span>
-            <span class="card-pill">Data cleaning</span>
+            <span class="card-pill">Data</span>
           </div>
-          <h3>Merging JSON, XML &amp; CSV with dynamic IDs</h3>
+          <h3>Merging JSON, XML &amp; CSV safely</h3>
           <p>
-            Standardised fields across three different file formats, used a unique identifier as a
-            key, then built a safe way to refresh those IDs when attributes like age changed – without
-            breaking relationships.
+            Normalised three different file formats, created dynamic identifiers and built checks
+            to update IDs safely when attributes changed, without breaking links between records.
           </p>
           <div class="card-links">
             <a href="#" target="_blank" rel="noreferrer">View code</a>
@@ -979,66 +1298,19 @@
             <span class="card-pill">CTF</span>
             <span class="card-pill">Teamwork</span>
           </div>
-          <h3>Capture the Flag coordination</h3>
+          <h3>Security CTF coordination</h3>
           <p>
-            Helped coordinate our team during a security CTF by assigning challenges based on
-            strengths, keeping an eye on progress and switching approaches when we got stuck under
-            time pressure.
+            Helped coordinate tasks in a Capture the Flag event by assigning challenges based on
+            strengths and keeping everyone moving when we got stuck.
           </p>
           <div class="card-links">
             <a href="#" target="_blank" rel="noreferrer">Challenge notes (planned)</a>
           </div>
           <div class="card-footer">
-            <span>Leadership in technical setting</span>
+            <span>Leadership in technical settings</span>
             <span class="icon">↳</span>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED ARP -->
-  <section id="arp">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Featured project</div>
-        <h2 class="section-title">ARP cache poisoning detection &amp; prevention</h2>
-        <p class="section-subtitle">
-          MSc dissertation project: building and evaluating a system that spots ARP spoofing in
-          virtual networks and automatically updates the network to block the attack.
-        </p>
-      </div>
-
-      <div class="arp-layout">
-        <div class="arp-text reveal">
-          <p>
-            The aim was to go beyond “log and alert” and actually change how the network behaves when
-            a spoofing attempt is detected. The system ties together packet inspection, anomaly
-            detection and SDN-based mitigation.
-          </p>
-          <ul>
-            <li>Monitors ARP traffic with Scapy and flags suspicious IP/MAC changes.</li>
-            <li>Talks to a Ryu SDN controller to install or update flow rules in real time.</li>
-            <li>Acts as a hybrid ARP proxy / watchdog so legitimate traffic still works.</li>
-            <li>Includes a custom ARP attack tool to test edge cases and detection coverage.</li>
-            <li>Evaluated with different tools and scenarios inside an Open vSwitch lab.</li>
-          </ul>
-
-          <div class="arp-actions">
-            <button class="btn-ghost" type="button">Dissertation PDF (coming soon)</button>
-            <button class="btn-ghost" type="button">Diagrams &amp; lab screenshots (coming soon)</button>
-          </div>
-        </div>
-
-        <aside class="arp-media reveal tilt-card hover-tilt">
-          <div class="arp-image-frame">
-            Space reserved for your ARP architecture diagram or controller flow table view.
-            Once you export diagrams, they can live here.
-          </div>
-          <div class="arp-caption">
-            This section can later link straight to a full ARP project page and your final paper.
-          </div>
-        </aside>
       </div>
     </div>
   </section>
@@ -1047,55 +1319,62 @@
   <section id="education">
     <div class="container">
       <div class="section-header">
-        <div class="section-kicker">Background</div>
+        <div class="section-kicker">Path</div>
         <h2 class="section-title">Education, certifications &amp; CV</h2>
+        <p class="section-subtitle">
+          A quick overview of where I studied, what I’ve been trained on and where to find more detail.
+        </p>
       </div>
 
       <div class="two-column">
+        <!-- Left: education timeline -->
         <div class="reveal">
-          <h3 style="margin-top:0; font-size:1rem; color:#f9fafb;">Education</h3>
-          <ul class="edu-list">
-            <li>
-              <div class="edu-degree">MSc Cybersecurity (Distinction)</div>
-              <div class="edu-inst">University of Sunderland · 2023 – 2024</div>
-            </li>
-            <li>
-              <div class="edu-degree">BSc Networks &amp; Cybersecurity (First Class Honours)</div>
-              <div class="edu-inst">University of Sunderland · 2020 – 2023</div>
-            </li>
-            <li>
-              <div class="edu-degree">Foundation Programme – Engineering &amp; Physical Sciences</div>
-              <div class="edu-inst">OnCampus Sunderland · 2020</div>
-            </li>
-          </ul>
+          <div class="edu-card">
+            <div class="edu-heading">Education</div>
+            <ul class="edu-timeline">
+              <li>
+                <div class="edu-degree">MSc Cybersecurity (Distinction)</div>
+                <div class="edu-inst">University of Sunderland · 2023 – 2024</div>
+                <div class="edu-note">
+                  Dissertation on detecting and blocking ARP spoofing in virtual networks using Python and SDN.
+                </div>
+              </li>
+              <li>
+                <div class="edu-degree">BSc Networks &amp; Cybersecurity (First Class Honours)</div>
+                <div class="edu-inst">University of Sunderland · 2020 – 2023</div>
+                <div class="edu-note">
+                  Routing &amp; switching, secure network design, CCNA/CCNP-style modules, network projects.
+                </div>
+              </li>
+              <li>
+                <div class="edu-degree">Foundation Programme – Engineering &amp; Physical Sciences</div>
+                <div class="edu-inst">OnCampus Sunderland · 2020</div>
+              </li>
+            </ul>
+          </div>
         </div>
 
+        <!-- Right: certs + CV -->
         <aside class="cert-card reveal">
-          <div style="font-weight:600; margin-bottom:0.4rem;">Certifications &amp; structured learning</div>
-          <p style="margin:0; font-size:0.88rem;">
-            Things that support the work you’ve seen above.
+          <div class="cert-heading">Certifications &amp; programmes</div>
+          <p class="cert-intro">
+            Structured learning that supports the practical work you’ve seen above.
           </p>
 
           <div class="cert-row">
-            <span class="cert-pill">
-              <span class="dot"></span>CompTIA Security+
-            </span>
-            <span class="cert-pill">
-              <span class="dot"></span>IT Technical Skills Bootcamp
-            </span>
-            <span class="cert-pill">
-              <span class="dot"></span>McKinsey Forward Program
-            </span>
+            <span class="cert-pill"><span class="dot"></span>CompTIA Security+</span>
+            <span class="cert-pill"><span class="dot"></span>IT Technical Skills Bootcamp</span>
+            <span class="cert-pill"><span class="dot"></span>McKinsey Forward Program</span>
           </div>
 
           <div class="cert-links">
-            <div>Security+ credential: <a href="#" target="_blank" rel="noreferrer">View certificate</a></div>
-            <div>IT Bootcamp: <a href="#" target="_blank" rel="noreferrer">View details</a></div>
+            <div>Security+ credential: <a href="#" target="_blank" rel="noreferrer">Add link here</a></div>
+            <div>Bootcamp details: <a href="#" target="_blank" rel="noreferrer">Add link here</a></div>
           </div>
 
           <div class="cv-link">
             CV (PDF):
-            <!-- upload your CV as Alaa-CV.pdf to the repo root -->
+            <!-- upload Alaa-CV.pdf to repo root -->
             <a href="Alaa-CV.pdf" target="_blank" rel="noreferrer">Download my full CV</a>
           </div>
         </aside>
@@ -1108,35 +1387,59 @@
     <div class="container">
       <div class="section-header">
         <div class="section-kicker">Contact</div>
-        <h2 class="section-title">Get in touch</h2>
+        <h2 class="section-title">Let’s talk</h2>
         <p class="section-subtitle">
-          If you want to talk about a project, my dissertation, or anything around cybersecurity
-          and networks, feel free to reach out.
+          If you’d like to discuss a role, a project, or simply compare notes on security and networks,
+          these are the easiest ways to reach me.
         </p>
       </div>
 
-      <p class="contact-text">
-        I’m happy to share more detailed write-ups, code samples or diagrams for any of the projects
-        on this site.
-      </p>
+      <div class="contact-wrapper reveal">
+        <div>
+          <p class="contact-text">
+            I can share more detailed documentation, diagrams or code samples from my projects if
+            you’d like to take a closer look. Email is usually best, but I’m also active on GitHub
+            and LinkedIn.
+          </p>
 
-      <div class="contact-links">
-        📧 Email:
-        <a href="mailto:YOUR.EMAIL@here.com">YOUR.EMAIL@here.com</a><br>
-        🐙 GitHub:
-        <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer">
-          github.com/alaaerfan7
-        </a><br>
-        💼 LinkedIn:
-        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
-          Add your LinkedIn URL here
-        </a>
+          <div class="contact-links">
+            📧 Email:
+            <a href="mailto:YOUR.EMAIL@here.com">YOUR.EMAIL@here.com</a><br><br>
+            🐙 GitHub:
+            <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer">
+              github.com/alaaerfan7
+            </a><br><br>
+            💼 LinkedIn:
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+              Add your LinkedIn URL here
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Use the email link on the left to contact me.');">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Your email">
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="What would you like to talk about?"></textarea>
+          </div>
+          <button class="btn-primary" type="submit">Send (opens email)</button>
+          <div class="contact-hint">
+            This form doesn’t send data anywhere – it’s here as a UX preview. Use the email link to reach me.
+          </div>
+        </form>
       </div>
     </div>
   </section>
 
   <footer>
-    © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS &amp; JavaScript.
+    © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS &amp; JavaScript on GitHub Pages.
   </footer>
 
   <script>
@@ -1149,10 +1452,18 @@
         document.body.classList.remove("loading");
         const overlay = document.getElementById("loader-overlay");
         overlay.classList.add("hidden");
-      }, 1200); // how long the logo stays before revealing the site
+      }, 1200);
     });
 
-    // Scroll reveal
+    // Scroll progress bar
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById("scroll-bar-inner").style.width = progress + "%";
+    });
+
+    // Reveal on scroll
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -1186,6 +1497,30 @@
           "perspective(900px) rotateX(0deg) rotateY(0deg)";
       });
     });
+
+    // Theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    themeToggle.addEventListener("click", () => {
+      const body = document.body;
+      const isLight = body.classList.toggle("light");
+      themeIcon.textContent = isLight ? "☀️" : "🌙";
+      themeToggle.querySelector("span:last-child").textContent = isLight ? "Light" : "Dark";
+    });
+
+    // Dynamic kicker text (cycles)
+    const kicker = document.getElementById("dynamicKicker");
+    const phrases = [
+      "Cybersecurity & Networks",
+      "Security · شبكات · Python",
+      "English & Arabic | Incident Response",
+      "From packets to people"
+    ];
+    let phraseIndex = 0;
+    setInterval(() => {
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      kicker.textContent = phrases[phraseIndex];
+    }, 3500);
   </script>
 </body>
 </html>
