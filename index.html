@@ -1,1735 +1,2197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ala'a Alsheikh Ali | Cybersecurity & Networks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>Ala'a Alsheikh Ali | Cybersecurity & Networks</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #020617;
-      --card-bg: #020617;
-      --card-border: rgba(31,41,55,1);
-      --text-main: #e5e7eb;
-      --text-soft: #9ca3af;
-      --accent-1: #22c55e;
-      --accent-2: #0ea5e9;
-      --accent-3: #6366f1;
-      --accent-4: #a855f7;
-      --hero-max-width: 720px;
-    }
+<style>
+:root {
+  --bg: #020617;
+  --card-bg: #020617;
+  --card-border: rgba(31,41,55,1);
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+  --accent-1: #22c55e;
+  --accent-2: #0ea5e9;
+  --accent-3: #6366f1;
+  --accent-4: #a855f7;
+  --hero-max-width: 720px;
+}
 
-    body.light {
-      --bg: #ffffff;
-      --card-bg: #ffffff;
-      --card-border: rgba(229,231,235,1);
-      --text-main: #111827;
-      --text-soft: #6b7280;
-    }
+body.light {
+  --bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: rgba(229,231,235,1);
+  --text-main: #111827;
+  --text-soft: #6b7280;
+}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-    body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.38) 0, transparent 55%),
-        radial-gradient(circle at 100% 5%, rgba(16,185,129,0.32) 0, transparent 55%),
-        radial-gradient(circle at 0% 100%, rgba(139,92,246,0.35) 0, transparent 65%),
-        var(--bg);
-      background-size: 140% 140%;
-      animation: bg-shift 30s ease-in-out infinite alternate;
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-    body.light {
-      background: #ffffff;
-      animation: none;
-    }
-    body.loading { overflow: hidden; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59,130,246,0.38) 0, transparent 55%),
+    radial-gradient(circle at 100% 5%, rgba(16,185,129,0.32) 0, transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(139,92,246,0.35) 0, transparent 65%),
+    var(--bg);
+  background-size: 140% 140%;
+  animation: bg-shift 30s ease-in-out infinite alternate;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+body.light {
+  background: #ffffff;
+  animation: none;
+}
+body.loading { overflow: hidden; }
 
-    @keyframes bg-shift {
-      0% { background-position: 0% 0%; }
-      50% { background-position: 100% 30%; }
-      100% { background-position: 20% 100%; }
-    }
+@keyframes bg-shift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 30%; }
+  100% { background-position: 20% 100%; }
+}
 
-    a { color: inherit; text-decoration: none; }
+a { color: inherit; text-decoration: none; }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
 
-    /* Scroll bar */
-    #scroll-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      width: 100%;
-      background: rgba(15,23,42,0.8);
-      z-index: 60;
-    }
-    #scroll-bar-inner {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(to right, var(--accent-2), var(--accent-3), var(--accent-4));
-      transition: width 0.08s linear;
-    }
+/* Scroll bar */
+#scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: rgba(15,23,42,0.8);
+  z-index: 60;
+}
+#scroll-bar-inner {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, var(--accent-2), var(--accent-3), var(--accent-4));
+  transition: width 0.08s linear;
+}
 
-    /* Loader */
-    #loader-overlay {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, #0f172a 0, #020617 55%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    #loader-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .loader-inner {
-      text-align: center;
-      color: #e5e7eb;
-    }
-    .loader-logo {
-      width: 70px;
-      height: 70px;
-      border-radius: 999px;
-      background: conic-gradient(from 220deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
-      box-shadow: 0 0 32px rgba(56,189,248,0.9);
-      margin: 0 auto 1.1rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .loader-ring {
-      position: absolute;
-      inset: 10px;
-      border-radius: 999px;
-      border: 2px solid rgba(15,23,42,0.95);
-      border-top-color: rgba(15,23,42,0.3);
-      animation: spin 1.2s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .loader-text-main {
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      font-size: 0.78rem;
-      color: #9ca3af;
-      margin-bottom: 0.35rem;
-    }
-    .loader-text-sub {
-      font-size: 0.9rem;
-      color: #cbd5f5;
-    }
+/* Loader */
+#loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, #0f172a 0, #020617 55%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loader-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-inner {
+  text-align: center;
+  color: #e5e7eb;
+}
+.loader-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: conic-gradient(from 220deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
+  box-shadow: 0 0 32px rgba(56,189,248,0.9);
+  margin: 0 auto 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+.loader-ring {
+  position: absolute;
+  inset: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(15,23,42,0.95);
+  border-top-color: rgba(15,23,42,0.3);
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loader-text-main {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-bottom: 0.35rem;
+}
+.loader-text-sub {
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
 
-    /* Nav */
-    .nav {
-      position: sticky;
-      top: 3px;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.98), rgba(15,23,42,0.92));
-      border-bottom: 1px solid rgba(30,64,175,0.75);
-    }
-    body.light .nav {
-      background: rgba(255,255,255,0.95);
-      border-bottom-color: rgba(229,231,235,1);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.65rem 1.5rem;
-    }
-    .nav-left { display: flex; align-items: center; gap: 0.6rem; }
-    .nav-logo {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #f97316, #a855f7);
-      box-shadow: 0 0 20px rgba(168,85,247,0.9);
-    }
-    .nav-name {
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      color: #f9fafb;
-    }
-    body.light .nav-name { color: #111827; }
+/* Nav */
+.nav {
+  position: sticky;
+  top: 3px;
+  z-index: 50;
+  backdrop-filter: blur(18px);
+  background: linear-gradient(to bottom, rgba(15,23,42,0.98), rgba(15,23,42,0.92));
+  border-bottom: 1px solid rgba(30,64,175,0.75);
+}
+body.light .nav {
+  background: rgba(255,255,255,0.95);
+  border-bottom-color: rgba(229,231,235,1);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.5rem;
+}
+.nav-left { display: flex; align-items: center; gap: 0.6rem; }
+.nav-logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #f97316, #a855f7);
+  box-shadow: 0 0 20px rgba(168,85,247,0.9);
+}
+.nav-name {
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #f9fafb;
+}
+body.light .nav-name { color: #111827; }
 
-    .nav-links {
-      display: flex;
-      gap: 0.8rem;
-      font-size: 0.9rem;
-      color: #9ca3af;
-      align-items: center;
-    }
-    .nav-links a {
-      position: relative;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
-    }
-    .nav-links a:hover {
-      background: rgba(15,23,42,0.9);
-      color: #f9fafb;
-      transform: translateY(-1px);
-    }
-    body.light .nav-links a:hover {
-      background: rgba(229,231,235,0.9);
-      color: #111827;
-    }
+.nav-links {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  align-items: center;
+}
+.nav-links a {
+  position: relative;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.nav-links a:hover {
+  background: rgba(15,23,42,0.9);
+  color: #f9fafb;
+  transform: translateY(-1px);
+}
+body.light .nav-links a:hover {
+  background: rgba(229,231,235,0.9);
+  color: #111827;
+}
 
-    .theme-toggle {
-      border-radius: 999px;
-      border: 1px solid rgba(75,85,99,0.9);
-      background: rgba(15,23,42,0.95);
-      color: #e5e7eb;
-      padding: 0.25rem 0.7rem;
-      font-size: 0.78rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    body.light .theme-toggle {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-    }
+.theme-toggle {
+  border-radius: 999px;
+  border: 1px solid rgba(75,85,99,0.9);
+  background: rgba(15,23,42,0.95);
+  color: #e5e7eb;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+body.light .theme-toggle {
+  background: #111827;
+  color: #f9fafb;
+  border-color: #111827;
+}
 
-    /* Hero */
-    .intro {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .intro-inner {
-      max-width: var(--hero-max-width);
-      padding: 4.5rem 1.5rem 3.5rem;
-    }
-    .intro-role {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--text-soft);
-      margin-bottom: 0.5rem;
-    }
-    .intro-title {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.08;
-      margin: 0 0 0.8rem;
-      background: linear-gradient(to right, #f9fafb, #e5e7eb, #a5b4fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    body.light .intro-title {
-      background: linear-gradient(to right, #111827, #111827);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+/* Hero */
+.intro {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.intro-inner {
+  max-width: var(--hero-max-width);
+  padding: 4.5rem 1.5rem 3.5rem;
+}
+.intro-role {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-soft);
+  margin-bottom: 0.5rem;
+}
+.intro-title {
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.08;
+  margin: 0 0 0.8rem;
+  background: linear-gradient(to right, #f9fafb, #e5e7eb, #a5b4fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+body.light .intro-title {
+  background: linear-gradient(to right, #111827, #111827);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-    .typed-wrapper {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.15rem;
-    }
-    #typedText { white-space: nowrap; }
-    .typed-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background: #e5e7eb;
-      margin-left: 4px;
-      animation: blink 0.8s steps(1) infinite;
-    }
-    body.light .typed-cursor { background: #111827; }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      50.01%, 100% { opacity: 0; }
-    }
+.typed-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+#typedText { white-space: nowrap; }
+.typed-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #e5e7eb;
+  margin-left: 4px;
+  animation: blink 0.8s steps(1) infinite;
+}
+body.light .typed-cursor { background: #111827; }
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
 
-    .intro-meta {
-      font-size: 0.9rem;
-      color: var(--text-soft);
-      margin-bottom: 0.9rem;
-    }
-    .intro-subtitle {
-      margin: 0 auto 1.8rem;
-      max-width: 32rem;
-      font-size: 0.98rem;
-      color: #cbd5f5;
-    }
-    body.light .intro-subtitle { color: #4b5563; }
+.intro-meta {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-bottom: 0.9rem;
+}
+.intro-subtitle {
+  margin: 0 auto 1.8rem;
+  max-width: 32rem;
+  font-size: 0.98rem;
+  color: #cbd5f5;
+}
+body.light .intro-subtitle { color: #4b5563; }
 
-    .intro-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      justify-content: center;
-      margin-bottom: 2.8rem;
-    }
-    .btn-primary {
-      border-radius: 999px;
-      border: none;
-      padding: 0.65rem 1.8rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      cursor: pointer;
-      background: radial-gradient(circle at 0 0, var(--accent-1), transparent 60%),
-                  radial-gradient(circle at 100% 0, var(--accent-2), transparent 60%),
-                  linear-gradient(135deg, var(--accent-2), var(--accent-3));
-      color: #f9fafb;
-      box-shadow: 0 16px 40px rgba(15,118,110,0.55);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-    }
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.01);
-      filter: brightness(1.05);
-      box-shadow: 0 22px 55px rgba(56,189,248,0.65);
-    }
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 0.6rem 1.7rem;
-      font-size: 0.9rem;
-      border: 1px solid rgba(75,85,99,0.9);
-      background: rgba(15,23,42,0.95);
-      color: #e5e7eb;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-    }
-    .btn-ghost span.icon { font-size: 1rem; }
-    .btn-ghost:hover {
-      background: rgba(30,64,175,0.75);
-      border-color: rgba(129,140,248,0.95);
-      transform: translateY(-1px);
-    }
-    body.light .btn-ghost {
-      background: #f9fafb;
-      color: #111827;
-      border-color: rgba(209,213,219,1);
-    }
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-bottom: 2.8rem;
+}
+.btn-primary {
+  border-radius: 999px;
+  border: none;
+  padding: 0.65rem 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: radial-gradient(circle at 0 0, var(--accent-1), transparent 60%),
+              radial-gradient(circle at 100% 0, var(--accent-2), transparent 60%),
+              linear-gradient(135deg, var(--accent-2), var(--accent-3));
+  color: #f9fafb;
+  box-shadow: 0 16px 40px rgba(15,118,110,0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-1px) scale(1.01);
+  filter: brightness(1.05);
+  box-shadow: 0 22px 55px rgba(56,189,248,0.65);
+}
+.btn-ghost {
+  border-radius: 999px;
+  padding: 0.6rem 1.7rem;
+  font-size: 0.9rem;
+  border: 1px solid rgba(75,85,99,0.9);
+  background: rgba(15,23,42,0.95);
+  color: #e5e7eb;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.btn-ghost span.icon { font-size: 1rem; }
+.btn-ghost:hover {
+  background: rgba(30,64,175,0.75);
+  border-color: rgba(129,140,248,0.95);
+  transform: translateY(-1px);
+}
+body.light .btn-ghost {
+  background: #f9fafb;
+  color: #111827;
+  border-color: rgba(209,213,219,1);
+}
 
-    .scroll-indicator {
-      position: absolute;
-      bottom: 1.7rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .scroll-indicator span {
-      font-size: 1.1rem;
-      animation: bounce 1.4s infinite ease-in-out;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
-    }
+.scroll-indicator {
+  position: absolute;
+  bottom: 1.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.scroll-indicator span {
+  font-size: 1.1rem;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
 
-    /* Sections */
-    section { padding: 3rem 0; }
-    .section-header { margin-bottom: 1.6rem; }
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-      margin-bottom: 0.35rem;
-    }
-    .section-title {
-      font-size: 1.45rem;
-      margin: 0 0 0.35rem;
-      color: var(--text-main);
-    }
-    .section-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-soft);
-      max-width: 36rem;
-    }
+/* Sections */
+section { padding: 3rem 0; }
+.section-header { margin-bottom: 1.6rem; }
+.section-kicker {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-soft);
+  margin-bottom: 0.35rem;
+}
+.section-title {
+  font-size: 1.45rem;
+  margin: 0 0 0.35rem;
+  color: var(--text-main);
+}
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  max-width: 36rem;
+}
 
-    /* About photo */
-    .hero-block { padding-top: 2.2rem; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.5fr);
-      gap: 2.6rem;
-      align-items: center;
-    }
-    .hero-photo-wrap { display: flex; justify-content: center; }
-    .hero-photo-card {
-      position: relative;
-      width: 360px;
-      height: 360px;
-      border-radius: 1.85rem;
-      padding: 0.55rem;
-      background:
-        radial-gradient(circle at 0 0, rgba(34,197,94,0.35), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 55%),
-        radial-gradient(circle at 0 100%, rgba(147,51,234,0.35), transparent 60%),
-        #020617;
-      box-shadow: 0 30px 90px rgba(15,23,42,0.9);
-      transition: transform 0.2s ease-out;
-    }
-    body.light .hero-photo-card {
-      background: #ffffff;
-      box-shadow: 0 24px 60px rgba(148,163,184,0.7);
-    }
-    .hero-photo-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-photo-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .hero-text-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-      margin-bottom: 0.7rem;
-    }
-    .hero-text-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin: 0 0 0.7rem;
-      color: var(--text-main);
-    }
-    .hero-text-body {
-      font-size: 0.95rem;
-      color: #d1d5db;
-      margin-bottom: 0.7rem;
-    }
-    body.light .hero-text-body { color: #4b5563; }
-    .hero-note {
-      font-size: 0.86rem;
-      color: var(--text-soft);
-      margin-top: 0.4rem;
-    }
+/* About photo */
+.hero-block { padding-top: 2.2rem; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.5fr);
+  gap: 2.6rem;
+  align-items: center;
+}
+.hero-photo-wrap { display: flex; justify-content: center; }
+.hero-photo-card {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  border-radius: 1.85rem;
+  padding: 0.55rem;
+  background:
+    radial-gradient(circle at 0 0, rgba(34,197,94,0.35), transparent 55%),
+    radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 55%),
+    radial-gradient(circle at 0 100%, rgba(147,51,234,0.35), transparent 60%),
+    #020617;
+  box-shadow: 0 30px 90px rgba(15,23,42,0.9);
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease;
+}
+body.light .hero-photo-card {
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(148,163,184,0.7);
+}
+.hero-photo-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-text-kicker {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-soft);
+  margin-bottom: 0.7rem;
+}
+.hero-text-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 0.7rem;
+  color: var(--text-main);
+}
+.hero-text-body {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  margin-bottom: 0.7rem;
+}
+body.light .hero-text-body { color: #4b5563; }
+.hero-note {
+  font-size: 0.86rem;
+  color: var(--text-soft);
+  margin-top: 0.4rem;
+}
 
-    /* Experience timeline */
-    .experience-card {
-      border-radius: 1.1rem;
-      background: rgba(15,23,42,0.96);
-      border: 1px solid rgba(30,64,175,0.9);
-      padding: 1.2rem 1.2rem 1rem;
-      box-shadow: 0 26px 70px rgba(15,23,42,0.95);
-    }
-    body.light .experience-card {
-      background: #ffffff;
-      border-color: rgba(229,231,235,1);
-      box-shadow: 0 18px 45px rgba(148,163,184,0.6);
-    }
-    .exp-timeline {
-      list-style: none;
-      margin: 0;
-      padding: 0 0 0 0.4rem;
-      border-left: 1px solid rgba(55,65,81,0.9);
-    }
-    body.light .exp-timeline { border-left-color: rgba(229,231,235,1); }
-    .exp-item {
-      position: relative;
-      padding-left: 1rem;
-      padding-bottom: 1rem;
-    }
-    .exp-item::before {
-      content: "";
-      position: absolute;
-      left: -6px;
-      top: 0.35rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: linear-gradient(to right, var(--accent-4), var(--accent-2));
-      box-shadow: 0 0 0 3px rgba(79,70,229,0.45);
-    }
-    .exp-role { font-weight: 600; font-size: 0.96rem; color: var(--text-main); }
-    .exp-org { font-size: 0.84rem; color: var(--text-soft); margin-top: 0.1rem; }
-    .exp-meta { font-size: 0.8rem; color: #cbd5f5; margin-top: 0.12rem; }
-    body.light .exp-meta { color: #4b5563; }
-    .exp-detail { font-size: 0.83rem; color: var(--text-soft); margin-top: 0.35rem; max-width: 40rem; }
+/* Experience timeline */
+.experience-card {
+  border-radius: 1.1rem;
+  background: rgba(15,23,42,0.96);
+  border: 1px solid rgba(30,64,175,0.9);
+  padding: 1.2rem 1.2rem 1rem;
+  box-shadow: 0 26px 70px rgba(15,23,42,0.95);
+}
+body.light .experience-card {
+  background: #ffffff;
+  border-color: rgba(229,231,235,1);
+  box-shadow: 0 18px 45px rgba(148,163,184,0.6);
+}
+.exp-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.4rem;
+  border-left: 1px solid rgba(55,65,81,0.9);
+}
+body.light .exp-timeline { border-left-color: rgba(229,231,235,1); }
+.exp-item {
+  position: relative;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+.exp-item::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0.35rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent-4), var(--accent-2));
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.45);
+}
+.exp-role { font-weight: 600; font-size: 0.96rem; color: var(--text-main); }
+.exp-org { font-size: 0.84rem; color: var(--text-soft); margin-top: 0.1rem; }
+.exp-meta { font-size: 0.8rem; color: #cbd5f5; margin-top: 0.12rem; }
+body.light .exp-meta { color: #4b5563; }
+.exp-detail { font-size: 0.83rem; color: var(--text-soft); margin-top: 0.35rem; max-width: 40rem; }
 
-    /* Skills marquee */
-    .skills-wrapper {
-      margin-top: 0.6rem;
-      border-radius: 1.1rem;
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.25), transparent 65%),
-                  rgba(15,23,42,0.95);
-      border: 1px solid rgba(30,64,175,0.9);
-      padding: 1rem 1.1rem 1.2rem;
-      box-shadow: 0 22px 60px rgba(15,23,42,0.9);
-      overflow: hidden;
-    }
-    body.light .skills-wrapper {
-      background: #ffffff;
-      border-color: rgba(229,231,235,1);
-      box-shadow: 0 16px 40px rgba(148,163,184,0.6);
-    }
-    .skills-row-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-      margin-bottom: 0.4rem;
-    }
-    .skills-row {
-      display: flex;
-      gap: 0.5rem;
-      white-space: nowrap;
-      animation: skills-scroll 26s linear infinite;
-    }
-    .skills-row:nth-child(3) {
-      animation-duration: 32s;
-      animation-direction: reverse;
-    }
-    .skills-row:hover { animation-play-state: paused; }
-    @keyframes skills-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+/* === SKILLS – FULL-WIDTH MARQUEE === */
+.skills-section {
+  padding: 4rem 0;
+  border-top: 1px solid rgba(15,23,42,0.9);
+  border-bottom: 1px solid rgba(15,23,42,0.9);
+  background: #020617;
+  overflow: hidden;
+  position: relative;
+}
+body.light .skills-section {
+  background: #f9fafb;
+  border-color: rgba(229,231,235,1);
+}
 
-    .skill-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.32rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      background: rgba(15,23,42,0.98);
-      color: #e5e7eb;
-      border: 1px solid rgba(55,65,81,0.9);
-      transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-    body.light .skill-pill {
-      background: #f9fafb;
-      color: #111827;
-      border-color: rgba(229,231,235,1);
-    }
-    .skill-pill:hover {
-      transform: translateY(-2px) scale(1.02);
-      border-color: rgba(129,140,248,1);
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.28), transparent 60%),
-                  rgba(15,23,42,0.98);
-      box-shadow: 0 0 18px rgba(56,189,248,0.7);
-    }
-    .skill-pill-logo { text-decoration: none; }
-    .skill-logo-svg { width: 16px; height: 16px; }
+.skills-inner {
+  position: relative;
+  z-index: 2;
+}
 
-    /* Projects */
-    .projects-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 3fr);
-      gap: 1.8rem;
-      align-items: flex-start;
-    }
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .project-item {
-      border-radius: 1rem;
-      padding: 0.85rem 0.9rem;
-      background: rgba(15,23,42,0.98);
-      border: 1px solid rgba(31,41,55,1);
-      cursor: pointer;
-      text-align: left;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-      font-size: 0.86rem;
-      color: #e5e7eb;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.7rem;
-      align-items: center;
-    }
-    body.light .project-item {
-      background: #f9fafb;
-      border-color: rgba(229,231,235,1);
-      color: #111827;
-    }
-    .project-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 0.9rem;
-      background: radial-gradient(circle at 30% 30%, #22c55e, #22c55e15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      color: #ecfdf5;
-    }
-    .project-item-title { font-weight: 500; margin-bottom: 0.15rem; }
-    .project-item-short {
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-    body.light .project-item-short { color: #6b7280; }
-    .project-item.active {
-      background: radial-gradient(circle at 0 0, rgba(129,140,248,0.4), transparent 65%),
-                  #020617;
-      border-color: rgba(129,140,248,1);
-      box-shadow: 0 24px 60px rgba(30,64,175,0.9);
-      transform: translateY(-1px);
-    }
-    body.light .project-item.active {
-      background: #111827;
-      color: #f9fafb;
-    }
+.skills-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  pointer-events: none;
+  z-index: 3;
+}
+.skills-fade.left {
+  left: 0;
+  background: linear-gradient(to right, #020617, transparent);
+}
+.skills-fade.right {
+  right: 0;
+  background: linear-gradient(to left, #020617, transparent);
+}
+body.light .skills-fade.left {
+  background: linear-gradient(to right, #f9fafb, transparent);
+}
+body.light .skills-fade.right {
+  background: linear-gradient(to left, #f9fafb, transparent);
+}
 
-    .project-preview {
-      border-radius: 1.2rem;
-      background: #020617;
-      border: 1px solid #111827;
-      padding: 0;
-      box-shadow: 0 32px 80px rgba(15,23,42,1);
-      color: #e5e7eb;
-      font-size: 0.86rem;
-    }
+.skills-marquee {
+  position: relative;
+  margin-top: 2rem;
+}
 
-    .code-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.4rem 0.8rem;
-      background: #111827;
-      border-bottom: 1px solid #020617;
-      font-size: 0.78rem;
-      color: #9ca3af;
-    }
-    .code-header-left {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-    .code-dots {
-      display: inline-flex;
-      gap: 0.25rem;
-      margin-right: 0.3rem;
-    }
-    .code-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #ef4444;
-    }
-    .code-dot:nth-child(2) { background: #f97316; }
-    .code-dot:nth-child(3) { background: #22c55e; }
+.marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
 
-    .code-header-tabs {
-      display: inline-flex;
-      border-radius: 0.4rem;
-      background: rgba(15,23,42,0.9);
-      padding: 0.1rem;
-    }
-    .code-header-tab {
-      padding: 0.1rem 0.45rem;
-      border-radius: 0.3rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .code-header-tab.active {
-      background: #020617;
-      color: #e5e7eb;
-    }
+.marquee-row {
+  display: flex;
+  width: max-content;
+  animation: skills-marquee 38s linear infinite;
+}
+.marquee-row:nth-child(2) {
+  animation-duration: 44s;
+  animation-direction: reverse;
+}
+.marquee-row:nth-child(3) {
+  animation-duration: 50s;
+}
+.marquee-row:hover {
+  animation-play-state: paused;
+}
 
-    .code-main {
-      padding: 0.8rem;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 0.5rem;
-    }
-    .project-preview-title {
-      font-weight: 600;
-      margin-bottom: 0.1rem;
-    }
-    .project-preview-tags {
-      font-size: 0.78rem;
-      color: #9ca3af;
-    }
-    .preview-tabs {
-      display: inline-flex;
-      gap: 0.4rem;
-      border-radius: 999px;
-      padding: 0.16rem;
-      background: #020617;
-      margin-top: 0.4rem;
-    }
-    .preview-tab {
-      border-radius: 999px;
-      border: none;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.78rem;
-      color: #9ca3af;
-      background: transparent;
-      cursor: pointer;
-    }
-    .preview-tab.active {
-      background: #111827;
-      color: #f9fafb;
-    }
-    .preview-body { margin-top: 0.4rem; }
-    .preview-body p { margin-top: 0; }
+@keyframes skills-marquee {
+  to { transform: translateX(-50%); }
+}
 
-    .preview-images {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-    .preview-image-frame {
-      border-radius: 0.7rem;
-      background: radial-gradient(circle at top, #020617, #020617);
-      border: 1px solid #1f2937;
-      height: 210px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.82rem;
-      color: #9ca3af;
-      text-align: center;
-      padding: 1rem;
-    }
-    .preview-image-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      color: #9ca3af;
-    }
-    .preview-image-nav button {
-      border-radius: 999px;
-      border: 1px solid rgba(75,85,99,0.9);
-      background: #020617;
-      color: #e5e7eb;
-      padding: 0.15rem 0.6rem;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.85rem;
+  margin: 0 0.4rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  background: rgba(15,23,42,0.98);
+  color: #e5e7eb;
+  border: 1px solid rgba(55,65,81,0.9);
+  white-space: nowrap;
+  transition: box-shadow 0.18s ease, transform 0.18s ease,
+              border-color 0.18s ease, background 0.18s ease;
+}
+body.light .skill-pill {
+  background: #f9fafb;
+  color: #111827;
+  border-color: rgba(229,231,235,1);
+}
+.skill-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(129,140,248,1);
+  background: radial-gradient(circle at 0 0, rgba(56,189,248,0.28), transparent 60%),
+              rgba(15,23,42,0.98);
+  box-shadow: 0 0 18px rgba(56,189,248,0.7);
+}
+.skill-label {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
 
-    .preview-code {
-      border-radius: 0.7rem;
-      background: #020617;
-      color: #e5e7eb;
-      border: 1px solid #111827;
-      padding: 0.7rem 0.8rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.78rem;
-      overflow-x: auto;
-    }
+/* === CODE SHOWCASE SECTION (projects) === */
+.code-showcase {
+  padding: 4rem 0 4.5rem;
+}
+.cs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 3fr);
+  gap: 2rem;
+  align-items: flex-start;
+}
+@media (max-width: 960px) {
+  .cs-layout {
+    grid-template-columns: 1fr;
+  }
+}
 
-    .preview-footer {
-      margin-top: 0.6rem;
-      font-size: 0.78rem;
-      color: #9ca3af;
-    }
+/* LEFT: project list cards */
+.cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cs-card {
+  border-radius: 1rem;
+  background: #020617;
+  border: 1px solid #1f2937;
+  padding: 1rem 1rem 0.9rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: flex-start;
+  transition: background 0.18s ease, border-color 0.18s ease,
+              box-shadow 0.18s ease, transform 0.18s ease;
+}
+body.light .cs-card {
+  background: #ffffff;
+  color: #111827;
+  border-color: rgba(229,231,235,1);
+}
+.cs-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.9rem;
+  background: radial-gradient(circle at 30% 30%, #22c55e, #22c55e10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.cs-card-main {
+  min-width: 0;
+}
+.cs-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.cs-card-text {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+body.light .cs-card-text {
+  color: #6b7280;
+}
+.cs-card-tags {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.cs-tag-pill {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(55,65,81,0.9);
+  color: #9ca3af;
+}
+body.light .cs-tag-pill {
+  border-color: rgba(209,213,219,1);
+}
 
-    /* Education – redesigned cards */
-    #education {
-      position: relative;
-    }
-    #education::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 0 0, rgba(56,189,248,0.2), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(129,140,248,0.18), transparent 55%);
-      opacity: 0.6;
-      z-index: -1;
-    }
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .edu-card {
-      position: relative;
-      border-radius: 1rem;
-      padding: 1.2rem 1.1rem;
-      background: rgba(15,23,42,0.98);
-      border: 1px solid rgba(30,64,175,0.85);
-      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
-      overflow: hidden;
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-    }
-    body.light .edu-card {
-      background: #ffffff;
-      border-color: rgba(229,231,235,1);
-      box-shadow: 0 12px 35px rgba(148,163,184,0.6);
-    }
-    .edu-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(129,140,248,0.35), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.25s ease-out;
-    }
-    .edu-card:hover::before {
-      opacity: 1;
-    }
-    .edu-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-2);
-      box-shadow: 0 24px 70px rgba(37,99,235,0.75);
-    }
-    .edu-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.16rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      background: rgba(15,23,42,0.9);
-      color: #e5e7eb;
-      border: 1px solid rgba(55,65,81,0.9);
-      margin-bottom: 0.35rem;
-    }
-    body.light .edu-pill {
-      background: #f9fafb;
-      color: #111827;
-      border-color: rgba(209,213,219,1);
-    }
-    .edu-date {
-      font-size: 0.8rem;
-      color: var(--accent-2);
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      letter-spacing: 0.06em;
-    }
-    .edu-degree {
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 0.2rem;
-    }
-    .edu-inst {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      margin-bottom: 0.5rem;
-    }
-    .edu-note {
-      font-size: 0.84rem;
-      color: #cbd5f5;
-    }
-    body.light .edu-note {
-      color: #4b5563;
-    }
+.cs-card.active {
+  background: radial-gradient(circle at 0 0, rgba(129,140,248,0.4), transparent 70%),
+              #020617;
+  border-color: rgba(129,140,248,1);
+  box-shadow: 0 26px 80px rgba(30,64,175,0.95);
+  transform: translateY(-2px);
+}
+body.light .cs-card.active {
+  background: #111827;
+  color: #f9fafb;
+}
 
-    /* Contact */
-    .contact-section {
-      background: #020617;
-      color: #e5e7eb;
-      padding: 3rem 0 2.5rem;
-      margin-top: 2rem;
-    }
-    .contact-title {
-      text-align: center;
-      font-size: 1.7rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-    .contact-subtitle {
-      text-align: center;
-      font-size: 0.92rem;
-      color: #9ca3af;
-      margin-bottom: 2rem;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
-      gap: 2rem;
-    }
-    .contact-text {
-      font-size: 0.92rem;
-      color: #e5e7eb;
-      margin-bottom: 0.9rem;
-    }
-    .contact-form {
-      display: grid;
-      gap: 0.7rem;
-      font-size: 0.85rem;
-      background: #020617;
-      border-radius: 1rem;
-      padding: 1.1rem 1.2rem;
-      border: 1px solid #1f2937;
-      box-shadow: 0 24px 60px rgba(15,23,42,1);
-    }
-    .contact-form label {
-      display: block;
-      margin-bottom: 0.18rem;
-      color: #9ca3af;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.45rem 0.55rem;
-      border-radius: 0.55rem;
-      border: 1px solid #374151;
-      background: #020617;
-      color: #e5e7eb;
-      font-family: inherit;
-      font-size: 0.85rem;
-    }
-    .contact-form textarea { resize: vertical; min-height: 90px; }
-    .contact-hint {
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
+/* RIGHT: editor panel */
+.cs-editor {
+  border-radius: 1.3rem;
+  background: #020617;
+  border: 1px solid #111827;
+  box-shadow: 0 32px 90px rgba(15,23,42,1);
+  overflow: hidden;
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease;
+}
+body.light .cs-editor {
+  background: #0b1120;
+  border-color: #020617;
+}
 
-    .social-row {
-      margin-top: 1.5rem;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-    }
-    .social-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 0.5rem;
-      background: #020617;
-      border: 1px solid #334155;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .social-icon:hover {
-      background: #111827;
-      border-color: #6366f1;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 30px rgba(79,70,229,0.75);
-    }
-    .social-svg { width: 18px; height: 18px; }
+.cs-editor-header {
+  padding: 0.9rem 1.1rem 0.75rem;
+  border-bottom: 1px solid #020617;
+  background: radial-gradient(circle at 0 0, rgba(56,189,248,0.22), transparent 60%),
+              #020617;
+}
+.cs-editor-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.cs-editor-sub {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+.cs-editor-pills {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.cs-pill {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(55,65,81,0.95);
+}
+body.light .cs-pill {
+  background: #020617;
+  color: #e5e7eb;
+}
 
-    footer {
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 1.3rem 0 1.8rem;
-      color: #6b7280;
-      background: #020617;
-      border-top: 1px solid #111827;
-    }
+/* Tabs + toolbar */
+.cs-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0.85rem;
+  background: #020617;
+  border-bottom: 1px solid #111827;
+}
+.cs-tabs {
+  display: inline-flex;
+  background: #020617;
+  border-radius: 999px;
+  padding: 0.12rem;
+  gap: 0.2rem;
+}
+.cs-tab {
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.75rem;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+}
+.cs-tab.active {
+  background: #111827;
+  color: #f9fafb;
+}
+.cs-copy-btn {
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  padding: 0.18rem 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
 
-    /* Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px) scale(0.985);
-      transition: opacity 0.45s ease-out, transform 0.45s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+/* Editor body */
+.cs-editor-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background: #020617;
+  max-height: 440px;
+  overflow: hidden;
+}
 
-    /* Responsive */
-    @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-block { padding-top: 2.4rem; }
-      .hero-photo-wrap { order: -1; }
-      .projects-layout { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .nav-inner { padding-inline: 1.1rem; }
-      .intro-actions { flex-direction: column; }
-      .btn-primary, .btn-ghost {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
+/* Line numbers */
+.cs-lines {
+  padding: 0.7rem 0.4rem 0.9rem 0.8rem;
+  background: #020617;
+  border-right: 1px solid #111827;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.76rem;
+  color: #4b5563;
+  text-align: right;
+  user-select: none;
+}
+.cs-lines div {
+  height: 1.3em;
+}
+
+/* Code / Diagram / Notes content */
+.cs-content {
+  padding: 0.7rem 0.9rem 0.9rem;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* Diagram view */
+.cs-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.cs-diagram img {
+  max-width: 100%;
+  border-radius: 0.8rem;
+  border: 1px solid #1f2937;
+}
+.cs-diagram-placeholder {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* Notes view */
+.cs-notes {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.86rem;
+  color: #e5e7eb;
+}
+.cs-notes p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.cs-notes ul {
+  padding-left: 1.1rem;
+  margin: 0.2rem 0 0.3rem;
+}
+.cs-notes li {
+  margin-bottom: 0.22rem;
+}
+
+/* Education timeline (cleaned) */
+.edu-section { padding: 4rem 0 4.5rem; }
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, #4f46e5, #22c55e, transparent);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+}
+.timeline-item {
+  padding: 10px 40px 16px;
+  position: relative;
+  width: 50%;
+}
+.timeline-item.left { left: 0; text-align: right; }
+.timeline-item.right { left: 50%; text-align: left; }
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent-1);
+  top: 22px;
+  box-shadow: 0 0 12px rgba(34,197,94,0.9);
+  transition: 0.2s;
+  z-index: 1;
+}
+.timeline-item.left::after { right: -7px; }
+.timeline-item.right::after { left: -7px; }
+.timeline-item:hover::after {
+  background: var(--accent-1);
+}
+
+.edu-card {
+  background: rgba(15,23,42,0.96);
+  border-radius: 1rem;
+  border: 1px solid rgba(30,64,175,0.9);
+  padding: 1.2rem 1.3rem 1.1rem;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.9);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.edu-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-2);
+}
+body.light .edu-card {
+  background: #ffffff;
+  border-color: rgba(229,231,235,1);
+  box-shadow: 0 14px 40px rgba(148,163,184,0.7);
+}
+.edu-date {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent-2);
+  margin-bottom: 0.3rem;
+}
+.edu-degree {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.edu-inst {
+  font-size: 0.85rem;
+  color: #a5b4fc;
+  margin-bottom: 0.35rem;
+}
+.edu-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(16,185,129,0.12);
+  color: #6ee7b7;
+  margin-bottom: 0.5rem;
+}
+.edu-note {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* Contact */
+.contact-section {
+  background: #020617;
+  color: #e5e7eb;
+  padding: 3rem 0 2.5rem;
+  margin-top: 2rem;
+}
+.contact-title {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.contact-subtitle {
+  text-align: center;
+  font-size: 0.92rem;
+  color: #9ca3af;
+  margin-bottom: 2rem;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+  gap: 2rem;
+}
+.contact-text {
+  font-size: 0.92rem;
+  color: #e5e7eb;
+  margin-bottom: 0.9rem;
+}
+.contact-form {
+  display: grid;
+  gap: 0.7rem;
+  font-size: 0.85rem;
+  background: #020617;
+  border-radius: 1rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #1f2937;
+  box-shadow: 0 24px 60px rgba(15,23,42,1);
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 0.18rem;
+  color: #9ca3af;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid #374151;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+.contact-form textarea { resize: vertical; min-height: 90px; }
+.contact-hint {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.social-row {
+  margin-top: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.social-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 0.5rem;
+  background: #020617;
+  border: 1px solid #334155;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.social-icon:hover {
+  background: #111827;
+  border-color: #6366f1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(79,70,229,0.75);
+}
+.social-svg { width: 18px; height: 18px; }
+
+footer {
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1.3rem 0 1.8rem;
+  color: #6b7280;
+  background: #020617;
+  border-top: 1px solid #111827;
+}
+
+/* Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Responsive tweaks */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-block { padding-top: 2.4rem; }
+  .hero-photo-wrap { order: -1; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .timeline::after { left: 24px; }
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 60px;
+    padding-right: 16px;
+  }
+  .timeline-item::after {
+    left: 17px !important;
+    right: auto !important;
+  }
+}
+@media (max-width: 640px) {
+  .nav-inner { padding-inline: 1.1rem; }
+  .intro-actions { flex-direction: column; }
+  .btn-primary, .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
 </head>
 <body class="loading">
-  <div id="scroll-bar"><div id="scroll-bar-inner"></div></div>
+<div id="scroll-bar"><div id="scroll-bar-inner"></div></div>
 
-  <div id="loader-overlay">
-    <div class="loader-inner">
-      <div class="loader-logo">
-        <div class="loader-ring"></div>
-      </div>
-      <div class="loader-text-main">Ala'a Alsheikh Ali</div>
-      <div class="loader-text-sub">Loading your security lab…</div>
+<div id="loader-overlay">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <div class="loader-ring"></div>
+    </div>
+    <div class="loader-text-main">Ala'a Alsheikh Ali</div>
+    <div class="loader-text-sub">Loading your security lab…</div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <div class="nav-left">
+      <div class="nav-logo"></div>
+      <div class="nav-name">ALA'A ALSHEIKH ALI</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about-block">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Path</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" type="button" id="themeToggle">
+        <span id="themeIcon">🌙</span>
+        <span>Dark</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<section class="intro" id="home">
+  <div class="intro-inner">
+    <div class="intro-role">Future Network Security Analyst</div>
+
+    <h1 class="intro-title">
+      <span class="typed-wrapper">
+        <span id="typedText">Hi, I'm Ala'a.</span>
+        <span class="typed-cursor"></span>
+      </span>
+    </h1>
+
+    <div class="intro-meta">
+      MSc Cybersecurity (Distinction) · BSc Networks &amp; Cybersecurity · CompTIA Security+
+    </div>
+
+    <p class="intro-subtitle">
+      I like building and breaking security labs to see how networks actually behave under pressure –
+      then turning that into clear designs, playbooks and tools that make life easier for analysts and engineers.
+    </p>
+
+    <div class="intro-actions">
+      <button class="btn-primary" onclick="document.getElementById('about-block').scrollIntoView({behavior: 'smooth'})">
+        Start with who I am
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+        <span class="icon">↘</span>
+        <span>See projects</span>
+      </button>
+      <button class="btn-ghost" onclick="window.open('Alaa_Alsheikh_Alis_CV.pdf','_blank')">
+        <span class="icon">⬇</span>
+        <span>Download CV</span>
+      </button>
     </div>
   </div>
 
-  <header class="nav">
-    <div class="container nav-inner">
-      <div class="nav-left">
-        <div class="nav-logo"></div>
-        <div class="nav-name">ALA'A ALSHEIKH ALI</div>
+  <div class="scroll-indicator">
+    <span>⌄</span>
+    <div>Scroll</div>
+  </div>
+</section>
+
+<section class="hero-block" id="about-block">
+  <div class="container hero-grid">
+    <div class="hero-photo-wrap reveal">
+      <div class="hero-photo-card tilt">
+        <div class="hero-photo-inner">
+          <!-- 👉 Replace this path with your profile image -->
+          <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
+        </div>
       </div>
-      <nav class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about-block">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Path</a>
-        <a href="#contact">Contact</a>
-        <button class="theme-toggle" type="button" id="themeToggle">
-          <span id="themeIcon">🌙</span>
-          <span>Dark</span>
-        </button>
-      </nav>
     </div>
-  </header>
 
-  <section class="intro" id="home">
-    <div class="intro-inner">
-      <div class="intro-role">Future Network Security Analyst</div>
-
-      <h1 class="intro-title">
-        <span class="typed-wrapper">
-          <span id="typedText">Hi, I'm Ala'a.</span>
-          <span class="typed-cursor"></span>
-        </span>
-      </h1>
-
-      <div class="intro-meta">
-        MSc Cybersecurity (Distinction) · BSc Networks &amp; Cybersecurity · CompTIA Security+
-      </div>
-
-      <p class="intro-subtitle">
-        I like building and breaking security labs to see how networks actually behave under pressure –
-        then turning that into clear designs, playbooks and tools that make life easier for analysts and engineers.
+    <div class="reveal">
+      <div class="hero-text-kicker">About</div>
+      <h2 class="hero-text-title">Who I am and how I like to work</h2>
+      <p class="hero-text-body">
+        I started from the network side – routing, switching and topologies – and then moved deeper into
+        cybersecurity. Most of my learning happens inside labs: virtual networks, Linux servers, packet captures,
+        SIEM dashboards and Python scripts.
       </p>
+      <p class="hero-text-body">
+        I enjoy understanding what the network and the user are actually doing, then designing security controls
+        that make sense in that context. That might be a detection rule, a redesign or a small script that
+        automates something analysts do manually.
+      </p>
+      <p class="hero-note">
+        This site brings together my projects, education and experience. Over time I’ll add full write-ups with
+        diagrams, screenshots and code for the projects below.
+      </p>
+    </div>
+  </div>
+</section>
 
-      <div class="intro-actions">
-        <button class="btn-primary" onclick="document.getElementById('about-block').scrollIntoView({behavior: 'smooth'})">
-          Start with who I am
-        </button>
-        <button class="btn-ghost" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
-          <span class="icon">↘</span>
-          <span>See projects</span>
-        </button>
-        <button class="btn-ghost" onclick="window.open('Alaa_Alsheikh_Alis_CV.pdf','_blank')">
-          <span class="icon">⬇</span>
-          <span>Download CV</span>
-        </button>
-      </div>
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Experience</div>
+      <h2 class="section-title">Where I’ve been and where I’m heading</h2>
+      <p class="section-subtitle">
+        A simple timeline of what I’ve done so far, plus the kind of Network Security Analyst role I’m aiming for.
+      </p>
     </div>
 
-    <div class="scroll-indicator">
-      <span>⌄</span>
-      <div>Scroll</div>
-    </div>
-  </section>
-
-  <section class="hero-block" id="about-block">
-    <div class="container hero-grid">
-      <div class="hero-photo-wrap reveal">
-        <div class="hero-photo-card hover-float-target">
-          <div class="hero-photo-inner">
-            <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
+    <div class="experience-card reveal">
+      <ul class="exp-timeline">
+        <li class="exp-item">
+          <div class="exp-role">Network Security Analyst (target role)</div>
+          <div class="exp-org">Education Training Collective – Digital Services · Stockton-on-Tees</div>
+          <div class="exp-meta">Based on REQ0001450 job profile · Cyber Essentials Plus, GDPR &amp; incident response</div>
+          <div class="exp-detail">
+            The kind of work I’m working towards: monitoring and responding to security alerts,
+            investigating incidents, managing vulnerabilities and helping to keep a multi-site college
+            infrastructure secure and compliant. A mix of Microsoft 365 / Azure security, firewalls,
+            endpoint protection, and explaining risk in plain language to non-technical staff.
           </div>
-        </div>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-role">Cybersecurity Intern</div>
+          <div class="exp-org">Flags Technology</div>
+          <div class="exp-meta">Internship · Security operations &amp; incident-style case work</div>
+          <div class="exp-detail">
+            Supported security activities such as analysing phishing examples, exploring lab-style attacks
+            and documenting how to respond. This experience helped me connect theory from Security+,
+            NIST frameworks and my MSc to the way incidents are actually handled.
+          </div>
+        </li>
+
+        <li class="exp-item">
+          <div class="exp-role">Sales Assistant (Part-time)</div>
+          <div class="exp-org">Sports Direct</div>
+          <div class="exp-meta">Customer-facing · High-pressure retail environment</div>
+          <div class="exp-detail">
+            Not a technical role, but important for communication and people skills: handling busy periods,
+            helping customers with clear explanations and working with a team under time pressure –
+            all useful behaviours for security work with stakeholders and users.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="skills-section">
+  <div class="container skills-inner">
+    <div class="section-header">
+      <div class="section-kicker">Skills</div>
+      <h2 class="section-title">What I’m comfortable working with</h2>
+      <p class="section-subtitle">
+        A mix of networking, security tools, cloud and scripting from my BSc, MSc, internship and labs.
+        The rows below scroll horizontally – hover on them to pause.
+      </p>
+    </div>
+  </div>
+
+  <div class="skills-marquee reveal">
+    <div class="skills-fade left"></div>
+    <div class="skills-fade right"></div>
+
+    <div class="marquee-track">
+      <!-- Row 1 -->
+      <div class="marquee-row">
+        <span class="skill-pill skill-label">Platforms &amp; endpoints</span>
+
+        <span class="skill-pill">Linux (Ubuntu, CentOS)</span>
+        <span class="skill-pill">Windows Server</span>
+        <span class="skill-pill">macOS</span>
+        <span class="skill-pill">Microsoft 365</span>
+        <span class="skill-pill">Intune &amp; Endpoint Manager</span>
+        <span class="skill-pill">Entra ID / Azure AD</span>
+        <span class="skill-pill">AWS</span>
+        <span class="skill-pill">Azure</span>
+
+        <!-- repeat for smooth loop -->
+        <span class="skill-pill">Linux (Ubuntu, CentOS)</span>
+        <span class="skill-pill">Windows Server</span>
+        <span class="skill-pill">Microsoft 365</span>
+        <span class="skill-pill">Intune &amp; Endpoint Manager</span>
       </div>
 
-      <div class="reveal">
-        <div class="hero-text-kicker">About</div>
-        <h2 class="hero-text-title">Who I am and how I like to work</h2>
-        <p class="hero-text-body">
-          I started from the network side – routing, switching and topologies – and then moved deeper into
-          cybersecurity. Most of my learning happens inside labs: virtual networks, Linux servers, packet captures,
-          SIEM dashboards and Python scripts.
-        </p>
-        <p class="hero-text-body">
-          I enjoy understanding what the network and the user are actually doing, then designing security controls
-          that make sense in that context. That might be a detection rule, a redesign or a small script that
-          automates something analysts do manually.
-        </p>
-        <p class="hero-note">
-          This site brings together my projects, education and experience. Over time I’ll add full write-ups with
-          diagrams, screenshots and code for the projects below.
-        </p>
+      <!-- Row 2 -->
+      <div class="marquee-row">
+        <span class="skill-pill skill-label">Networking &amp; security stack</span>
+
+        <span class="skill-pill">Cisco IOS · ASA</span>
+        <span class="skill-pill">Routing &amp; Switching</span>
+        <span class="skill-pill">BGP</span>
+        <span class="skill-pill">OSPF</span>
+        <span class="skill-pill">VLANs</span>
+        <span class="skill-pill">VPNs (IPsec, site-to-site)</span>
+        <span class="skill-pill">Firewalls</span>
+        <span class="skill-pill">DNS · DHCP</span>
+        <span class="skill-pill">Wireless networking</span>
+        <span class="skill-pill">SDN concepts</span>
+        <span class="skill-pill">Wireshark</span>
+        <span class="skill-pill">Splunk · ELK · QRadar</span>
+        <span class="skill-pill">Nessus · Nmap · Metasploit</span>
+        <span class="skill-pill">SOC-style alert triage</span>
+
+        <!-- repeat -->
+        <span class="skill-pill">Cisco IOS · ASA</span>
+        <span class="skill-pill">Routing &amp; Switching</span>
+        <span class="skill-pill">Wireshark</span>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="marquee-row">
+        <span class="skill-pill skill-label">Programming &amp; governance</span>
+
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Bash scripting</span>
+        <span class="skill-pill">SQL · NoSQL</span>
+        <span class="skill-pill">HTML · CSS · JavaScript</span>
+        <span class="skill-pill">C# basics</span>
+        <span class="skill-pill">NIST · SANS · ISO 27001</span>
+        <span class="skill-pill">OWASP Top 10</span>
+        <span class="skill-pill">GDPR &amp; data privacy</span>
+        <span class="skill-pill">CompTIA Security+ domains</span>
+        <span class="skill-pill">Agile &amp; project work</span>
+        <span class="skill-pill">English (Fluent)</span>
+        <span class="skill-pill">Arabic (Fluent)</span>
+
+        <!-- repeat -->
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">NIST · SANS</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="experience">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Experience</div>
-        <h2 class="section-title">Where I’ve been and where I’m heading</h2>
-        <p class="section-subtitle">
-          A simple timeline of what I’ve done so far, plus the kind of Network Security Analyst role I’m aiming for.
-        </p>
-      </div>
-
-      <div class="experience-card reveal">
-        <ul class="exp-timeline">
-          <li class="exp-item">
-            <div class="exp-role">Network Security Analyst (target role)</div>
-            <div class="exp-org">Education Training Collective – Digital Services · Stockton-on-Tees</div>
-            <div class="exp-meta">Based on REQ0001450 job profile · Cyber Essentials Plus, GDPR &amp; incident response</div>
-            <div class="exp-detail">
-              The kind of work I’m working towards: monitoring and responding to security alerts,
-              investigating incidents, managing vulnerabilities and helping to keep a multi-site college
-              infrastructure secure and compliant. A mix of Microsoft 365 / Azure security, firewalls,
-              endpoint protection, and explaining risk in plain language to non-technical staff.
-            </div>
-          </li>
-
-          <li class="exp-item">
-            <div class="exp-role">Cybersecurity Intern</div>
-            <div class="exp-org">Flags Technology</div>
-            <div class="exp-meta">Internship · Security operations &amp; incident-style case work</div>
-            <div class="exp-detail">
-              Supported security activities such as analysing phishing examples, exploring lab-style attacks
-              and documenting how to respond. This experience helped me connect theory from Security+,
-              NIST frameworks and my MSc to the way incidents are actually handled.
-            </div>
-          </li>
-
-          <li class="exp-item">
-            <div class="exp-role">Sales Assistant (Part-time)</div>
-            <div class="exp-org">Sports Direct</div>
-            <div class="exp-meta">Customer-facing · High-pressure retail environment</div>
-            <div class="exp-detail">
-              Not a technical role, but important for communication and people skills: handling busy periods,
-              helping customers with clear explanations and working with a team under time pressure –
-              all useful behaviours for security work with stakeholders and users.
-            </div>
-          </li>
-        </ul>
-      </div>
+<section id="projects" class="code-showcase">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Projects</div>
+      <h2 class="section-title">Code &amp; security labs I’m proud of</h2>
+      <p class="section-subtitle">
+        On the left: project cards. On the right: a VS Code-style panel where you can switch between
+        code, a diagram placeholder and short notes.
+      </p>
     </div>
-  </section>
 
-  <section id="skills">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Skills</div>
-        <h2 class="section-title">What I’m comfortable working with</h2>
-        <p class="section-subtitle">
-          A mix of networking, security tools, cloud and scripting from my BSc, MSc, internship and labs.
-          The badges below slide like a ticker; hover to pause and highlight them.
-        </p>
-      </div>
+    <div class="cs-layout">
+      <!-- LEFT COLUMN: cards -->
+      <div class="cs-list" id="csProjectList"></div>
 
-      <div class="skills-wrapper reveal">
-        <div class="skills-row-label">Platforms &amp; endpoints</div>
-        <div class="skills-row">
-          <span class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="4" fill="#111827"></rect>
-              <circle cx="12" cy="9" r="4" fill="#22c55e"></circle>
-              <path d="M7 19c.8-2.3 2.5-3.5 5-3.5s4.2 1.2 5 3.5" stroke="#22c55e" stroke-width="1.4" fill="none"/>
-            </svg>
-            <span>Linux (Ubuntu, CentOS)</span>
-          </span>
-
-          <span class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="4" fill="#2563eb"></rect>
-              <rect x="7" y="7" width="10" height="10" rx="2" fill="#eff6ff"></rect>
-            </svg>
-            <span>Windows Server</span>
-          </span>
-
-          <span class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" fill="#020617"></circle>
-              <path d="M12 5a6 6 0 0 0 0 12 6 6 0 0 0 0-12z" fill="#f97316"/>
-            </svg>
-            <span>macOS</span>
-          </span>
-
-          <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"
-             class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="11" fill="#111827"></circle>
-              <text x="12" y="14" text-anchor="middle" font-size="10" fill="#f97316" font-family="system-ui, sans-serif">AWS</text>
-            </svg>
-            <span>AWS</span>
-          </a>
-
-          <a href="https://azure.microsoft.com" target="_blank" rel="noreferrer"
-             class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="11" fill="#0f172a"></circle>
-              <text x="12" y="14" text-anchor="middle" font-size="9" fill="#38bdf8" font-family="system-ui, sans-serif">AZ</text>
-            </svg>
-            <span>Azure</span>
-          </a>
-
-          <span class="skill-pill">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="11" fill="#111827"></circle>
-              <text x="12" y="14" text-anchor="middle" font-size="8" fill="#facc15" font-family="system-ui,sans-serif">M365</text>
-            </svg>
-            Microsoft 365
-          </span>
-          <span class="skill-pill">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="4" fill="#0f172a"></rect>
-              <text x="12" y="15" text-anchor="middle" font-size="8" fill="#38bdf8" font-family="system-ui,sans-serif">INT</text>
-            </svg>
-            Intune &amp; Endpoint Manager
-          </span>
-          <span class="skill-pill">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" fill="#111827"></circle>
-              <text x="12" y="14" text-anchor="middle" font-size="8" fill="#a5b4fc" font-family="system-ui,sans-serif">ID</text>
-            </svg>
-            Entra ID / Azure AD
-          </span>
-
-          <span class="skill-pill">Linux (Ubuntu, CentOS)</span>
-          <span class="skill-pill">Windows Server</span>
-        </div>
-
-        <div class="skills-row-label" style="margin-top:0.8rem;">Networking &amp; security stack</div>
-        <div class="skills-row">
-          <span class="skill-pill">Cisco IOS · ASA</span>
-          <span class="skill-pill">Routing &amp; Switching</span>
-          <span class="skill-pill">BGP</span>
-          <span class="skill-pill">OSPF</span>
-          <span class="skill-pill">VLANs</span>
-          <span class="skill-pill">VPNs (IPsec, site-to-site)</span>
-          <span class="skill-pill">Firewalls</span>
-          <span class="skill-pill">DNS · DHCP</span>
-          <span class="skill-pill">Wireless networking</span>
-          <span class="skill-pill">SDN concepts</span>
-          <span class="skill-pill">Wireshark</span>
-
-          <a href="https://www.splunk.com" target="_blank" rel="noreferrer"
-             class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="11" fill="#020617"></circle>
-              <text x="12" y="14" text-anchor="middle" font-size="8" fill="#22c55e" font-family="system-ui, sans-serif">SIEM</text>
-            </svg>
-            <span>Splunk · ELK · QRadar</span>
-          </a>
-
-          <span class="skill-pill">Nessus · Nmap · Metasploit</span>
-          <span class="skill-pill">Vulnerability scanning</span>
-          <span class="skill-pill">SOC-style alert triage</span>
-
-          <span class="skill-pill">Cisco IOS · ASA</span>
-          <span class="skill-pill">Routing &amp; Switching</span>
-        </div>
-
-        <div class="skills-row-label" style="margin-top:0.8rem;">Programming, frameworks &amp; governance</div>
-        <div class="skills-row">
-          <span class="skill-pill skill-pill-logo">
-            <svg class="skill-logo-svg" viewBox="0 0 24 24">
-              <circle cx="9" cy="12" r="5" fill="#0f172a"></circle>
-              <circle cx="15" cy="12" r="5" fill="#1d4ed8"></circle>
-            </svg>
-            <span>Python</span>
-          </span>
-          <span class="skill-pill">Bash scripting</span>
-          <span class="skill-pill">SQL · NoSQL</span>
-          <span class="skill-pill">HTML · CSS · JavaScript</span>
-          <span class="skill-pill">C# basics</span>
-          <span class="skill-pill">NIST · SANS · ISO 27001</span>
-          <span class="skill-pill">OWASP Top 10</span>
-          <span class="skill-pill">GDPR &amp; data privacy</span>
-          <span class="skill-pill">CompTIA Security+ domains</span>
-          <span class="skill-pill">Agile &amp; project work</span>
-          <span class="skill-pill">English (Fluent)</span>
-          <span class="skill-pill">Arabic (Fluent)</span>
-
-          <span class="skill-pill">Python</span>
-          <span class="skill-pill">NIST · SANS</span>
-        </div>
-      </div>
+      <!-- RIGHT COLUMN: editor -->
+      <div class="cs-editor tilt reveal" id="csEditor"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="projects">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Projects</div>
-        <h2 class="section-title">Code &amp; security labs I’m proud of</h2>
-        <p class="section-subtitle">
-          On the left: a list of projects. On the right: a VS Code-style preview with an overview, image placeholders
-          and a short code snippet. Full configs and code are available if you’d like to see more.
-        </p>
-      </div>
-
-      <div class="projects-layout">
-        <div class="projects-list">
-          <button class="project-item active" data-project="arp">
-            <div class="project-icon">🌐</div>
-            <div>
-              <div class="project-item-title">Network-level ARP spoofing lab</div>
-              <div class="project-item-short">Detecting and reacting to ARP poisoning in virtual networks.</div>
-            </div>
-          </button>
-
-          <button class="project-item" data-project="password">
-            <div class="project-icon">🔐</div>
-            <div>
-              <div class="project-item-title">Password security &amp; behaviour</div>
-              <div class="project-item-short">Flask portal measuring how UX changes real passwords.</div>
-            </div>
-          </button>
-
-          <button class="project-item" data-project="network">
-            <div class="project-icon">🏢</div>
-            <div>
-              <div class="project-item-title">Secure network redesign</div>
-              <div class="project-item-short">From flat network to segmented, redundant design.</div>
-            </div>
-          </button>
-
-          <button class="project-item" data-project="siem">
-            <div class="project-icon">📊</div>
-            <div>
-              <div class="project-item-title">SIEM alert tuning &amp; noise reduction</div>
-              <div class="project-item-short">Keeping important alerts loud and false positives quiet.</div>
-            </div>
-          </button>
-
-          <button class="project-item" data-project="merge">
-            <div class="project-icon">🗂️</div>
-            <div>
-              <div class="project-item-title">Merging JSON, XML &amp; CSV safely</div>
-              <div class="project-item-short">Standardising attributes and identifiers across files.</div>
-            </div>
-          </button>
-        </div>
-
-        <div class="project-preview reveal" id="projectPreview"></div>
-      </div>
+<section id="education" class="edu-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-kicker">Path</div>
+      <h2 class="section-title">Education &amp; certifications</h2>
+      <p class="section-subtitle">
+        The academic and structured training side that supports the labs and projects above.
+      </p>
     </div>
-  </section>
 
-  <section id="education">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-kicker">Path</div>
-        <h2 class="section-title">Education &amp; certifications</h2>
-        <p class="section-subtitle">
-          The academic and structured training side that supports the labs and projects above.
-        </p>
-      </div>
-
-      <div class="edu-grid">
-        <div class="edu-card hover-float-target reveal">
-          <div class="edu-pill">Postgraduate</div>
+    <div class="timeline">
+      <div class="timeline-item left reveal">
+        <div class="edu-card">
           <div class="edu-date">2023 – 2024</div>
           <div class="edu-degree">MSc Cybersecurity (Distinction)</div>
           <div class="edu-inst">University of Sunderland</div>
+          <div class="edu-badge">Distinction</div>
           <div class="edu-note">
             Focus on network security, incident response and secure system design.
-            Dissertation: detection and mitigation of ARP cache poisoning in virtual networks using Python and SDN.
+            Dissertation on detecting and mitigating ARP cache poisoning in virtual networks using Python and SDN.
           </div>
         </div>
+      </div>
 
-        <div class="edu-card hover-float-target reveal">
-          <div class="edu-pill">Undergraduate</div>
+      <div class="timeline-item right reveal">
+        <div class="edu-card">
           <div class="edu-date">2020 – 2023</div>
           <div class="edu-degree">BSc (Hons) Networks &amp; Cybersecurity</div>
           <div class="edu-inst">University of Sunderland</div>
+          <div class="edu-badge">First Class Honours</div>
           <div class="edu-note">
-            First Class Honours. Routing &amp; switching (CCNA/CCNP modules), secure network architecture,
-            VPNs, firewalls, and hands-on infrastructure design.
+            Routing &amp; switching (CCNA/CCNP style modules), secure network architecture, VPNs, firewalls and
+            hands-on infrastructure design projects for enterprise-style networks.
           </div>
         </div>
+      </div>
 
-        <div class="edu-card hover-float-target reveal">
-          <div class="edu-pill">Certification</div>
-          <div class="edu-date">Professional</div>
+      <div class="timeline-item left reveal">
+        <div class="edu-card">
+          <div class="edu-date">Certification</div>
           <div class="edu-degree">CompTIA Security+</div>
           <div class="edu-inst">CompTIA</div>
           <div class="edu-note">
-            Validated baseline skills in risk management, cryptography, identity management,
-            and security infrastructure aligned with industry practice.
+            Validated baseline skills in risk management, cryptography, identity and access management, and
+            security infrastructure operations.
           </div>
         </div>
+      </div>
 
-        <div class="edu-card hover-float-target reveal">
-          <div class="edu-pill">Bootcamp</div>
-          <div class="edu-date">Technical Skills</div>
+      <div class="timeline-item right reveal">
+        <div class="edu-card">
+          <div class="edu-date">Bootcamp</div>
           <div class="edu-degree">IT Technical Skills Bootcamp</div>
           <div class="edu-inst">Just IT</div>
           <div class="edu-note">
-            Endpoint management with Intune &amp; Entra ID, secure configuration,
-            device compliance and day-to-day support in Microsoft environments.
+            Endpoint management with Intune &amp; Entra ID, device compliance policies and secure configuration
+            for Microsoft 365 environments.
           </div>
         </div>
+      </div>
 
-        <div class="edu-card hover-float-target reveal">
-          <div class="edu-pill">Program</div>
-          <div class="edu-date">Leadership &amp; Growth</div>
+      <div class="timeline-item left reveal">
+        <div class="edu-card">
+          <div class="edu-date">Programme</div>
           <div class="edu-degree">McKinsey Forward Program</div>
           <div class="edu-inst">McKinsey &amp; Company</div>
           <div class="edu-note">
-            Developed practical problem solving, digital skills and adaptability – useful
-            for consulting-style security roles and working with stakeholders.
+            Practical problem solving, digital skills and adaptability for early-career professionals.
           </div>
         </div>
       </div>
-
-      <div class="cv-link" style="text-align: center; margin-top: 2rem;">
-        <a href="Alaa_Alsheikh_Alis_CV.pdf" target="_blank" rel="noreferrer">
-          <span style="font-size: 1.2rem; margin-right: 0.5rem;">📄</span> Download my full CV
-        </a>
-      </div>
     </div>
-  </section>
 
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="contact-title">Ready to talk about security?</div>
-      <div class="contact-subtitle">
-        Whether it’s a role, a project or just comparing notes on networks and security, feel free to reach out.
+    <div class="cv-link" style="text-align: center; margin-top: 2rem;">
+      <a href="Alaa_Alsheikh_Alis_CV.pdf" target="_blank" rel="noreferrer">
+        <span style="font-size: 1.2rem; margin-right: 0.5rem;">📄</span> Download my full CV
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-title">Ready to talk about security?</div>
+    <div class="contact-subtitle">
+      Whether it’s a role, a project or just comparing notes on networks and security, feel free to reach out.
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <p class="contact-text">
+          I’m happy to share more detailed diagrams, configs or code samples for the projects on this page.
+          The form opens an email draft so we can continue the conversation from there.
+        </p>
+        <p class="contact-text">
+          I’m especially interested in network security, SOC and security engineering roles, where
+          labs and experimentation are part of the job.
+        </p>
       </div>
 
-      <div class="contact-grid">
+      <form class="contact-form" onsubmit="sendMail(event)">
         <div>
-          <p class="contact-text">
-            I’m happy to share more detailed diagrams, configs or code samples for the projects on this page.
-            The form opens an email draft so we can continue the conversation from there.
-          </p>
-          <p class="contact-text">
-            I’m especially interested in network security, SOC and security engineering roles, where
-            labs and experimentation are part of the job.
-          </p>
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name">
         </div>
-
-        <form class="contact-form" onsubmit="sendMail(event)">
-          <div>
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder="Your name">
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="Your email">
-          </div>
-          <div>
-            <label for="message">Message</label>
-            <textarea id="message" placeholder="What would you like to talk about?"></textarea>
-          </div>
-          <button class="btn-primary" type="submit">Send message</button>
-          <div class="contact-hint">
-            This opens your email client to send a message to: <strong>alaa@alsheikhali.com</strong>.
-          </div>
-        </form>
-      </div>
-
-      <div class="social-row">
-        <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer" class="social-icon">
-          <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="11" fill="#020617"></circle>
-            <path d="M9.5 18c-.5-.2-.8-.5-.8-.9v-1.2c0-.4-.2-.7-.4-.9-.4-.3-.3-.5.1-.5.6 0 1 .5 1.1.7.3.5.7.7 1.5.7s1.2-.2 1.5-.7c.1-.2.5-.7 1.1-.7.4 0 .5.2.1.5-.3.2-.4.5-.4.9v1.2c0 .4-.3.7-.8.9-1 .3-2.2 .3-3.1 0z" fill="#e5e7eb"></path>
-            <path d="M12 6.5c-1.7 0-3 1.3-3 3 0 .9.4 1.7 1 2.2.2.2.3.4.2.7-.1.2-.1.3-.1.3s.4 0 .7-.2c.4-.2.7-.2 1.2-.2s.8 0 1.2.2c.3.2.7.2.7.2s0-.1-.1-.3c-.1-.3 0-.5.2-.7.6-.5 1-1.3 1-2.2 0-1.7-1.3-3-3-3z" fill="#e5e7eb"></path>
-          </svg>
-        </a>
-
-        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" class="social-icon">
-          <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="4" fill="#0ea5e9"></rect>
-            <rect x="7" y="9" width="2" height="8" fill="#e5e7eb"></rect>
-            <circle cx="8" cy="6.5" r="1" fill="#e5e7eb"></circle>
-            <path d="M12 9h1.8c1.3 0 2.2.9 2.2 2.4V17h-2v-4c0-.7-.3-1.1-.8-1.1-.5 0-1 .3-1 .9V17h-2v-6h1.8z" fill="#e5e7eb"></path>
-          </svg>
-        </a>
-      </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Your email">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="What would you like to talk about?"></textarea>
+        </div>
+        <button class="btn-primary" type="submit">Send message</button>
+        <div class="contact-hint">
+          This opens your email client to send a message to: <strong>alaa@alsheikhali.com</strong>.
+        </div>
+      </form>
     </div>
-  </section>
 
-  <footer>
-    © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS &amp; JavaScript on GitHub Pages.
-  </footer>
+    <div class="social-row">
+      <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer" class="social-icon">
+        <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" fill="#020617"></circle>
+          <path d="M9.5 18c-.5-.2-.8-.5-.8-.9v-1.2c0-.4-.2-.7-.4-.9-.4-.3-.3-.5.1-.5.6 0 1 .5 1.1.7.3.5.7.7 1.5.7s1.2-.2 1.5-.7c.1-.2.5-.7 1.1-.7.4 0 .5.2.1.5-.3.2-.4.5-.4.9v1.2c0 .4-.3.7-.8.9-1 .3-2.2 .3-3.1 0z" fill="#e5e7eb"></path>
+          <path d="M12 6.5c-1.7 0-3 1.3-3 3 0 .9.4 1.7 1 2.2.2.2.3.4.2.7-.1.2-.1.3-.1.3s.4 0 .7-.2c.4-.2.7-.2 1.2-.2s.8 0 1.2.2c.3.2.7.2.7.2s0-.1-.1-.3c-.1-.3 0-.5.2-.7.6-.5 1-1.3 1-2.2 0-1.7-1.3-3-3-3z" fill="#e5e7eb"></path>
+        </svg>
+      </a>
 
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+      <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" class="social-icon">
+        <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="4" fill="#0ea5e9"></rect>
+          <rect x="7" y="9" width="2" height="8" fill="#e5e7eb"></rect>
+          <circle cx="8" cy="6.5" r="1" fill="#e5e7eb"></circle>
+          <path d="M12 9h1.8c1.3 0 2.2.9 2.2 2.4V17h-2v-4c0-.7-.3-1.1-.8-1.1-.5 0-1 .3-1 .9V17h-2v-6h1.8z" fill="#e5e7eb"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
 
-    // Loader
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.classList.remove("loading");
-        document.getElementById("loader-overlay").classList.add("hidden");
-      }, 1200);
-    });
+<footer>
+  © <span id="year"></span> Ala'a Alsheikh Ali. Built with HTML, CSS &amp; JavaScript on GitHub Pages.
+</footer>
 
-    // Scroll progress bar
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      document.getElementById("scroll-bar-inner").style.width = progress + "%";
-    });
+<script>
+// Footer year
+document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Reveal on scroll
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+// Loader
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.body.classList.remove("loading");
+    document.getElementById("loader-overlay").classList.add("hidden");
+  }, 1200);
+});
 
-    // Theme toggle
-    const themeToggle = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
-    themeToggle.addEventListener("click", () => {
-      const body = document.body;
-      const isLight = body.classList.toggle("light");
-      themeIcon.textContent = isLight ? "☀️" : "🌙";
-      themeToggle.querySelector("span:last-child").textContent = isLight ? "Light" : "Dark";
-    });
+// Scroll progress bar
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById("scroll-bar-inner").style.width = progress + "%";
+});
 
-    // Typed hero text (multi-language)
-    const typedText = document.getElementById("typedText");
-    const phrases = [
-      "Hi, I'm Ala'a.",
-      "مرحباً، أنا علاء.",
-      "Bonjour, je suis Ala'a."
-    ];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let typing = true;
-
-    function typeLoop() {
-      const current = phrases[phraseIndex];
-
-      if (typing) {
-        if (charIndex <= current.length) {
-          typedText.textContent = current.slice(0, charIndex);
-          charIndex++;
-          setTimeout(typeLoop, 90);
-        } else {
-          typing = false;
-          setTimeout(typeLoop, 1600);
-        }
-      } else {
-        if (charIndex >= 0) {
-          typedText.textContent = current.slice(0, charIndex);
-          charIndex--;
-          setTimeout(typeLoop, 45);
-        } else {
-          typing = true;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-          setTimeout(typeLoop, 200);
-        }
+// Reveal on scroll
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
+    });
+  },
+  { threshold: 0.12 }
+);
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// Theme toggle
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+themeToggle.addEventListener("click", () => {
+  const body = document.body;
+  const isLight = body.classList.toggle("light");
+  themeIcon.textContent = isLight ? "☀️" : "🌙";
+  themeToggle.querySelector("span:last-child").textContent = isLight ? "Light" : "Dark";
+});
+
+// Typed hero text (multi-language)
+const typedText = document.getElementById("typedText");
+const phrases = [
+  "Hi, I'm Ala'a.",
+  "مرحباً، أنا علاء.",
+  "Bonjour, je suis Ala'a."
+];
+let phraseIndex = 0;
+let charIndex = 0;
+let typing = true;
+
+function typeLoop() {
+  const current = phrases[phraseIndex];
+
+  if (typing) {
+    if (charIndex <= current.length) {
+      typedText.textContent = current.slice(0, charIndex);
+      charIndex++;
+      setTimeout(typeLoop, 90);
+    } else {
+      typing = false;
+      setTimeout(typeLoop, 1600);
     }
-    typeLoop();
-
-    // Contact form -> mailto
-    function sendMail(e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value || "";
-      const email = document.getElementById("email").value || "";
-      const message = document.getElementById("message").value || "";
-
-      const subject = encodeURIComponent("Message from portfolio site");
-      const bodyLines = [
-        name ? "Name: " + name : "",
-        email ? "Email: " + email : "",
-        "",
-        message
-      ].join("%0D%0A");
-
-      window.location.href = "mailto:alaa@alsheikhali.com?subject=" + subject + "&body=" + bodyLines;
+  } else {
+    if (charIndex >= 0) {
+      typedText.textContent = current.slice(0, charIndex);
+      charIndex--;
+      setTimeout(typeLoop, 45);
+    } else {
+      typing = true;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      setTimeout(typeLoop, 200);
     }
+  }
+}
+typeLoop();
 
-    // Projects data (fixed, using template literals)
-    const projects = {
-      arp: {
-        title: "Network-level ARP spoofing lab",
-        tags: "Python · Scapy · SDN · Virtual networks",
-        overview: `
-          <p>
-            A lab that watches ARP traffic for suspicious IP/MAC changes and talks to a controller
-            to push mitigation rules. The goal was to move beyond just logging and have the network
-            react in real time when spoofing happens.
-          </p>
-          <p>
-            It includes attacker and victim VMs, Open vSwitch, a Python detection script and an SDN
-            controller that updates flow rules dynamically.
-          </p>
-        `,
-        images: [
-          "Replace this with a high-level ARP architecture diagram showing hosts, switches and controller.",
-          "Replace with a screenshot of the controller or flow table during a spoofing attempt.",
-          "Replace with a Wireshark capture comparing normal vs spoofed ARP traffic."
-        ],
-        code: `
-from scapy.all import ARP, sniff
+// Contact form -> mailto
+function sendMail(e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value || "";
+  const email = document.getElementById("email").value || "";
+  const message = document.getElementById("message").value || "";
 
-ip_mac_map = {}
+  const subject = encodeURIComponent("Message from portfolio site");
+  const bodyLines = [
+    name ? "Name: " + name : "",
+    email ? "Email: " + email : "",
+    "",
+    message
+  ].join("%0D%0A");
 
-def handle_arp(pkt):
-    if ARP in pkt and pkt[ARP].op == 2:  # ARP reply
-        ip = pkt[ARP].psrc
-        mac = pkt[ARP].hwsrc
+  window.location.href =
+    "mailto:alaa@alsheikhali.com?subject=" + subject + "&body=" + bodyLines;
+}
 
-        if ip in ip_mac_map and ip_mac_map[ip] != mac:
-            print(f"[ALERT] Possible spoofing: {ip} now {mac}, was {ip_mac_map[ip]}")
-            # call SDN controller API here to block the new MAC
+// Small helper for HTML escaping
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/* === CODE SHOWCASE DATA & RENDERING === */
+
+const showcaseProjects = [
+  {
+    id: "arp",
+    icon: "🌐",
+    title: "Network-level ARP spoofing lab",
+    summary: "Detecting and reacting to ARP poisoning in virtual networks using Python, Scapy and SDN.",
+    tags: ["Python", "Scapy", "SDN", "Virtual networks"],
+    headerLine:
+      "Lab that watches ARP traffic for suspicious IP/MAC changes and talks to a controller to push mitigation rules.",
+    pills: ["Real-time detection", "Controller integration", "Virtual topology"],
+    // 👉 Put your ARP diagram image file in /assets and set the filename here
+    diagrams: [
+  "assets/arp-diagram-1.png",
+  "assets/arp-diagram-2.png",
+  "assets/arp-diagram-3.png"],
+",
+    // 👉 Paste the real code you want to show for this project here
+    code: `
+import os
+import csv
+from ast import literal_eval
+import time
+from datetime import datetime
+import scapy.all as scapy
+import netifaces as ni
+from ryu.base import app_manager
+from ryu.controller import ofp_event, dpset
+from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER, HANDSHAKE_DISPATCHER
+from ryu.controller.handler import set_ev_cls
+from ryu.lib.packet import packet, ethernet, ether_types, in_proto, arp, dhcp, ipv4
+from ryu.ofproto import ofproto_v1_3
+
+# File paths for configurations and logs
+VM_VERIFIED_MAPPINGS_PATH = "./VM_Verified_mappings.csv"
+VM_VALID_DHCP_PATH = "./VM_VALIDDHCP.csv"
+VM_LOGS_DIRECTORY = "./vm_logs/log_{}.csv"
+
+# Durations for blocking and allowing
+PREVENTION_DURATION = 60
+ALLOWANCE_DURATION = 120
+
+# Predefined MAC addresses
+PREDEFINED_MACS = {
+    "00:0c:29:b6:1c:cc": "SDNController",
+    "00:0c:29:d2:89:dd": "ClientVM",
+    "00:0c:29:d6:4a:5d": "KaliAttacker",
+    "00:50:56:e5:97:60": "Gateway",
+    "ff:ff:ff:ff:ff:ff": "Broadcast"
+}
+
+# Convert MAC addresses to readable form
+def convert_mac_address(address):
+    return PREDEFINED_MACS.get(address, address)
+
+class NetworkScanner:
+    def __init__(self):
+        self.discovered_devices = {}
+        self.controller_mac = ni.ifaddresses('br0')[ni.AF_LINK][0]["addr"]
+        self.controller_ip = ni.ifaddresses('br0')[ni.AF_INET][0]["addr"]
+
+    def scan_network(self, ip_range):
+        try:
+            arp_request = scapy.ARP(pdst=ip_range)
+            eth_frame = scapy.Ether(dst='ff:ff:ff:ff:ff:ff')
+            request_packet = eth_frame / arp_request
+
+            responses, _ = scapy.srp(request_packet, timeout=1, iface="br0", verbose=False)
+            for _, received in responses:
+                self.discovered_devices[received.hwsrc] = received.psrc
+        except Exception as e:
+            print(f"Network scan error: {e}")
+
+class ProxyHandler:
+    def __init__(self):
+        self.device_list = {}
+        self.proxy_mac_address = ni.ifaddresses('br0')[ni.AF_LINK][0]["addr"]
+
+    def mac_known(self, mac):
+        return mac in self.device_list
+
+    def ip_known(self, ip):
+        return ip in self.device_list.values()
+
+    def find_mac_by_ip(self, ip):
+        for mac, stored_ip in self.device_list.items():
+            if stored_ip == ip:
+                return mac
+        return None
+
+    def send_arp_response(self, src_mac, dst_mac, dst_ip):
+        scapy.sendp(scapy.Ether(dst=dst_mac, src=src_mac) / 
+                    scapy.ARP(op="is-at", hwsrc=self.proxy_mac_address, psrc=self.device_list[src_mac], hwdst=dst_mac, pdst=dst_ip),
+                    iface="br0", verbose=False)
+
+class EventLogger:
+    def __init__(self, log_file_path):
+        self.log_file = log_file_path.format(datetime.now().strftime("%Y%m%d"))
+        log_dir = os.path.dirname(self.log_file)
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+        if not os.path.exists(self.log_file):
+            with open(self.log_file, 'w'): pass
+    
+    def log_event(self, event_id, mac, packet_data):
+        with open(self.log_file, 'a', newline='') as fd:
+            writer = csv.writer(fd)
+            writer.writerow([datetime.now(), event_id, mac, packet_data])
+
+class MacDatabaseHandler:
+    def __init__(self, db_file):
+        self.db_file = db_file
+        self.last_modified = None
+        self.mac_entries = {} 
+        self.default_entry = {"Rules": False, "LastIP": None} 
+        self.load_entries()
+
+    def add_mac_entry(self, mac, entry_data=None):
+        if entry_data is None:
+            entry_data = self.default_entry
+        
+        try:
+            if mac not in self.mac_entries:
+                with open(self.db_file, 'a', newline='') as fd:
+                    writer = csv.writer(fd)
+                    writer.writerow([mac, entry_data])
+            else:
+                with open(self.db_file, 'w', newline='') as fd:
+                    writer = csv.writer(fd)
+                    for existing_mac, existing_data in self.mac_entries.items():
+                        if existing_mac == mac:
+                            writer.writerow([mac, entry_data])
+                        else:
+                            writer.writerow([existing_mac, existing_data])
+            self.mac_entries[mac] = entry_data
+        except OSError as exc:
+            print(exc)
+    
+    def mac_registered(self, mac):
+        self.load_entries()
+        return mac in self.mac_entries
+   
+    def find_mac_by_ip(self, ip):
+        for mac, stored_data in self.mac_entries.items():
+            if stored_data["LastIP"] == ip:
+                return mac
+        return None
+
+    def load_entries(self):
+        try:
+            if os.path.exists(self.db_file):
+                if self.last_modified is None or os.path.getmtime(self.db_file) > self.last_modified:
+                    with open(self.db_file, 'r', newline='') as fd:
+                        mac_list = csv.reader(fd)
+                        self.mac_entries = dict(mac_list)
+                    
+                    for mac, record in self.mac_entries.items():
+                        self.mac_entries[mac] = literal_eval(record)
+
+                    self.last_modified = time.time()
+            else:
+                open(self.db_file, 'w').close()
+        except Exception as e:
+            print(f"Error loading MAC records: {e}")
+
+class ArpRequestTracker:
+    def __init__(self, threshold=10, interval=60):
+        self.threshold = threshold
+        self.interval = interval
+        self.request_history = {}
+
+    def track_arp_request(self, mac):
+        current_time = time.time()
+        if mac in self.request_history:
+            self.request_history[mac] = [t for t in self.request_history[mac] if t > current_time - self.interval]
         else:
-            ip_mac_map[ip] = mac
+            self.request_history[mac] = []
 
-sniff(filter="arp", prn=handle_arp, store=False)
-        `,
-        footer: "Full dissertation, diagrams and code are available if you’d like to dive deeper."
-      },
-      password: {
-        title: "Password security & behaviour portal",
-        tags: "Flask · UX · NIST 800-63-3",
-        overview: `
-          <p>
-            A web portal that lets users create accounts while seeing real-time feedback:
-            emoji reactions, colour-coded strength bars and time-to-crack estimates.
-          </p>
-          <p>
-            The goal was to measure how design nudges changed real password choices. Results were
-            analysed with SPSS (ANOVA, Chi-Square, t-tests) to see which patterns actually improved strength.
-          </p>
-        `,
-        images: [
-          "Screenshot placeholder for the signup page with password strength meter and emoji feedback.",
-          "Screenshot placeholder for a time-to-crack visualisation.",
-          "Graph placeholder for password strength distribution from the study."
-        ],
-        code: `
+        self.request_history[mac].append(current_time)
+
+        return len(self.request_history[mac]) <= self.threshold
+
+class SDNController(app_manager.RyuApp):
+    OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
+
+    def __init__(self, *args, **kwargs):
+        super(SDNController, self).__init__(*args, **kwargs)
+        self.switch_connections = {}
+        self.mac_port_map = {}
+        self.proxy_handler = ProxyHandler()
+        self.verified_mac_db = MacDatabaseHandler(VM_VERIFIED_MAPPINGS_PATH)
+        self.dhcp_mac_db = MacDatabaseHandler(VM_VALID_DHCP_PATH)
+        self.logger_handler = EventLogger(VM_LOGS_DIRECTORY)
+        self.initial_flows_installed = False
+        self.arp_request_tracker = ArpRequestTracker(threshold=10, interval=60)
+        self.load_dhcp_macs()
+
+    def load_dhcp_macs(self):
+        self.dhcp_mac_db.load_entries()
+        for mac, details in self.dhcp_mac_db.mac_entries.items():
+            self.logger.info("Loaded DHCP Entry - MAC: %s, Details: %s", mac, details)
+
+    @set_ev_cls(dpset.EventDP, HANDSHAKE_DISPATCHER)
+    def monitor_switch_connection(self, ev):
+        self.switch_connections = ev.dp
+        if ev.enter and not self.initial_flows_installed:
+            self.install_initial_flows()
+
+    def install_initial_flows(self):
+        self.logger.info("Installing initial flows")
+        scanner = NetworkScanner()
+        scanner.scan_network('192.168.100.0/24')
+
+        for mac, ip in scanner.discovered_devices.items():
+            mac_data = {"LastIP": ip, "Type": None}
+            self.verified_mac_db.add_mac_entry(mac, mac_data)
+            self.logger.info("New Device Found - MAC: %s, IP: %s", mac, ip)
+        
+        mac_data = {"LastIP": scanner.controller_ip, "Type": "DHCP"}
+        self.verified_mac_db.add_mac_entry(scanner.controller_mac, mac_data)
+        self.logger.info("Controller Device - MAC: %s, IP: %s", scanner.controller_mac, scanner.controller_ip)
+
+        self.initial_flows_installed = True
+
+    @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
+    def process_switch_features(self, ev):
+        dp = ev.msg.datapath
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+        
+        arp_match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP)
+        arp_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
+        self.insert_flow(dp, 1, arp_match, arp_actions)
+
+        dhcp_match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ip_proto=in_proto.IPPROTO_UDP, udp_src=67)
+        dhcp_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
+        self.insert_flow(dp, 1, dhcp_match, dhcp_actions)
+
+        default_match = parser_util.OFPMatch()
+        default_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
+        self.insert_flow(dp, 0, default_match, default_actions)
+    
+    def analyze_dhcp_packet(self, packet_msg):
+        dp = packet_msg.datapath
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+
+        pkt = packet.Packet(packet_msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+        dpid = dp.id
+        
+        pkt_dhcp = pkt.get_protocol(dhcp.dhcp)
+        if pkt_dhcp.op == dhcp.DHCP_DISCOVER:
+            self.logger.info("%s | %s -> %s", "DHCP Discover", convert_mac_address(eth.src), convert_mac_address(eth.dst))
+        elif pkt_dhcp.op == dhcp.DHCP_OFFER:
+            self.logger.info("%s | %s -> %s", "DHCP Offer", convert_mac_address(eth.src), convert_mac_address(eth.dst))
+            
+            if self.dhcp_mac_db.mac_registered(eth.src):
+                self.logger.info("Valid DHCP Offer to %s : %s", pkt_dhcp.chaddr, pkt_dhcp.yiaddr)
+                self.logger.info("Adding %s : %s to %s", pkt_dhcp.yiaddr, pkt_dhcp.chaddr, self.verified_mac_db.db_file)
+                mac_data = {"LastIP": pkt_dhcp.yiaddr, "Type": "DHCP"}
+                self.verified_mac_db.add_mac_entry(pkt_dhcp.chaddr, mac_data)
+            else:
+                self.logger_handler.log_event("DHCP", eth.src, "Invalid DHCP offer | MAC {} -> {}".format(
+                                eth.src, eth.dst))
+                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, eth_src=eth.src)
+                self.insert_flow(dp, 3, match, [], drop=True)
+                return
+        else:
+            self.logger.info("DHCP: %s | %s -> %s", dpid, convert_mac_address(eth.src), convert_mac_address(eth.dst))
+        
+        self.dispatch_packet(packet_msg)
+
+    def analyze_arp_packet(self, packet_msg):
+        dp = packet_msg.datapath
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+
+        pkt = packet.Packet(packet_msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+        dpid = dp.id
+        pkt_arp = pkt.get_protocol(arp.arp)
+
+        if pkt_arp.opcode == arp.ARP_REQUEST and self.proxy_handler.ip_known(pkt_arp.dst_ip):
+            self.proxy_handler.send_arp_response(self.proxy_handler.find_mac_by_ip(pkt_arp.dst_ip), eth.src, pkt_arp.src_ip)
+            return
+
+        if not self.verified_mac_db.mac_registered(eth.src) and not self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip):
+            self.logger.info("Registering new device %s with IP %s to %s", eth.src, pkt_arp.src_ip, self.verified_mac_db.db_file)
+            mac_data = {"LastIP": pkt_arp.src_ip, "Type": "Static"}
+            self.verified_mac_db.add_mac_entry(eth.src, mac_data)
+
+        if pkt_arp.opcode == arp.ARP_REQUEST:
+            self.logger.info("%s in %s | %s -> %s | %s", "ARP Request", dpid, convert_mac_address(eth.src), pkt_arp.dst_ip, convert_mac_address(eth.dst))
+            attack_id = "1."
+        elif pkt_arp.opcode == arp.ARP_REPLY:
+            self.logger.info("%s for %s | %s -> %s", "ARP Reply", pkt_arp.src_ip, convert_mac_address(eth.src), convert_mac_address(eth.dst))
+            attack_id = "2."
+
+        if self.verified_mac_db.mac_registered(eth.src) and self.verified_mac_db.mac_entries[eth.src]["LastIP"] != pkt_arp.src_ip:
+            self.logger_handler.log_event("{}1".format(attack_id), eth.src, "ARPID: ({}1) ARP spoof detected | MAC {} -> {} | IP: {}".format(
+                             attack_id, eth.src, self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip), pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        elif pkt_arp.opcode == arp.ARP_REQUEST and self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip) and not self.verified_mac_db.mac_registered(eth.src):
+            self.logger_handler.log_event("{}2".format(attack_id), eth.src, "ARPID: ({}2) ARP spoof from unknown MAC | MAC {} | IP: {}".format(
+                             attack_id, eth.src, pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        elif pkt_arp.opcode == arp.ARP_REPLY and self.verified_mac_db.find_mac_by_ip(pkt_arp.dst_ip) != pkt_arp.dst_mac and eth.dst != "ff:ff:ff:ff:ff:ff":
+            self.logger_handler.log_event("{}2".format(attack_id), eth.src, "ARPID: ({}2) ARP spoof detected | MAC {} | IP: {}".format(
+                             attack_id, pkt_arp.src_mac, pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        elif eth.src != pkt_arp.src_mac:
+            self.logger_handler.log_event("{}3".format(attack_id), eth.src, "ARPID: ({}3) ARP source mismatch | MAC {} <-> {} | IP: {}".format(
+                             attack_id, eth.src, pkt_arp.src_mac, pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        elif eth.dst != pkt_arp.dst_mac and pkt_arp.opcode == arp.ARP_REPLY:
+            self.logger_handler.log_event("{}4".format(attack_id), eth.src, "ARPID: ({}4) ARP destination mismatch | MAC {} <-> {} | IP: {}".format(
+                             attack_id, eth.src, pkt_arp.src_mac, pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        elif eth.dst.upper() == "FF:FF:FF:FF:FF:FF" and pkt_arp.opcode == arp.ARP_REPLY:
+            self.logger_handler.log_event("{}5".format(attack_id), eth.src, "ARPID: ({}5) ARP broadcast dst | MAC {} <-> {} | IP: {}".format(
+                             attack_id, eth.dst, pkt_arp.dst_mac, pkt_arp.src_ip))
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
+        else:
+            self.logger.info("Adding ARP flow for %ss:\n\tMAC: %s\tIP: %s ->\n\tMAC: %s\tIP: %s", ALLOWANCE_DURATION, eth.src, pkt_arp.src_ip, eth.dst, pkt_arp.dst_ip)
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=eth.src, arp_spa=pkt_arp.src_ip, eth_dst=eth.dst, eth_src=eth.src)
+            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
+            self.dispatch_packet(packet_msg)
+            self.insert_flow(dp, 2, match, actions, idle_timeout=ALLOWANCE_DURATION)
+            return
+        
+        self.logger.warning("Temporarily blocking MAC: %s, idle timeout %ss", eth.src, PREVENTION_DURATION)
+        if self.verified_mac_db.mac_registered(eth.src):
+            self.logger.info("Acting as proxy for %s ", self.verified_mac_db.mac_entries[eth.src]["LastIP"])
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_tpa=self.verified_mac_db.mac_entries[eth.src]["LastIP"])
+            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
+            self.insert_flow(dp, 4, match, actions)
+            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=self.proxy_handler.proxy_mac_address, eth_src=eth.src, arp_spa=self.verified_mac_db.mac_entries[eth.src]["LastIP"])
+            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
+            self.insert_flow(dp, 10, match, actions)
+            self.proxy_handler.device_list[eth.src] = self.verified_mac_db.mac_entries[eth.src]["LastIP"]
+        else:
+            self.logger.info("Cannot act as proxy for unknown MAC: %s ", eth.src)
+
+        match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
+        self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION, flag=protocol_constants.OFPFF_SEND_FLOW_REM)
+
+    def insert_flow(self, dp, priority, match, actions, buffer_id=None, drop=False, idle_timeout=0, hard_timeout=0, flag=0):
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+
+        if drop:
+            instructions = [parser_util.OFPInstructionActions(protocol_constants.OFPIT_CLEAR_ACTIONS, [])]
+        else:
+            instructions = [parser_util.OFPInstructionActions(protocol_constants.OFPIT_APPLY_ACTIONS, actions)]
+        
+        if buffer_id:
+            flow_mod = parser_util.OFPFlowMod(datapath=dp, buffer_id=buffer_id,
+                                    priority=priority, match=match,
+                                    instructions=instructions, idle_timeout=idle_timeout,
+                                    hard_timeout=hard_timeout, flags=flag)
+        else:
+            flow_mod = parser_util.OFPFlowMod(datapath=dp, priority=priority,
+                                    match=match, instructions=instructions,
+                                    idle_timeout=idle_timeout, hard_timeout=hard_timeout,
+                                    flags=flag)
+        dp.send_msg(flow_mod)
+   
+    def erase_flow(self, dp, priority, match):
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+         
+        flow_mod = parser_util.OFPFlowMod(datapath=dp, priority=priority,
+                                match=match, command=protocol_constants.OFPFC_DELETE, out_port=protocol_constants.OFPP_ANY,
+                                out_group=protocol_constants.OFPG_ANY)
+        dp.send_msg(flow_mod)
+
+    def dispatch_packet(self, packet_msg):
+        dp = packet_msg.datapath
+        protocol_constants = dp.ofproto
+        parser_util = dp.ofproto_parser
+
+        pkt = packet.Packet(packet_msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+        
+        dpid = format(dp.id, "d").zfill(16)
+        self.mac_port_map.setdefault(dpid, {})
+        self.mac_port_map[dpid][eth.src] = packet_msg.match["in_port"]
+       
+        if eth.dst in self.mac_port_map[dpid]:
+            out_port = self.mac_port_map[dpid][eth.dst]
+        else:
+            out_port = protocol_constants.OFPP_FLOOD
+        actions = [parser_util.OFPActionOutput(out_port)]
+        
+        data = None
+        if packet_msg.buffer_id == protocol_constants.OFP_NO_BUFFER:
+            data = packet_msg.data
+
+        out = parser_util.OFPPacketOut(datapath=dp, buffer_id=packet_msg.buffer_id,
+                                  in_port=packet_msg.match["in_port"], actions=actions, data=data)
+        dp.send_msg(out)
+
+    @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
+    def handle_packet_in_event(self, ev):
+        packet_msg = ev.msg
+        dp = packet_msg.datapath
+
+        pkt = packet.Packet(packet_msg.data)
+        eth = pkt.get_protocols(ethernet.ethernet)[0]
+
+        if eth.ethertype == ether_types.ETH_TYPE_LLDP:
+            return
+
+        dpid = dp.id
+
+        if pkt.get_protocol(arp.arp):
+            self.analyze_arp_packet(packet_msg)
+        elif pkt.get_protocol(dhcp.dhcp):
+            self.analyze_dhcp_packet(packet_msg)
+        else:
+            pkt_ipv4 = pkt.get_protocol(ipv4.ipv4)
+            if eth.src not in self.verified_mac_db.mac_entries.keys():
+                self.logger.info("Adding %s : %s to %s", eth.src, pkt_ipv4.src, self.verified_mac_db.db_file)
+                mac_data = {"LastIP": pkt_ipv4.src, "Type": "Static"}
+                self.verified_mac_db.add_mac_entry(eth.src, mac_data)
+            self.logger.info("%s in %s | %s -> %s", eth.ethertype, dpid, eth.src, eth.dst)
+            self.dispatch_packet(packet_msg)
+
+    @set_ev_cls(ofp_event.EventOFPFlowRemoved, MAIN_DISPATCHER)
+    def process_flow_removal(self, ev):
+        packet_msg = ev.msg
+        dp = packet_msg.datapath
+        parser_util = dp.ofproto_parser
+        protocol_constants = dp.ofproto
+        
+        if packet_msg.reason == protocol_constants.OFPRR_IDLE_TIMEOUT:
+            self.logger.info("Flow Timed out")
+            mac_address = packet_msg.match["eth_src"]
+            
+            self.logger.info('OFPFlowRemoved received:\n'
+                      '\tduration_sec=%d'
+                      '\tidle_timeout=%d hard_timeout=%d\n'
+                      '\tpacket_count=%d\n\tmatch.fields=%s',
+                      packet_msg.duration_sec,
+                      packet_msg.idle_timeout, packet_msg.hard_timeout,
+                      packet_msg.packet_count, packet_msg.match)
+ 
+            if self.proxy_handler.mac_known(mac_address):
+                self.logger.info("Removing Proxy server flow for %s", self.proxy_handler.device_list[mac_address])
+                self.logger.info("\tFlow rule prevented %s packets", packet_msg.packet_count)
+                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_tpa=self.proxy_handler.device_list[mac_address])
+                self.erase_flow(dp, 4, match)
+                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=self.proxy_handler.proxy_mac_address, eth_src=mac_address, arp_spa=self.proxy_handler.device_list[mac_address])
+                self.erase_flow(dp, 10, match)
+                del self.proxy_handler.device_list[mac_address] 
+
+    @set_ev_cls(ofp_event.EventOFPErrorMsg,
+            [HANDSHAKE_DISPATCHER, CONFIG_DISPATCHER, MAIN_DISPATCHER])
+    def process_error_message(self, ev):
+        packet_msg = ev.msg
+        self.logger.info('OFPErrorMsg received: type=0x%02x code=0x%02x message=%s',
+                          packet_msg.type, packet_msg.code, packet_msg.data.hex())
+
+    notes: `
+<p>This lab runs in a virtual environment with attacker and victim VMs, Open vSwitch and a Python detection script.</p>
+<ul>
+  <li>Detects ARP responses where an IP suddenly maps to a different MAC address.</li>
+  <li>Designed so the detection script can talk to an SDN controller to automatically push block rules.</li>
+  <li>Tested with normal traffic versus spoofing tools to tune the logic.</li>
+</ul>
+`
+  },
+  {
+    id: "password",
+    icon: "🔐",
+    title: "Password security & behaviour portal",
+    summary: "Flask portal measuring how UX nudges change real passwords.",
+    tags: ["Flask", "UX", "NIST 800-63-3"],
+    headerLine:
+      "Web portal where users see emoji feedback, colour-coded strength bars and time-to-crack estimates as they type.",
+    pills: ["UX research", "Entropy estimates", "User study"],
+    diagram: "assets/password-portal.png", // 👉 add screenshot of your signup / meter here
+    code: `
+import math
+
 def estimate_entropy(password: str) -> int:
-    """Very rough entropy estimate based on character types."""
     charset = 0
     if any(c.islower() for c in password): charset += 26
     if any(c.isupper() for c in password): charset += 26
     if any(c.isdigit() for c in password): charset += 10
     if any(not c.isalnum() for c in password): charset += 32
 
-    import math
+    # Shannon-style entropy estimate
     return int(len(password) * math.log2(charset or 1))
-        `,
-        footer: "The full write-up connects UX choices back to NIST password guidance."
-      },
-      network: {
-        title: "Secure network redesign",
-        tags: "Cisco · VLANs · VPN · High availability",
-        overview: `
-          <p>
-            A consulting-style project for a growing organisation whose flat network needed security
-            and resilience. I redesigned it with VLANs per department, inter-VLAN routing, firewalls,
-            NAT/PAT, site-to-site VPN and HSRP / EtherChannel.
-          </p>
-          <p>
-            The redesign eliminated single points of failure and improved both performance and isolation.
-          </p>
-        `,
-        images: [
-          "Main network topology diagram (core, distribution, access).",
-          "VLAN / subnet plan diagram.",
-          "ACL or firewall policy snippet showing segmentation rules."
-        ],
-        code: `
-interface GigabitEthernet0/0
- description Link to core switch
- ip address 10.0.0.1 255.255.255.0
- standby 1 ip 10.0.0.254
+    `.trim(),
+    notes: `
+<p>A research project that looked at how design elements change the passwords people actually choose.</p>
+<ul>
+  <li>Emoji reactions and colour-coded strength indicators update in real time as users type.</li>
+  <li>Entropy and time-to-crack estimates calculated on the backend.</li>
+  <li>Results analysed in SPSS (ANOVA, t-tests, Chi-square) to link UX patterns to password strength.</li>
+</ul>
+`
+  },
+  {
+    id: "network",
+    icon: "🏢",
+    title: "Secure network redesign",
+    summary: "From flat network to segmented, redundant design for a growing organisation.",
+    tags: ["Cisco", "VLANs", "VPN", "High availability"],
+    headerLine:
+      "Consulting-style project redesigning a flat network using VLANs, firewalls, NAT/PAT, site-to-site VPN and HSRP.",
+    pills: ["Segmentation", "Resilience", "Client-style documentation"],
+    diagram: "assets/network-topology.png", // 👉 add your main topology diagram here
+    code: `
+! Example of VLAN interface with HSRP
+interface GigabitEthernet0/0.10
+ description Users VLAN
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ standby 1 ip 192.168.10.254
  standby 1 priority 110
  standby 1 preempt
-!
+
+! Site-to-site VPN tunnel
 interface Tunnel0
  description Site-to-site VPN
  ip address 172.16.0.1 255.255.255.252
  tunnel source GigabitEthernet0/0
  tunnel destination 203.0.113.10
-        `,
-        footer: "I can share the design document with diagrams and configs if you’d like to see the full picture."
-      },
-      siem: {
-        title: "SIEM alert tuning & noise reduction",
-        tags: "Splunk · detections · SOC quality of life",
-        overview: `
-          <p>
-            Looked at environments where harmless tests (like EICAR) triggered constant alerts
-            and pop-ups. The focus was keeping strong coverage while reducing alert fatigue.
-          </p>
-          <p>
-            Work included reviewing existing rules, improving context in alerts and adjusting
-            thresholds / suppression windows so important events stand out.
-          </p>
-        `,
-        images: [
-          "Noisy dashboard before tuning.",
-          "Cleaner dashboard after tuning, highlighting fewer, higher quality alerts."
-        ],
-        code: `
-index=security sourcetype=anti-malware
-| stats count BY signature, host
-| where count > 20
-| search NOT signature="EICAR_Test_File"
-        `,
-        footer: "This experience shapes how I think about making tools support people instead of overwhelming them."
-      },
-      merge: {
-        title: "Merging JSON, XML & CSV safely",
-        tags: "Python · data cleaning · identifiers",
-        overview: `
-          <p>
-            A project to merge three different file formats into a single consistent dataset
-            without losing track of identities when attributes change.
-          </p>
-          <p>
-            I standardised field names, added missing keys safely and used a dynamic identifier
-            strategy so updates (like age or address) didn’t break relationships between records.
-          </p>
-        `,
-        images: [
-          "Diagram showing JSON, XML and CSV inputs flowing into one normalised table.",
-          "Screenshot of the final merged dataset."
-        ],
-        code: `
+    `.trim(),
+    notes: `
+<p>University project treated as if it were a real client engagement.</p>
+<ul>
+  <li>Identified single points of failure in the original flat network.</li>
+  <li>Designed VLANs per department, inter-VLAN routing and firewall rules between segments.</li>
+  <li>Added HSRP and EtherChannel to meet maximum tolerable downtime targets.</li>
+</ul>
+`
+  },
+  {
+    id: "siem",
+    icon: "📊",
+    title: "SIEM alert tuning & noise reduction",
+    summary: "Keeping important alerts loud and false positives quiet.",
+    tags: ["Splunk", "Detections", "SOC quality of life"],
+    headerLine:
+      "Focused on reducing alert fatigue while keeping coverage strong, especially around harmless test files like EICAR.",
+    pills: ["Alert hygiene", "Contextual tuning", "SOC workflows"],
+    diagram: "assets/siem-before-after.png", // 👉 before/after dashboard screenshot
+    code: `
+// Splunk SPL example for brute force detection
+index=security sourcetype="win*security" EventCode=4625
+| where User="Administrator" OR User="Root"
+| stats count dc(Source_Network_Address) as SrcIPs BY User, dest_host
+| where count > 15 AND SrcIPs > 1
+| search NOT [ | inputlookup trusted_subnets.csv | fields src_ip ]
+| eval Risk_Score = if(count > 50, "Critical", "High")
+| table _time, User, dest_host, count, Risk_Score
+    `.trim(),
+    notes: `
+<p>Inspired by environments where harmless test files caused constant pop-ups and noise.</p>
+<ul>
+  <li>Reviewed existing rules and dashboards to understand why false positives were firing.</li>
+  <li>Improved context, added suppression windows and adjusted thresholds.</li>
+  <li>Goal: analysts see fewer alerts, but each one is higher quality and easier to act on.</li>
+</ul>
+`
+  },
+  {
+    id: "merge",
+    icon: "🗂️",
+    title: "Merging JSON, XML &amp; CSV safely",
+    summary: "Standardising attributes and identifiers across different file formats.",
+    tags: ["Python", "Data cleaning", "Identifiers"],
+    headerLine:
+      "Tooling to merge three different sources into a single consistent dataset without losing track of identities.",
+    pills: ["Standardisation", "Dynamic identifiers", "Future ETL"],
+    diagram: "assets/merge-diagram.png", // 👉 diagram showing JSON/XML/CSV flowing into one table
+    code: `
 def build_identifier(record):
     parts = [
         record.get("first_name", ""),
@@ -1744,132 +2206,188 @@ for rec in incoming_records:
     existing = people.get(ident, {})
     existing.update(rec)
     people[ident] = existing
-        `,
-        footer: "The approach was designed to be easy to move into a proper ETL pipeline later."
-      }
-    };
+    `.trim(),
+    notes: `
+<p>Project to unify three different file formats into one person-centric view.</p>
+<ul>
+  <li>Standardised field names and added missing keys while keeping true missing values empty.</li>
+  <li>Used a dynamic identifier strategy so updates (like age or address) don’t break relationships.</li>
+  <li>Designed so the logic can later sit inside a proper ETL pipeline.</li>
+</ul>
+`
+  }
+];
 
-    const previewEl = document.getElementById("projectPreview");
-    const projectButtons = document.querySelectorAll(".project-item");
+const csListEl = document.getElementById("csProjectList");
+const csEditorEl = document.getElementById("csEditor");
+let csActiveId = showcaseProjects[0].id;
 
-    function renderProject(id) {
-      const p = projects[id];
-      if (!p) return;
-
-      previewEl.innerHTML = `
-        <div class="code-header">
-          <div class="code-header-left">
-            <div class="code-dots">
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-              <span class="code-dot"></span>
-            </div>
-            <span>Code Showcase / ${id}.py</span>
+function renderProjectCards() {
+  csListEl.innerHTML = showcaseProjects
+    .map(p => {
+      const tagMarkup = p.tags
+        .map(t => `<span class="cs-tag-pill">${t}</span>`)
+        .join("");
+      return `
+        <button class="cs-card${p.id === csActiveId ? " active" : ""}" data-project="${p.id}">
+          <div class="cs-card-icon">${p.icon}</div>
+          <div class="cs-card-main">
+            <div class="cs-card-title">${p.title}</div>
+            <div class="cs-card-text">${p.summary}</div>
+            <div class="cs-card-tags">${tagMarkup}</div>
           </div>
-          <div class="code-header-tabs">
-            <div class="code-header-tab active">
-              <span>main</span>
-            </div>
-          </div>
-        </div>
-        <div class="code-main">
-          <div>
-            <div class="project-preview-title">${p.title}</div>
-            <div class="project-preview-tags">${p.tags}</div>
-            <div class="preview-tabs">
-              <button class="preview-tab active" data-tab="overview">Overview</button>
-              <button class="preview-tab" data-tab="images">Images</button>
-              <button class="preview-tab" data-tab="code">Code</button>
-            </div>
-          </div>
-          <div class="preview-body" id="previewBody"></div>
-          <div class="preview-footer">${p.footer}</div>
-        </div>
+        </button>
       `;
+    })
+    .join("");
 
-      const bodyEl = document.getElementById("previewBody");
-      const tabs = previewEl.querySelectorAll(".preview-tab");
+  csListEl.querySelectorAll(".cs-card").forEach(card => {
+    card.addEventListener("click", () => {
+      csActiveId = card.getAttribute("data-project");
+      renderProjectCards();
+      renderEditor();
+    });
+  });
+}
 
-      function showOverview() {
-        bodyEl.innerHTML = p.overview;
-      }
+function renderEditor() {
+  const p = showcaseProjects.find(x => x.id === csActiveId);
+  if (!p) return;
 
-      function showImages() {
-        let idx = 0;
-        bodyEl.innerHTML = `
-          <div class="preview-images">
-            <div class="preview-image-frame" id="previewImageFrame">${p.images[0]}</div>
-            <div class="preview-image-nav">
-              <button type="button" id="prevImg">Prev</button>
-              <span id="imgCounter">Image 1 of ${p.images.length}</span>
-              <button type="button" id="nextImg">Next</button>
-            </div>
-          </div>
-        `;
-        const frame = document.getElementById("previewImageFrame");
-        const counter = document.getElementById("imgCounter");
-        document.getElementById("prevImg").onclick = () => {
-          idx = (idx - 1 + p.images.length) % p.images.length;
-          frame.textContent = p.images[idx];
-          counter.textContent = "Image " + (idx + 1) + " of " + p.images.length;
-        };
-        document.getElementById("nextImg").onclick = () => {
-          idx = (idx + 1) % p.images.length;
-          frame.textContent = p.images[idx];
-          counter.textContent = "Image " + (idx + 1) + " of " + p.images.length;
-        };
-      }
+  const pillsMarkup = p.pills
+    .map(text => `<span class="cs-pill">${text}</span>`)
+    .join("");
 
-      function showCode() {
-        bodyEl.innerHTML = `
-          <div class="preview-code"><pre>${p.code.trim()}</pre></div>
-        `;
-      }
+  const lines = p.code.split("\n");
+  const lineNumbers = lines.map((_, i) => `<div>${i + 1}</div>`).join("");
 
-      // default tab
-      showOverview();
+  csEditorEl.innerHTML = `
+    <div class="cs-editor-header">
+      <div class="cs-editor-title">${p.title}</div>
+      <div class="cs-editor-sub">${p.headerLine}</div>
+      <div class="cs-editor-pills">${pillsMarkup}</div>
+    </div>
+    <div class="cs-toolbar">
+      <div class="cs-tabs">
+        <button class="cs-tab active" data-tab="code">Code</button>
+        <button class="cs-tab" data-tab="diagram">Diagram</button>
+        <button class="cs-tab" data-tab="notes">Notes</button>
+      </div>
+      <button class="cs-copy-btn" type="button" id="csCopyBtn">
+        <span>⧉</span><span>Copy code</span>
+      </button>
+    </div>
+    <div class="cs-editor-body">
+      <div class="cs-lines" id="csLines">
+        ${lineNumbers}
+      </div>
+      <div class="cs-content" id="csContent"></div>
+    </div>
+  `;
 
-      tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-          tabs.forEach(t => t.classList.remove("active"));
-          tab.classList.add("active");
-          const t = tab.getAttribute("data-tab");
-          if (t === "overview") showOverview();
-          if (t === "images") showImages();
-          if (t === "code") showCode();
-        });
-      });
+    const contentEl = document.getElementById("csContent");
+  const tabs = csEditorEl.querySelectorAll(".cs-tab");
+  let diagramIndex = 0; // which picture we’re on
+
+  function showCode() {
+    const codeHTML = `<pre><code>${escapeHTML(p.code)}</code></pre>`;
+    contentEl.className = "cs-content cs-code";
+    contentEl.innerHTML = codeHTML;
+  }
+
+  function showDiagram() {
+    contentEl.className = "cs-content cs-diagram";
+
+    const imgs = p.diagrams || [];
+
+    if (!imgs.length) {
+      contentEl.innerHTML =
+        '<div class="cs-diagram-placeholder">Add diagram image paths for this project in the JavaScript.</div>';
+      return;
     }
 
-    projectButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        projectButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderProject(btn.getAttribute("data-project"));
+    diagramIndex = 0;
+
+    const navHtml = imgs.length > 1
+      ? `
+        <div class="cs-diagram-nav">
+          <button type="button" id="csDiagPrev">Prev</button>
+          <span id="csDiagCounter">Image 1 of ${imgs.length}</span>
+          <button type="button" id="csDiagNext">Next</button>
+        </div>
+      `
+      : "";
+
+    contentEl.innerHTML = `
+      <div>
+        <img id="csDiagramImg" src="${imgs[0]}" alt="${p.title} diagram">
+        ${navHtml}
+      </div>
+    `;
+
+    if (imgs.length > 1) {
+      const imgEl = document.getElementById("csDiagramImg");
+      const counterEl = document.getElementById("csDiagCounter");
+
+      function updateDiagram() {
+        imgEl.src = imgs[diagramIndex];
+        counterEl.textContent = "Image " + (diagramIndex + 1) + " of
+
+
+  function showNotes() {
+    contentEl.className = "cs-content cs-notes";
+    contentEl.innerHTML = p.notes;
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const tabName = tab.getAttribute("data-tab");
+      if (tabName === "code") showCode();
+      if (tabName === "diagram") showDiagram();
+      if (tabName === "notes") showNotes();
+    });
+  });
+
+  // Default view
+  showCode();
+
+  const copyBtn = document.getElementById("csCopyBtn");
+  if (copyBtn && navigator.clipboard) {
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(p.code).then(() => {
+        const span = copyBtn.querySelector("span:last-child");
+        const old = span.textContent;
+        span.textContent = "Copied!";
+        setTimeout(() => (span.textContent = old), 900);
       });
     });
+  }
+}
 
-    renderProject("arp");
+// Simple parallax tilt on hover for elements with .tilt
+function addTiltEffect() {
+  document.querySelectorAll(".tilt").forEach(el => {
+    const strength = 10;
+    el.addEventListener("mousemove", e => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rotateX = (+strength * y).toFixed(2);
+      const rotateY = (-strength * x).toFixed(2);
+      el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+  });
+}
 
-    // Hover float effect for specific elements (picture + education cards)
-    function addHoverFloat(selector, maxTranslate = 10) {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
-        el.addEventListener("mousemove", e => {
-          const rect = el.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          const tx = -x * maxTranslate;
-          const ty = -y * maxTranslate;
-          el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-        });
-        el.addEventListener("mouseleave", () => {
-          el.style.transform = "translate3d(0,0,0)";
-        });
-      });
-    }
-
-    addHoverFloat(".hover-float-target", 10);
-  </script>
+// Initialise projects + tilt once DOM is ready
+renderProjectCards();
+renderEditor();
+addTiltEffect();
+</script>
 </body>
 </html>
