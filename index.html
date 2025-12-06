@@ -25,10 +25,10 @@
     }
 
     body.light {
-      --bg: #f3f4f6;
-      --bg-soft: #e5e7eb;
+      --bg: #ffffff;
+      --bg-soft: #f9fafb;
       --card-bg: #ffffff;
-      --card-border: rgba(209,213,219,1);
+      --card-border: rgba(229,231,235,1);
       --text-main: #111827;
       --text-soft: #6b7280;
     }
@@ -49,6 +49,11 @@
       animation: bg-shift 30s ease-in-out infinite alternate;
       color: var(--text-main);
       line-height: 1.6;
+    }
+
+    body.light {
+      background: #ffffff;
+      animation: none;
     }
 
     body.loading {
@@ -150,7 +155,7 @@
     /* NAVBAR */
     .nav {
       position: sticky;
-      top: 3px; /* sits below progress bar */
+      top: 3px; /* just under scroll bar */
       z-index: 50;
       backdrop-filter: blur(18px);
       background: linear-gradient(to bottom, rgba(15,23,42,0.96), rgba(15,23,42,0.88));
@@ -158,8 +163,8 @@
     }
 
     body.light .nav {
-      background: rgba(249,250,251,0.9);
-      border-bottom-color: rgba(209,213,219,1);
+      background: rgba(255,255,255,0.95);
+      border-bottom-color: rgba(229,231,235,1);
     }
 
     .nav-inner {
@@ -249,9 +254,9 @@
     }
 
     body.light .theme-toggle {
-      background: #f9fafb;
-      color: #111827;
-      border-color: rgba(209,213,219,1);
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
     }
 
     /* INTRO */
@@ -270,14 +275,6 @@
       padding: 4.5rem 1.5rem 3rem;
     }
 
-    .intro-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-      margin-bottom: 0.7rem;
-    }
-
     .intro-title {
       font-size: clamp(2.6rem, 5vw, 3.8rem);
       font-weight: 700;
@@ -288,6 +285,13 @@
       background-clip: text;
       color: transparent;
       animation: intro-pop 0.9s ease-out forwards;
+    }
+
+    body.light .intro-title {
+      background: linear-gradient(to right, #111827, #111827);
+      color: #111827;
+      -webkit-background-clip: initial;
+      background-clip: initial;
     }
 
     .intro-meta {
@@ -313,13 +317,6 @@
       0%   { opacity: 0; transform: translateY(18px) scale(0.97); }
       55%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .intro-dynamic {
-      font-size: 0.86rem;
-      color: var(--text-soft);
-      margin-bottom: 0.6rem;
-      height: 1.1rem;
     }
 
     .intro-actions {
@@ -441,8 +438,8 @@
 
     .hero-photo-card {
       position: relative;
-      width: 320px;
-      height: 320px;
+      width: 360px;
+      height: 360px;
       border-radius: 1.85rem;
       padding: 0.55rem;
       background:
@@ -454,11 +451,7 @@
     }
 
     body.light .hero-photo-card {
-      background:
-        radial-gradient(circle at 0 0, rgba(34,197,94,0.25), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(56,189,248,0.25), transparent 55%),
-        radial-gradient(circle at 0 100%, rgba(147,51,234,0.25), transparent 60%),
-        #ffffff;
+      background: #ffffff;
       box-shadow: 0 24px 60px rgba(148,163,184,0.7);
     }
 
@@ -478,23 +471,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .hero-photo-tag {
-      position: absolute;
-      bottom: 0.75rem;
-      left: 0.9rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.96);
-      border: 1px solid rgba(148,163,184,0.9);
-      padding: 0.22rem 0.7rem;
-      font-size: 0.72rem;
-      color: #e5e7eb;
-    }
-
-    body.light .hero-photo-tag {
-      background: rgba(15,23,42,0.9);
-      color: #f9fafb;
     }
 
     .hero-text-kicker {
@@ -526,7 +502,7 @@
       margin-top: 0.4rem;
     }
 
-    /* SKILLS MARQUEE */
+    /* SKILLS marquee (kept similar) */
     .skills-wrapper {
       margin-top: 0.6rem;
       border-radius: 1.1rem;
@@ -540,7 +516,7 @@
 
     body.light .skills-wrapper {
       background: #ffffff;
-      border-color: rgba(209,213,219,1);
+      border-color: rgba(229,231,235,1);
       box-shadow: 0 16px 40px rgba(148,163,184,0.6);
     }
 
@@ -564,9 +540,7 @@
       animation-direction: reverse;
     }
 
-    .skills-row:hover {
-      animation-play-state: paused;
-    }
+    .skills-row:hover { animation-play-state: paused; }
 
     @keyframes skills-scroll {
       0% { transform: translateX(0); }
@@ -590,7 +564,7 @@
     body.light .skill-pill {
       background: #f9fafb;
       color: #111827;
-      border-color: rgba(209,213,219,1);
+      border-color: rgba(229,231,235,1);
     }
 
     .skill-pill-icon {
@@ -612,106 +586,220 @@
       box-shadow: 0 0 18px rgba(56,189,248,0.7);
     }
 
-    /* PROJECTS */
-    .grid-3 {
+    /* PROJECTS LAYOUT */
+    .projects-layout {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 3fr);
+      gap: 1.8rem;
+      align-items: flex-start;
     }
 
-    .card {
-      border-radius: 1rem;
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 70%),
-                  rgba(15,23,42,0.98);
-      border: 1px solid rgba(30,64,175,0.9);
-      padding: 1rem 1.15rem 0.9rem;
-      position: relative;
-      overflow: hidden;
-      transform: translateY(0) scale(1);
-      transition: transform 0.18s ease-out,
-                  box-shadow 0.18s ease-out,
-                  border-color 0.18s ease-out,
-                  background 0.18s ease-out;
-      box-shadow: 0 18px 55px rgba(15,23,42,0.9);
-    }
-
-    body.light .card {
-      background: #ffffff;
-      border-color: rgba(209,213,219,1);
-      box-shadow: 0 16px 40px rgba(148,163,184,0.6);
-    }
-
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 26px 80px rgba(15,23,42,1);
-      border-color: rgba(129,140,248,1);
-      background:
-        radial-gradient(circle at 100% 0, rgba(147,51,234,0.35), transparent 60%),
-        rgba(15,23,42,1);
-    }
-
-    body.light .card:hover {
-      background: linear-gradient(to bottom right, #ffffff, #e5e7eb);
-    }
-
-    .card-pill-row {
+    .projects-list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 0.65rem;
+      flex-direction: column;
+      gap: 0.6rem;
     }
 
-    .card-pill {
-      font-size: 0.7rem;
-      padding: 0.16rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid rgba(55,65,81,0.9);
+    .project-item {
+      border-radius: 0.9rem;
+      padding: 0.75rem 0.9rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(31,41,55,1);
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      font-size: 0.88rem;
       color: #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    body.light .project-item {
+      background: #f9fafb;
+      border-color: rgba(229,231,235,1);
+      color: #111827;
+    }
+
+    .project-item:hover {
+      background: rgba(30,64,175,0.6);
+      border-color: rgba(129,140,248,1);
+      transform: translateY(-1px);
+    }
+
+    body.light .project-item:hover {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .project-item.active {
+      background: linear-gradient(to right, #111827, #1f2937);
+      border-color: rgba(129,140,248,1);
+    }
+
+    body.light .project-item.active {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .project-item-title {
+      font-weight: 500;
+    }
+
+    .project-item-tags {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    body.light .project-item-tags { color: #d1d5db; }
+
+    .project-preview {
+      border-radius: 1.1rem;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(30,64,175,0.9);
+      padding: 1rem 1.1rem;
+      box-shadow: 0 22px 60px rgba(15,23,42,1);
+    }
+
+    body.light .project-preview {
+      background: #ffffff;
+      border-color: rgba(229,231,235,1);
+      box-shadow: 0 20px 60px rgba(148,163,184,0.6);
+    }
+
+    .project-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-preview-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .project-preview-tags {
+      font-size: 0.76rem;
+      color: #9ca3af;
+    }
+
+    .preview-tabs {
+      display: inline-flex;
+      gap: 0.4rem;
+      margin-bottom: 0.7rem;
+      border-radius: 999px;
+      padding: 0.2rem;
       background: rgba(15,23,42,0.95);
     }
 
-    body.light .card-pill {
+    body.light .preview-tabs {
+      background: #f3f4f6;
+    }
+
+    .preview-tab {
+      border-radius: 999px;
+      border: none;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .preview-tab.active {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    body.light .preview-tab.active {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    .preview-body {
+      font-size: 0.88rem;
+      color: #e5e7eb;
+    }
+
+    body.light .preview-body { color: #374151; }
+
+    .preview-body p { margin-top: 0; }
+
+    .preview-images {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .preview-image-frame {
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      border: 1px solid rgba(31,41,55,1);
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    body.light .preview-image-frame {
+      background: #0b1120;
+      border-color: #020617;
+      color: #e5e7eb;
+    }
+
+    .preview-image-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .preview-image-nav button {
+      border-radius: 999px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    body.light .preview-image-nav button {
       background: #f9fafb;
       color: #111827;
       border-color: rgba(209,213,219,1);
     }
 
-    .card h3 {
-      margin: 0 0 0.35rem;
-      font-size: 1rem;
-      color: var(--text-main);
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 0.86rem;
-      color: #cbd5f5;
-    }
-
-    body.light .card p { color: #4b5563; }
-
-    .card-footer {
-      margin-top: 0.7rem;
+    .preview-code {
+      border-radius: 0.9rem;
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #111827;
+      padding: 0.7rem 0.8rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 0.78rem;
-      color: var(--text-soft);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      overflow-x: auto;
     }
 
-    .card-footer span.icon { font-size: 1rem; }
+    body.light .preview-code {
+      background: #0b1120;
+      color: #e5e7eb;
+      border-color: #020617;
+    }
 
-    .card-links {
-      margin-top: 0.5rem;
+    .preview-footer {
+      margin-top: 0.6rem;
       font-size: 0.8rem;
-      display: flex;
-      gap: 0.7rem;
-      color: #cbd5f5;
+      color: #9ca3af;
     }
-
-    .card-links a { color: #60a5fa; }
-
-    .card-links a:hover { text-decoration: underline; }
 
     /* EDUCATION & CERTS */
     .two-column {
@@ -730,7 +818,7 @@
 
     body.light .edu-card {
       background: #ffffff;
-      border-color: rgba(209,213,219,1);
+      border-color: rgba(229,231,235,1);
       box-shadow: 0 16px 40px rgba(148,163,184,0.6);
     }
 
@@ -750,9 +838,7 @@
       border-left: 1px solid rgba(55,65,81,0.9);
     }
 
-    body.light .edu-timeline {
-      border-left-color: rgba(209,213,219,1);
-    }
+    body.light .edu-timeline { border-left-color: rgba(229,231,235,1); }
 
     .edu-timeline li {
       position: relative;
@@ -868,7 +954,7 @@
 
     body.light .contact-wrapper {
       background: #ffffff;
-      border-color: rgba(209,213,219,1);
+      border-color: rgba(229,231,235,1);
       box-shadow: 0 18px 50px rgba(148,163,184,0.7);
     }
 
@@ -960,7 +1046,7 @@
     body.light footer {
       background: #f9fafb;
       color: #6b7280;
-      border-top-color: rgba(209,213,219,1);
+      border-top-color: rgba(229,231,235,1);
     }
 
     /* RESPONSIVE */
@@ -968,14 +1054,13 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-block { padding-top: 2.4rem; }
       .hero-photo-wrap { order: -1; }
-      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .two-column { grid-template-columns: 1fr; }
       .contact-wrapper { grid-template-columns: 1fr; }
+      .projects-layout { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
       .nav-inner { padding-inline: 1.1rem; }
-      .grid-3 { grid-template-columns: 1fr; }
       .intro-actions { flex-direction: column; }
       .btn-primary,
       .btn-ghost { width: 100%; justify-content: center; }
@@ -993,7 +1078,7 @@
         <div class="loader-ring"></div>
       </div>
       <div class="loader-text-main">Ala'a Alsheikh Ali</div>
-      <div class="loader-text-sub">Warming up the lab…</div>
+      <div class="loader-text-sub">Loading the lab…</div>
     </div>
   </div>
 
@@ -1022,20 +1107,17 @@
   <!-- INTRO -->
   <section class="intro" id="home">
     <div class="intro-inner">
-      <div class="intro-kicker" id="dynamicKicker">Cybersecurity &amp; Networks</div>
-
-      <h1 class="intro-title">
-        Hi, I'm Ala'a.<br>
-        I build and break security labs to see how things really behave.
+      <h1 class="intro-title" id="heroTitle">
+        Hi, I'm Ala'a.
       </h1>
 
       <div class="intro-meta">
-        MSc Cybersecurity · BSc Networks &amp; Cybersecurity (First Class) · CompTIA Security+
+        MSc Cybersecurity (Distinction) · BSc Networks &amp; Cybersecurity · CompTIA Security+
       </div>
 
-      <p class="intro-subtitle">
-        I like taking real-world problems – noisy alerts, strange network traffic or weak passwords –
-        and turning them into clear labs, tools and explanations that actually help people.
+      <p class="intro-subtitle" id="heroSubtitle">
+        I build and break security labs to understand how systems really behave – then turn what I
+        learn into clear designs, playbooks and tools people can actually use.
       </p>
 
       <div class="intro-actions">
@@ -1065,11 +1147,8 @@
       <div class="hero-photo-wrap reveal tilt-card hover-tilt">
         <div class="hero-photo-card">
           <div class="hero-photo-inner">
-            <!-- Make sure this file exists in assets/profile.JPG -->
+            <!-- Your picture file -->
             <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
-          </div>
-          <div class="hero-photo-tag">
-            Cybersecurity &amp; Networks
           </div>
         </div>
       </div>
@@ -1078,19 +1157,17 @@
         <div class="hero-text-kicker">About</div>
         <h2 class="hero-text-title">Who I am and how I like to work</h2>
         <p class="hero-text-body">
-          I started from the network side – routing, switching, topology – and then moved deeper
-          into cybersecurity. Most of my time is spent inside labs: virtual networks with Linux,
-          packet captures, SIEM dashboards, Python scripts and a lot of terminals.
+          I started from the network side – routing, switching, and topology – and then moved deeper
+          into cybersecurity. Most of my work happens inside labs: virtual networks, Linux servers,
+          packet captures, SIEM dashboards and Python scripts.
         </p>
         <p class="hero-text-body">
-          I enjoy problems where I can mix protocols with people: understanding how an attack
-          actually looks on the wire, and then making the response simple enough that a team can
-          repeat it under pressure.
+          I like seeing how attacks and misconfigurations appear in real traffic and logs, then
+          designing responses that are realistic for the teams who have to run them every day.
         </p>
         <p class="hero-note">
-          This site brings together my projects, education and skills. Over time I’ll add deeper
-          write-ups for my ARP detection system, password security &amp; UX work, and network
-          consulting project.
+          This site collects my projects, skills and education. Over time I’ll add full write-ups
+          with diagrams, screenshots and code for the projects you see below.
         </p>
       </div>
     </div>
@@ -1117,16 +1194,11 @@
           <div class="skill-pill"><span class="skill-pill-icon">☁️</span>AWS</div>
           <div class="skill-pill"><span class="skill-pill-icon">☁️</span>Azure</div>
           <div class="skill-pill"><span class="skill-pill-icon">ID</span>Entra ID / Azure AD</div>
-          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Microsoft Intune / MDM</div>
+          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Intune / MDM</div>
 
-          <!-- repeat for seamless scroll -->
+          <!-- repeat for scroll -->
           <div class="skill-pill"><span class="skill-pill-icon">🐧</span>Linux (Ubuntu, CentOS)</div>
           <div class="skill-pill"><span class="skill-pill-icon">🪟</span>Windows Server</div>
-          <div class="skill-pill"><span class="skill-pill-icon">🍎</span>macOS</div>
-          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>AWS</div>
-          <div class="skill-pill"><span class="skill-pill-icon">☁️</span>Azure</div>
-          <div class="skill-pill"><span class="skill-pill-icon">ID</span>Entra ID / Azure AD</div>
-          <div class="skill-pill"><span class="skill-pill-icon">MD</span>Microsoft Intune / MDM</div>
         </div>
 
         <div class="skills-row-label" style="margin-top:0.8rem;">Networking &amp; security</div>
@@ -1141,20 +1213,12 @@
           <div class="skill-pill"><span class="skill-pill-icon">WS</span>Wireshark</div>
           <div class="skill-pill"><span class="skill-pill-icon">DN</span>DNS / DHCP</div>
           <div class="skill-pill"><span class="skill-pill-icon">SD</span>SDN concepts</div>
+          <div class="skill-pill"><span class="skill-pill-icon">SI</span>Splunk / ELK / QRadar</div>
+          <div class="skill-pill"><span class="skill-pill-icon">Vs</span>Nessus / Nmap / Metasploit</div>
 
-          <div class="skill-pill"><span class="skill-pill-icon">SI</span>Splunk</div>
-          <div class="skill-pill"><span class="skill-pill-icon">EL</span>ELK Stack</div>
-          <div class="skill-pill"><span class="skill-pill-icon">QR</span>QRadar</div>
-          <div class="skill-pill"><span class="skill-pill-icon">Ns</span>Nessus</div>
-          <div class="skill-pill"><span class="skill-pill-icon">Nm</span>Nmap</div>
-          <div class="skill-pill"><span class="skill-pill-icon">Ms</span>Metasploit</div>
-
-          <!-- repeat -->
+          <!-- repeat small -->
           <div class="skill-pill"><span class="skill-pill-icon">C</span>Cisco IOS / ASA</div>
           <div class="skill-pill"><span class="skill-pill-icon">R</span>Routing &amp; Switching</div>
-          <div class="skill-pill"><span class="skill-pill-icon">B</span>BGP</div>
-          <div class="skill-pill"><span class="skill-pill-icon">O</span>OSPF</div>
-          <div class="skill-pill"><span class="skill-pill-icon">V</span>VLANs</div>
         </div>
 
         <div class="skills-row-label" style="margin-top:0.8rem;">Programming, frameworks &amp; other</div>
@@ -1162,155 +1226,89 @@
           <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
           <div class="skill-pill"><span class="skill-pill-icon">B</span>Bash</div>
           <div class="skill-pill"><span class="skill-pill-icon">S</span>SQL / NoSQL</div>
-          <div class="skill-pill"><span class="skill-pill-icon">JS</span>JavaScript, HTML, CSS</div>
+          <div class="skill-pill"><span class="skill-pill-icon">JS</span>JavaScript · HTML · CSS</div>
           <div class="skill-pill"><span class="skill-pill-icon">C#</span>C#</div>
-          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST, SANS, ISO 27001</div>
+          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST · SANS · ISO 27001</div>
           <div class="skill-pill"><span class="skill-pill-icon">OW</span>OWASP Top 10</div>
-          <div class="skill-pill"><span class="skill-pill-icon">GD</span>GDPR</div>
+          <div class="skill-pill"><span class="skill-pill-icon">GD</span>GDPR &amp; privacy</div>
           <div class="skill-pill"><span class="skill-pill-icon">SP</span>Security+ domains</div>
           <div class="skill-pill"><span class="skill-pill-icon">PM</span>Project work &amp; Agile</div>
           <div class="skill-pill"><span class="skill-pill-icon">EN</span>English (Fluent)</div>
           <div class="skill-pill"><span class="skill-pill-icon">AR</span>Arabic (Fluent)</div>
 
-          <!-- repeat small subset -->
           <div class="skill-pill"><span class="skill-pill-icon">🐍</span>Python</div>
-          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST, SANS, ISO 27001</div>
-          <div class="skill-pill"><span class="skill-pill-icon">OW</span>OWASP Top 10</div>
+          <div class="skill-pill"><span class="skill-pill-icon">IR</span>NIST · SANS</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS with PREVIEW -->
   <section id="projects">
     <div class="container">
       <div class="section-header">
         <div class="section-kicker">Projects</div>
-        <h2 class="section-title">A few things I’ve built or worked on</h2>
+        <h2 class="section-title">A few things I’ve built or analysed</h2>
         <p class="section-subtitle">
-          Short snapshots first; later these cards can link to deeper write-ups with diagrams and
-          code samples.
+          Click a project on the left to see a preview. You can switch between an overview, images
+          and a small code snippet. Full code and documents are available on request.
         </p>
       </div>
 
-      <div class="grid-3">
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">Python</span>
-            <span class="card-pill">Scapy</span>
-            <span class="card-pill">SDN</span>
-          </div>
-          <h3>Network-level ARP spoofing lab</h3>
-          <p>
-            Built a virtual lab that detects suspicious ARP behaviour and uses a controller to push
-            mitigation rules, so spoofed hosts are blocked without breaking normal traffic.
-          </p>
-          <div class="card-links">
-            <a href="#education">Mentioned in MSc dissertation</a>
-            <a href="#" target="_blank" rel="noreferrer">Code (coming soon)</a>
-          </div>
-          <div class="card-footer">
-            <span>Open vSwitch · Ryu</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+      <div class="projects-layout">
+        <div class="projects-list">
+          <button class="project-item active" data-project="arp">
+            <div>
+              <div class="project-item-title">Network-level ARP spoofing lab</div>
+              <div class="project-item-tags">Python · Scapy · SDN</div>
+            </div>
+            <span>↳</span>
+          </button>
 
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">Flask</span>
-            <span class="card-pill">UX</span>
-            <span class="card-pill">NIST 800-63-3</span>
-          </div>
-          <h3>Password security &amp; behaviour</h3>
-          <p>
-            Designed a password creation page with visual feedback, emojis and crack-time estimates,
-            then analysed how these nudges changed real password choices.
-          </p>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Prototype (coming soon)</a>
-          </div>
-          <div class="card-footer">
-            <span>SPSS · Statistical analysis</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+          <button class="project-item" data-project="password">
+            <div>
+              <div class="project-item-title">Password security &amp; behaviour</div>
+              <div class="project-item-tags">Flask · UX · NIST 800-63-3</div>
+            </div>
+            <span>↳</span>
+          </button>
 
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">Cisco</span>
-            <span class="card-pill">VLANs</span>
-            <span class="card-pill">VPN</span>
-          </div>
-          <h3>Secure network redesign</h3>
-          <p>
-            Treated a university network brief as a client project: designed segmentation, VPN,
-            firewall rules and redundancy while aiming for low downtime and clear documentation.
-          </p>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Topology (planned)</a>
-          </div>
-          <div class="card-footer">
-            <span>HSRP · EtherChannel</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+          <button class="project-item" data-project="network">
+            <div>
+              <div class="project-item-title">Secure network redesign</div>
+              <div class="project-item-tags">Cisco · VLANs · VPN</div>
+            </div>
+            <span>↳</span>
+          </button>
 
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">Splunk</span>
-            <span class="card-pill">SIEM</span>
-          </div>
-          <h3>SIEM noise reduction</h3>
-          <p>
-            Looked at lab environments where harmless tests triggered constant alerts, then tuned
-            rules so they still caught real attacks without overwhelming analysts.
-          </p>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Use-case notes (planned)</a>
-          </div>
-          <div class="card-footer">
-            <span>Detection engineering</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+          <button class="project-item" data-project="siem">
+            <div>
+              <div class="project-item-title">SIEM noise reduction</div>
+              <div class="project-item-tags">Splunk · Detection engineering</div>
+            </div>
+            <span>↳</span>
+          </button>
 
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">Python</span>
-            <span class="card-pill">Data</span>
-          </div>
-          <h3>Merging JSON, XML &amp; CSV safely</h3>
-          <p>
-            Normalised three different file formats, created dynamic identifiers and built checks
-            to update IDs safely when attributes changed, without breaking links between records.
-          </p>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">View code</a>
-          </div>
-          <div class="card-footer">
-            <span>Data pipelines</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+          <button class="project-item" data-project="merge">
+            <div>
+              <div class="project-item-title">Merging JSON, XML &amp; CSV safely</div>
+              <div class="project-item-tags">Python · Data pipelines</div>
+            </div>
+            <span>↳</span>
+          </button>
 
-        <article class="card reveal tilt-card hover-tilt">
-          <div class="card-pill-row">
-            <span class="card-pill">CTF</span>
-            <span class="card-pill">Teamwork</span>
-          </div>
-          <h3>Security CTF coordination</h3>
-          <p>
-            Helped coordinate tasks in a Capture the Flag event by assigning challenges based on
-            strengths and keeping everyone moving when we got stuck.
-          </p>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Challenge notes (planned)</a>
-          </div>
-          <div class="card-footer">
-            <span>Leadership in technical settings</span>
-            <span class="icon">↳</span>
-          </div>
-        </article>
+          <button class="project-item" data-project="ctf">
+            <div>
+              <div class="project-item-title">Security CTF coordination</div>
+              <div class="project-item-tags">Teamwork · Time pressure</div>
+            </div>
+            <span>↳</span>
+          </button>
+        </div>
+
+        <div class="project-preview reveal" id="projectPreview">
+          <!-- Filled by JS -->
+        </div>
       </div>
     </div>
   </section>
@@ -1340,10 +1338,10 @@
                 </div>
               </li>
               <li>
-                <div class="edu-degree">BSc Networks &amp; Cybersecurity (First Class Honours)</div>
+                <div class="edu-degree">BSc Networks &amp; Cybersecurity</div>
                 <div class="edu-inst">University of Sunderland · 2020 – 2023</div>
                 <div class="edu-note">
-                  Routing &amp; switching, secure network design, CCNA/CCNP-style modules, network projects.
+                  Routing &amp; switching, secure network design, CCNA/CCNP-style modules and applied projects.
                 </div>
               </li>
               <li>
@@ -1375,7 +1373,7 @@
           <div class="cv-link">
             CV (PDF):
             <!-- upload Alaa-CV.pdf to repo root -->
-            <a href="Ala'a Alsheikh Ali's CV.pdf" target="_blank" rel="noreferrer">Download my full CV</a>
+            <a href="Alaa-CV.pdf" target="_blank" rel="noreferrer">Download my full CV</a>
           </div>
         </aside>
       </div>
@@ -1404,7 +1402,7 @@
 
           <div class="contact-links">
             📧 Email:
-            <a href="mailto:YOUR.EMAIL@here.com">YOUR.EMAIL@here.com</a><br><br>
+            <a href="mailto:alaa@alsheikhali.com">alaa@alsheikhali.com</a><br><br>
             🐙 GitHub:
             <a href="https://github.com/alaaerfan7" target="_blank" rel="noreferrer">
               github.com/alaaerfan7
@@ -1416,7 +1414,7 @@
           </div>
         </div>
 
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Use the email link on the left to contact me.');">
+        <form class="contact-form" onsubmit="event.preventDefault(); window.location.href='mailto:alaa@alsheikhali.com';">
           <div>
             <label for="name">Name</label>
             <input id="name" type="text" placeholder="Your name">
@@ -1429,9 +1427,9 @@
             <label for="message">Message</label>
             <textarea id="message" placeholder="What would you like to talk about?"></textarea>
           </div>
-          <button class="btn-primary" type="submit">Send (opens email)</button>
+          <button class="btn-primary" type="submit">Open email to contact me</button>
           <div class="contact-hint">
-            This form doesn’t send data anywhere – it’s here as a UX preview. Use the email link to reach me.
+            This form doesn’t send data anywhere – it’s here as a UX preview. Use the email link or button to contact me.
           </div>
         </form>
       </div>
@@ -1508,19 +1506,318 @@
       themeToggle.querySelector("span:last-child").textContent = isLight ? "Light" : "Dark";
     });
 
-    // Dynamic kicker text (cycles)
-    const kicker = document.getElementById("dynamicKicker");
-    const phrases = [
-      "Cybersecurity & Networks",
-      "Security · شبكات · Python",
-      "English & Arabic | Incident Response",
-      "From packets to people"
+    // Multilanguage hero text (changes whole sentence)
+    const heroTitle = document.getElementById("heroTitle");
+    const heroSubtitle = document.getElementById("heroSubtitle");
+
+    const heroStates = [
+      {
+        title: "Hi, I'm Ala'a.",
+        subtitle: "I build and break security labs to understand how systems really behave – then turn what I learn into clear designs, playbooks and tools people can actually use."
+      },
+      {
+        title: "مرحباً، أنا علاء.",
+        subtitle: "أحب تجربة الشبكات والأنظمة في بيئة آمنة، ثم تحويل النتائج إلى حلول عملية وواضحة تساعد الفرق على العمل بثقة."
+      },
+      {
+        title: "Bonjour, je suis Ala'a.",
+        subtitle: "J’aime transformer des problèmes de sécurité complexes en architectures et procédures simples, adaptées aux personnes qui les utilisent au quotidien."
+      }
     ];
-    let phraseIndex = 0;
+
+    let heroIndex = 0;
     setInterval(() => {
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      kicker.textContent = phrases[phraseIndex];
-    }, 3500);
+      heroIndex = (heroIndex + 1) % heroStates.length;
+      heroTitle.style.opacity = 0;
+      heroSubtitle.style.opacity = 0;
+      setTimeout(() => {
+        heroTitle.textContent = heroStates[heroIndex].title;
+        heroSubtitle.textContent = heroStates[heroIndex].subtitle;
+        heroTitle.style.opacity = 1;
+        heroSubtitle.style.opacity = 1;
+      }, 250);
+    }, 5000);
+
+    // Projects data for preview
+    const projects = {
+      arp: {
+        title: "Network-level ARP spoofing lab",
+        tags: "Python · Scapy · SDN · Virtual networks",
+        overview: `
+          <p>
+            A lab that watches ARP traffic for suspicious IP/MAC changes and talks to a controller to push
+            mitigation rules. The goal was to go beyond just logging alerts and actually change how the
+            network behaves when a spoofing attempt happens.
+          </p>
+          <p>
+            The lab includes attack and victim VMs, Open vSwitch, a Python detection script and an SDN
+            controller that updates flow rules in real time.
+          </p>
+        `,
+        images: [
+          "Upload your high-level ARP architecture diagram here (topology of hosts, switches and controller).",
+          "Replace with a screenshot of your controller or flow table view during an attack.",
+          "Replace with Wireshark or Scapy capture showing normal vs. spoofed ARP traffic."
+        ],
+        code: `
+from scapy.all import ARP, sniff
+
+ip_mac_map = {}
+
+def handle_arp(pkt):
+    if ARP in pkt and pkt[ARP].op == 2:  # ARP reply
+        ip = pkt[ARP].psrc
+        mac = pkt[ARP].hwsrc
+
+        if ip in ip_mac_map and ip_mac_map[ip] != mac:
+            print(f"[ALERT] Possible spoofing: {ip} is now {mac}, was {ip_mac_map[ip]}")
+            # here we would call the SDN controller REST API to push a mitigation rule
+        else:
+            ip_mac_map[ip] = mac
+
+sniff(filter="arp", prn=handle_arp, store=False)
+        `,
+        footer: "Full dissertation, diagrams and code are available if needed."
+      },
+      password: {
+        title: "Password security & behaviour portal",
+        tags: "Flask · UX · NIST 800-63-3",
+        overview: `
+          <p>
+            A web portal that lets people create accounts while seeing real-time feedback: emoji reactions,
+            colour-coded strength bars and time-to-crack estimates. The aim was to see how design nudges
+            influenced real password choices.
+          </p>
+          <p>
+            Study results were analysed with SPSS (ANOVA, Chi-Square and t-tests) to understand whether
+            the design changes actually improved password strength without overwhelming users.
+          </p>
+        `,
+        images: [
+          "Screenshot placeholder for the signup page with strength meter and emoji feedback.",
+          "Screenshot placeholder for the time-to-crack visualisation.",
+          "Graph placeholder for password strength distribution from your SPSS analysis."
+        ],
+        code: `
+def estimate_entropy(password: str) -> int:
+    """Very rough entropy estimate based on character types."""
+    charset = 0
+    if any(c.islower() for c in password): charset += 26
+    if any(c.isupper() for c in password): charset += 26
+    if any(c.isdigit() for c in password): charset += 10
+    if any(not c.isalnum() for c in password): charset += 32
+
+    import math
+    return int(len(password) * math.log2(charset or 1))
+        `,
+        footer: "Happy to share the research summary and anonymised results if you’d like to see more detail."
+      },
+      network: {
+        title: "Secure network redesign for a growing organisation",
+        tags: "Cisco · VLANs · VPN · Firewalls",
+        overview: `
+          <p>
+            A university consulting-style project treated as a real client: redesigning a flat,
+            fragile network into one with segmentation, redundancy and secure remote access.
+          </p>
+          <p>
+            The design introduced VLANs by department, inter-VLAN routing, firewalls, NAT/PAT, site-to-site
+            VPNs and HSRP/ EtherChannel to remove single points of failure.
+          </p>
+        `,
+        images: [
+          "Replace with the main network topology diagram (core, distribution, access).",
+          "Replace with a VLAN / subnet plan table or diagram.",
+          "Replace with a firewall or ACL policy view showing segmentation between departments."
+        ],
+        code: `
+interface GigabitEthernet0/0
+ description Link to core switch
+ ip address 10.0.0.1 255.255.255.0
+ standby 1 ip 10.0.0.254
+ standby 1 priority 110
+ standby 1 preempt
+!
+interface Tunnel0
+ description Site-to-site VPN
+ ip address 172.16.0.1 255.255.255.252
+ tunnel source GigabitEthernet0/0
+ tunnel destination 203.0.113.10
+        `,
+        footer: "A full design document with diagrams and device configs can be shared on request."
+      },
+      siem: {
+        title: "SIEM noise reduction & alert tuning",
+        tags: "Splunk · Use cases · Detections",
+        overview: `
+          <p>
+            Looked at environments where harmless tests (like EICAR) triggered constant alerts and
+            pop-ups. The goal was to keep strong coverage while reducing fatigue for analysts and users.
+          </p>
+          <p>
+            The work included reviewing existing rules, adding better context to alerts and adjusting
+            thresholds or suppression windows so that genuine incidents still stood out.
+          </p>
+        `,
+        images: [
+          "Replace with a screenshot of a noisy dashboard before tuning.",
+          "Replace with an updated dashboard view showing clearer, prioritised alerts."
+        ],
+        code: `
+index=security sourcetype=anti-malware
+| stats count BY signature, host
+| where count > 20
+| search NOT signature="EICAR_Test_File"
+        `,
+        footer: "This work feeds into how I think about security operations and making tools support people, not drown them."
+      },
+      merge: {
+        title: "Merging JSON, XML & CSV safely",
+        tags: "Python · Data cleaning · Identifiers",
+        overview: `
+          <p>
+            A data project to combine three different file formats (JSON, XML and CSV) into a single
+            consistent structure without losing track of who is who when attributes change.
+          </p>
+          <p>
+            I standardised field names, filled missing keys safely and used a dynamic identifier
+            strategy so that updates (like age or address changes) could be handled without breaking
+            relationships between records.
+          </p>
+        `,
+        images: [
+          "Replace with a diagram of the three input formats flowing into one normalised structure.",
+          "Replace with a screenshot of the merged dataset in a table view."
+        ],
+        code: `
+def build_identifier(record):
+    key_parts = [record.get("first_name",""), record.get("last_name",""), record.get("postcode","")]
+    return "_".join(k.lower().replace(" ", "") for k in key_parts if k)
+
+people = {}
+for rec in incoming_records:
+    ident = build_identifier(rec)
+    existing = people.get(ident, {})
+    existing.update(rec)
+    people[ident] = existing
+        `,
+        footer: "The approach was designed so it could later be reused in a proper ETL pipeline or database."
+      },
+      ctf: {
+        title: "Security Capture the Flag coordination",
+        tags: "Teamwork · Triage · Time pressure",
+        overview: `
+          <p>
+            A CTF event where I focused on how we worked as a team: triaging challenges, assigning
+            tasks based on strengths and keeping everyone focused when we got stuck.
+          </p>
+          <p>
+            I made sure someone always owned each challenge, tracked what we had tried so far and
+            suggested when to switch to something with a better chance of points.
+          </p>
+        `,
+        images: [
+          "Replace with a blurred or anonymised screenshot of the CTF scoreboard.",
+          "Replace with a diagram showing how you divided challenges between team members."
+        ],
+        code: `
+# pseudo-code for simple challenge tracking
+challenges = {"crypto": "Ali", "web": "Sara", "pwn": "Alaa"}
+
+for name, owner in challenges.items():
+    print(f"{name} -> {owner} is responsible")
+        `,
+        footer: "This experience influences how I think about leading small technical groups under time pressure."
+      }
+    };
+
+    const previewEl = document.getElementById("projectPreview");
+    const projectButtons = document.querySelectorAll(".project-item");
+
+    function renderProject(id) {
+      const p = projects[id];
+      if (!p) return;
+
+      previewEl.innerHTML = `
+        <div class="project-preview-header">
+          <div>
+            <div class="project-preview-title">${p.title}</div>
+            <div class="project-preview-tags">${p.tags}</div>
+          </div>
+          <div class="preview-tabs">
+            <button class="preview-tab active" data-tab="overview">Overview</button>
+            <button class="preview-tab" data-tab="images">Images</button>
+            <button class="preview-tab" data-tab="code">Code snippet</button>
+          </div>
+        </div>
+        <div class="preview-body" id="previewBody"></div>
+        <div class="preview-footer">${p.footer}</div>
+      `;
+
+      const bodyEl = document.getElementById("previewBody");
+      const tabs = previewEl.querySelectorAll(".preview-tab");
+
+      function showOverview() {
+        bodyEl.innerHTML = p.overview;
+      }
+
+      function showImages() {
+        let idx = 0;
+        bodyEl.innerHTML = `
+          <div class="preview-images">
+            <div class="preview-image-frame" id="previewImageFrame">${p.images[0]}</div>
+            <div class="preview-image-nav">
+              <button type="button" id="prevImg">Prev</button>
+              <span id="imgCounter">Image 1 of ${p.images.length}</span>
+              <button type="button" id="nextImg">Next</button>
+            </div>
+          </div>
+        `;
+        const frame = document.getElementById("previewImageFrame");
+        const counter = document.getElementById("imgCounter");
+        document.getElementById("prevImg").onclick = () => {
+          idx = (idx - 1 + p.images.length) % p.images.length;
+          frame.textContent = p.images[idx];
+          counter.textContent = "Image " + (idx + 1) + " of " + p.images.length;
+        };
+        document.getElementById("nextImg").onclick = () => {
+          idx = (idx + 1) % p.images.length;
+          frame.textContent = p.images[idx];
+          counter.textContent = "Image " + (idx + 1) + " of " + p.images.length;
+        };
+      }
+
+      function showCode() {
+        bodyEl.innerHTML = `
+          <div class="preview-code"><pre>${p.code.trim()}</pre></div>
+        `;
+      }
+
+      // default
+      showOverview();
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          const t = tab.getAttribute("data-tab");
+          if (t === "overview") showOverview();
+          if (t === "images") showImages();
+          if (t === "code") showCode();
+        });
+      });
+    }
+
+    projectButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        projectButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProject(btn.getAttribute("data-project"));
+      });
+    });
+
+    // initial preview
+    renderProject("arp");
   </script>
 </body>
 </html>
