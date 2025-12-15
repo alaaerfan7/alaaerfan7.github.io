@@ -820,6 +820,7 @@ body.light .cs-pill {
 /* Diagram view */
 .cs-diagram {
   display: flex;
+  flex-direction: column; /* Changed to column to support nav buttons below */
   align-items: center;
   justify-content: center;
   min-height: 260px;
@@ -833,6 +834,29 @@ body.light .cs-pill {
   font-size: 0.8rem;
   color: #9ca3af;
   text-align: center;
+}
+/* New style for diagram navigation */
+.cs-diagram-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.cs-diagram-nav button {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e5e7eb;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.cs-diagram-nav button:hover {
+  background: #334155;
+}
+.cs-diagram-nav span {
+  font-size: 0.75rem;
+  color: #9ca3af;
 }
 
 /* Notes view */
@@ -1166,7 +1190,6 @@ footer {
     <div class="hero-photo-wrap reveal">
       <div class="hero-photo-card tilt">
         <div class="hero-photo-inner">
-          <!-- 👉 Replace this path with your profile image -->
           <img src="assets/profile.JPG" alt="Portrait of Ala'a Alsheikh Ali">
         </div>
       </div>
@@ -1260,7 +1283,6 @@ footer {
     <div class="skills-fade right"></div>
 
     <div class="marquee-track">
-      <!-- Row 1 -->
       <div class="marquee-row">
         <span class="skill-pill skill-label">Platforms &amp; endpoints</span>
 
@@ -1273,14 +1295,12 @@ footer {
         <span class="skill-pill">AWS</span>
         <span class="skill-pill">Azure</span>
 
-        <!-- repeat for smooth loop -->
         <span class="skill-pill">Linux (Ubuntu, CentOS)</span>
         <span class="skill-pill">Windows Server</span>
         <span class="skill-pill">Microsoft 365</span>
         <span class="skill-pill">Intune &amp; Endpoint Manager</span>
       </div>
 
-      <!-- Row 2 -->
       <div class="marquee-row">
         <span class="skill-pill skill-label">Networking &amp; security stack</span>
 
@@ -1299,13 +1319,11 @@ footer {
         <span class="skill-pill">Nessus · Nmap · Metasploit</span>
         <span class="skill-pill">SOC-style alert triage</span>
 
-        <!-- repeat -->
         <span class="skill-pill">Cisco IOS · ASA</span>
         <span class="skill-pill">Routing &amp; Switching</span>
         <span class="skill-pill">Wireshark</span>
       </div>
 
-      <!-- Row 3 -->
       <div class="marquee-row">
         <span class="skill-pill skill-label">Programming &amp; governance</span>
 
@@ -1322,7 +1340,6 @@ footer {
         <span class="skill-pill">English (Fluent)</span>
         <span class="skill-pill">Arabic (Fluent)</span>
 
-        <!-- repeat -->
         <span class="skill-pill">Python</span>
         <span class="skill-pill">NIST · SANS</span>
       </div>
@@ -1342,10 +1359,8 @@ footer {
     </div>
 
     <div class="cs-layout">
-      <!-- LEFT COLUMN: cards -->
       <div class="cs-list" id="csProjectList"></div>
 
-      <!-- RIGHT COLUMN: editor -->
       <div class="cs-editor tilt reveal" id="csEditor"></div>
     </div>
   </div>
@@ -1618,10 +1633,10 @@ const showcaseProjects = [
     pills: ["Real-time detection", "Controller integration", "Virtual topology"],
     // 👉 Put your ARP diagram image file in /assets and set the filename here
     diagrams: [
-  "assets/arp-diagram-1.png",
-  "assets/arp-diagram-2.png",
-  "assets/arp-diagram-3.png"],
-",
+      "assets/arp-diagram-1.png",
+      "assets/arp-diagram-2.png",
+      "assets/arp-diagram-3.png"
+    ],
     // 👉 Paste the real code you want to show for this project here
     code: `
 import os
@@ -1760,7 +1775,7 @@ class MacDatabaseHandler:
                     with open(self.db_file, 'r', newline='') as fd:
                         mac_list = csv.reader(fd)
                         self.mac_entries = dict(mac_list)
-                    
+                     
                     for mac, record in self.mac_entries.items():
                         self.mac_entries[mac] = literal_eval(record)
 
@@ -1816,578 +1831,4 @@ class SDNController(app_manager.RyuApp):
     def install_initial_flows(self):
         self.logger.info("Installing initial flows")
         scanner = NetworkScanner()
-        scanner.scan_network('192.168.100.0/24')
-
-        for mac, ip in scanner.discovered_devices.items():
-            mac_data = {"LastIP": ip, "Type": None}
-            self.verified_mac_db.add_mac_entry(mac, mac_data)
-            self.logger.info("New Device Found - MAC: %s, IP: %s", mac, ip)
-        
-        mac_data = {"LastIP": scanner.controller_ip, "Type": "DHCP"}
-        self.verified_mac_db.add_mac_entry(scanner.controller_mac, mac_data)
-        self.logger.info("Controller Device - MAC: %s, IP: %s", scanner.controller_mac, scanner.controller_ip)
-
-        self.initial_flows_installed = True
-
-    @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
-    def process_switch_features(self, ev):
-        dp = ev.msg.datapath
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-        
-        arp_match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP)
-        arp_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
-        self.insert_flow(dp, 1, arp_match, arp_actions)
-
-        dhcp_match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, ip_proto=in_proto.IPPROTO_UDP, udp_src=67)
-        dhcp_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
-        self.insert_flow(dp, 1, dhcp_match, dhcp_actions)
-
-        default_match = parser_util.OFPMatch()
-        default_actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
-        self.insert_flow(dp, 0, default_match, default_actions)
-    
-    def analyze_dhcp_packet(self, packet_msg):
-        dp = packet_msg.datapath
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-
-        pkt = packet.Packet(packet_msg.data)
-        eth = pkt.get_protocols(ethernet.ethernet)[0]
-        dpid = dp.id
-        
-        pkt_dhcp = pkt.get_protocol(dhcp.dhcp)
-        if pkt_dhcp.op == dhcp.DHCP_DISCOVER:
-            self.logger.info("%s | %s -> %s", "DHCP Discover", convert_mac_address(eth.src), convert_mac_address(eth.dst))
-        elif pkt_dhcp.op == dhcp.DHCP_OFFER:
-            self.logger.info("%s | %s -> %s", "DHCP Offer", convert_mac_address(eth.src), convert_mac_address(eth.dst))
-            
-            if self.dhcp_mac_db.mac_registered(eth.src):
-                self.logger.info("Valid DHCP Offer to %s : %s", pkt_dhcp.chaddr, pkt_dhcp.yiaddr)
-                self.logger.info("Adding %s : %s to %s", pkt_dhcp.yiaddr, pkt_dhcp.chaddr, self.verified_mac_db.db_file)
-                mac_data = {"LastIP": pkt_dhcp.yiaddr, "Type": "DHCP"}
-                self.verified_mac_db.add_mac_entry(pkt_dhcp.chaddr, mac_data)
-            else:
-                self.logger_handler.log_event("DHCP", eth.src, "Invalid DHCP offer | MAC {} -> {}".format(
-                                eth.src, eth.dst))
-                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_IP, eth_src=eth.src)
-                self.insert_flow(dp, 3, match, [], drop=True)
-                return
-        else:
-            self.logger.info("DHCP: %s | %s -> %s", dpid, convert_mac_address(eth.src), convert_mac_address(eth.dst))
-        
-        self.dispatch_packet(packet_msg)
-
-    def analyze_arp_packet(self, packet_msg):
-        dp = packet_msg.datapath
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-
-        pkt = packet.Packet(packet_msg.data)
-        eth = pkt.get_protocols(ethernet.ethernet)[0]
-        dpid = dp.id
-        pkt_arp = pkt.get_protocol(arp.arp)
-
-        if pkt_arp.opcode == arp.ARP_REQUEST and self.proxy_handler.ip_known(pkt_arp.dst_ip):
-            self.proxy_handler.send_arp_response(self.proxy_handler.find_mac_by_ip(pkt_arp.dst_ip), eth.src, pkt_arp.src_ip)
-            return
-
-        if not self.verified_mac_db.mac_registered(eth.src) and not self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip):
-            self.logger.info("Registering new device %s with IP %s to %s", eth.src, pkt_arp.src_ip, self.verified_mac_db.db_file)
-            mac_data = {"LastIP": pkt_arp.src_ip, "Type": "Static"}
-            self.verified_mac_db.add_mac_entry(eth.src, mac_data)
-
-        if pkt_arp.opcode == arp.ARP_REQUEST:
-            self.logger.info("%s in %s | %s -> %s | %s", "ARP Request", dpid, convert_mac_address(eth.src), pkt_arp.dst_ip, convert_mac_address(eth.dst))
-            attack_id = "1."
-        elif pkt_arp.opcode == arp.ARP_REPLY:
-            self.logger.info("%s for %s | %s -> %s", "ARP Reply", pkt_arp.src_ip, convert_mac_address(eth.src), convert_mac_address(eth.dst))
-            attack_id = "2."
-
-        if self.verified_mac_db.mac_registered(eth.src) and self.verified_mac_db.mac_entries[eth.src]["LastIP"] != pkt_arp.src_ip:
-            self.logger_handler.log_event("{}1".format(attack_id), eth.src, "ARPID: ({}1) ARP spoof detected | MAC {} -> {} | IP: {}".format(
-                             attack_id, eth.src, self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip), pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        elif pkt_arp.opcode == arp.ARP_REQUEST and self.verified_mac_db.find_mac_by_ip(pkt_arp.src_ip) and not self.verified_mac_db.mac_registered(eth.src):
-            self.logger_handler.log_event("{}2".format(attack_id), eth.src, "ARPID: ({}2) ARP spoof from unknown MAC | MAC {} | IP: {}".format(
-                             attack_id, eth.src, pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        elif pkt_arp.opcode == arp.ARP_REPLY and self.verified_mac_db.find_mac_by_ip(pkt_arp.dst_ip) != pkt_arp.dst_mac and eth.dst != "ff:ff:ff:ff:ff:ff":
-            self.logger_handler.log_event("{}2".format(attack_id), eth.src, "ARPID: ({}2) ARP spoof detected | MAC {} | IP: {}".format(
-                             attack_id, pkt_arp.src_mac, pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        elif eth.src != pkt_arp.src_mac:
-            self.logger_handler.log_event("{}3".format(attack_id), eth.src, "ARPID: ({}3) ARP source mismatch | MAC {} <-> {} | IP: {}".format(
-                             attack_id, eth.src, pkt_arp.src_mac, pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        elif eth.dst != pkt_arp.dst_mac and pkt_arp.opcode == arp.ARP_REPLY:
-            self.logger_handler.log_event("{}4".format(attack_id), eth.src, "ARPID: ({}4) ARP destination mismatch | MAC {} <-> {} | IP: {}".format(
-                             attack_id, eth.src, pkt_arp.src_mac, pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        elif eth.dst.upper() == "FF:FF:FF:FF:FF:FF" and pkt_arp.opcode == arp.ARP_REPLY:
-            self.logger_handler.log_event("{}5".format(attack_id), eth.src, "ARPID: ({}5) ARP broadcast dst | MAC {} <-> {} | IP: {}".format(
-                             attack_id, eth.dst, pkt_arp.dst_mac, pkt_arp.src_ip))
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-            self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION)
-        else:
-            self.logger.info("Adding ARP flow for %ss:\n\tMAC: %s\tIP: %s ->\n\tMAC: %s\tIP: %s", ALLOWANCE_DURATION, eth.src, pkt_arp.src_ip, eth.dst, pkt_arp.dst_ip)
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=eth.src, arp_spa=pkt_arp.src_ip, eth_dst=eth.dst, eth_src=eth.src)
-            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
-            self.dispatch_packet(packet_msg)
-            self.insert_flow(dp, 2, match, actions, idle_timeout=ALLOWANCE_DURATION)
-            return
-        
-        self.logger.warning("Temporarily blocking MAC: %s, idle timeout %ss", eth.src, PREVENTION_DURATION)
-        if self.verified_mac_db.mac_registered(eth.src):
-            self.logger.info("Acting as proxy for %s ", self.verified_mac_db.mac_entries[eth.src]["LastIP"])
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_tpa=self.verified_mac_db.mac_entries[eth.src]["LastIP"])
-            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_CONTROLLER)]
-            self.insert_flow(dp, 4, match, actions)
-            match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=self.proxy_handler.proxy_mac_address, eth_src=eth.src, arp_spa=self.verified_mac_db.mac_entries[eth.src]["LastIP"])
-            actions = [parser_util.OFPActionOutput(protocol_constants.OFPP_NORMAL)]
-            self.insert_flow(dp, 10, match, actions)
-            self.proxy_handler.device_list[eth.src] = self.verified_mac_db.mac_entries[eth.src]["LastIP"]
-        else:
-            self.logger.info("Cannot act as proxy for unknown MAC: %s ", eth.src)
-
-        match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, eth_src=eth.src)
-        self.insert_flow(dp, 3, match, [], drop=True, idle_timeout=PREVENTION_DURATION, flag=protocol_constants.OFPFF_SEND_FLOW_REM)
-
-    def insert_flow(self, dp, priority, match, actions, buffer_id=None, drop=False, idle_timeout=0, hard_timeout=0, flag=0):
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-
-        if drop:
-            instructions = [parser_util.OFPInstructionActions(protocol_constants.OFPIT_CLEAR_ACTIONS, [])]
-        else:
-            instructions = [parser_util.OFPInstructionActions(protocol_constants.OFPIT_APPLY_ACTIONS, actions)]
-        
-        if buffer_id:
-            flow_mod = parser_util.OFPFlowMod(datapath=dp, buffer_id=buffer_id,
-                                    priority=priority, match=match,
-                                    instructions=instructions, idle_timeout=idle_timeout,
-                                    hard_timeout=hard_timeout, flags=flag)
-        else:
-            flow_mod = parser_util.OFPFlowMod(datapath=dp, priority=priority,
-                                    match=match, instructions=instructions,
-                                    idle_timeout=idle_timeout, hard_timeout=hard_timeout,
-                                    flags=flag)
-        dp.send_msg(flow_mod)
-   
-    def erase_flow(self, dp, priority, match):
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-         
-        flow_mod = parser_util.OFPFlowMod(datapath=dp, priority=priority,
-                                match=match, command=protocol_constants.OFPFC_DELETE, out_port=protocol_constants.OFPP_ANY,
-                                out_group=protocol_constants.OFPG_ANY)
-        dp.send_msg(flow_mod)
-
-    def dispatch_packet(self, packet_msg):
-        dp = packet_msg.datapath
-        protocol_constants = dp.ofproto
-        parser_util = dp.ofproto_parser
-
-        pkt = packet.Packet(packet_msg.data)
-        eth = pkt.get_protocols(ethernet.ethernet)[0]
-        
-        dpid = format(dp.id, "d").zfill(16)
-        self.mac_port_map.setdefault(dpid, {})
-        self.mac_port_map[dpid][eth.src] = packet_msg.match["in_port"]
-       
-        if eth.dst in self.mac_port_map[dpid]:
-            out_port = self.mac_port_map[dpid][eth.dst]
-        else:
-            out_port = protocol_constants.OFPP_FLOOD
-        actions = [parser_util.OFPActionOutput(out_port)]
-        
-        data = None
-        if packet_msg.buffer_id == protocol_constants.OFP_NO_BUFFER:
-            data = packet_msg.data
-
-        out = parser_util.OFPPacketOut(datapath=dp, buffer_id=packet_msg.buffer_id,
-                                  in_port=packet_msg.match["in_port"], actions=actions, data=data)
-        dp.send_msg(out)
-
-    @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
-    def handle_packet_in_event(self, ev):
-        packet_msg = ev.msg
-        dp = packet_msg.datapath
-
-        pkt = packet.Packet(packet_msg.data)
-        eth = pkt.get_protocols(ethernet.ethernet)[0]
-
-        if eth.ethertype == ether_types.ETH_TYPE_LLDP:
-            return
-
-        dpid = dp.id
-
-        if pkt.get_protocol(arp.arp):
-            self.analyze_arp_packet(packet_msg)
-        elif pkt.get_protocol(dhcp.dhcp):
-            self.analyze_dhcp_packet(packet_msg)
-        else:
-            pkt_ipv4 = pkt.get_protocol(ipv4.ipv4)
-            if eth.src not in self.verified_mac_db.mac_entries.keys():
-                self.logger.info("Adding %s : %s to %s", eth.src, pkt_ipv4.src, self.verified_mac_db.db_file)
-                mac_data = {"LastIP": pkt_ipv4.src, "Type": "Static"}
-                self.verified_mac_db.add_mac_entry(eth.src, mac_data)
-            self.logger.info("%s in %s | %s -> %s", eth.ethertype, dpid, eth.src, eth.dst)
-            self.dispatch_packet(packet_msg)
-
-    @set_ev_cls(ofp_event.EventOFPFlowRemoved, MAIN_DISPATCHER)
-    def process_flow_removal(self, ev):
-        packet_msg = ev.msg
-        dp = packet_msg.datapath
-        parser_util = dp.ofproto_parser
-        protocol_constants = dp.ofproto
-        
-        if packet_msg.reason == protocol_constants.OFPRR_IDLE_TIMEOUT:
-            self.logger.info("Flow Timed out")
-            mac_address = packet_msg.match["eth_src"]
-            
-            self.logger.info('OFPFlowRemoved received:\n'
-                      '\tduration_sec=%d'
-                      '\tidle_timeout=%d hard_timeout=%d\n'
-                      '\tpacket_count=%d\n\tmatch.fields=%s',
-                      packet_msg.duration_sec,
-                      packet_msg.idle_timeout, packet_msg.hard_timeout,
-                      packet_msg.packet_count, packet_msg.match)
- 
-            if self.proxy_handler.mac_known(mac_address):
-                self.logger.info("Removing Proxy server flow for %s", self.proxy_handler.device_list[mac_address])
-                self.logger.info("\tFlow rule prevented %s packets", packet_msg.packet_count)
-                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_tpa=self.proxy_handler.device_list[mac_address])
-                self.erase_flow(dp, 4, match)
-                match = parser_util.OFPMatch(eth_type=ether_types.ETH_TYPE_ARP, arp_sha=self.proxy_handler.proxy_mac_address, eth_src=mac_address, arp_spa=self.proxy_handler.device_list[mac_address])
-                self.erase_flow(dp, 10, match)
-                del self.proxy_handler.device_list[mac_address] 
-
-    @set_ev_cls(ofp_event.EventOFPErrorMsg,
-            [HANDSHAKE_DISPATCHER, CONFIG_DISPATCHER, MAIN_DISPATCHER])
-    def process_error_message(self, ev):
-        packet_msg = ev.msg
-        self.logger.info('OFPErrorMsg received: type=0x%02x code=0x%02x message=%s',
-                          packet_msg.type, packet_msg.code, packet_msg.data.hex())
-
-    notes: `
-<p>This lab runs in a virtual environment with attacker and victim VMs, Open vSwitch and a Python detection script.</p>
-<ul>
-  <li>Detects ARP responses where an IP suddenly maps to a different MAC address.</li>
-  <li>Designed so the detection script can talk to an SDN controller to automatically push block rules.</li>
-  <li>Tested with normal traffic versus spoofing tools to tune the logic.</li>
-</ul>
-`
-  },
-  {
-    id: "password",
-    icon: "🔐",
-    title: "Password security & behaviour portal",
-    summary: "Flask portal measuring how UX nudges change real passwords.",
-    tags: ["Flask", "UX", "NIST 800-63-3"],
-    headerLine:
-      "Web portal where users see emoji feedback, colour-coded strength bars and time-to-crack estimates as they type.",
-    pills: ["UX research", "Entropy estimates", "User study"],
-    diagram: "assets/password-portal.png", // 👉 add screenshot of your signup / meter here
-    code: `
-import math
-
-def estimate_entropy(password: str) -> int:
-    charset = 0
-    if any(c.islower() for c in password): charset += 26
-    if any(c.isupper() for c in password): charset += 26
-    if any(c.isdigit() for c in password): charset += 10
-    if any(not c.isalnum() for c in password): charset += 32
-
-    # Shannon-style entropy estimate
-    return int(len(password) * math.log2(charset or 1))
-    `.trim(),
-    notes: `
-<p>A research project that looked at how design elements change the passwords people actually choose.</p>
-<ul>
-  <li>Emoji reactions and colour-coded strength indicators update in real time as users type.</li>
-  <li>Entropy and time-to-crack estimates calculated on the backend.</li>
-  <li>Results analysed in SPSS (ANOVA, t-tests, Chi-square) to link UX patterns to password strength.</li>
-</ul>
-`
-  },
-  {
-    id: "network",
-    icon: "🏢",
-    title: "Secure network redesign",
-    summary: "From flat network to segmented, redundant design for a growing organisation.",
-    tags: ["Cisco", "VLANs", "VPN", "High availability"],
-    headerLine:
-      "Consulting-style project redesigning a flat network using VLANs, firewalls, NAT/PAT, site-to-site VPN and HSRP.",
-    pills: ["Segmentation", "Resilience", "Client-style documentation"],
-    diagram: "assets/network-topology.png", // 👉 add your main topology diagram here
-    code: `
-! Example of VLAN interface with HSRP
-interface GigabitEthernet0/0.10
- description Users VLAN
- encapsulation dot1Q 10
- ip address 192.168.10.1 255.255.255.0
- standby 1 ip 192.168.10.254
- standby 1 priority 110
- standby 1 preempt
-
-! Site-to-site VPN tunnel
-interface Tunnel0
- description Site-to-site VPN
- ip address 172.16.0.1 255.255.255.252
- tunnel source GigabitEthernet0/0
- tunnel destination 203.0.113.10
-    `.trim(),
-    notes: `
-<p>University project treated as if it were a real client engagement.</p>
-<ul>
-  <li>Identified single points of failure in the original flat network.</li>
-  <li>Designed VLANs per department, inter-VLAN routing and firewall rules between segments.</li>
-  <li>Added HSRP and EtherChannel to meet maximum tolerable downtime targets.</li>
-</ul>
-`
-  },
-  {
-    id: "siem",
-    icon: "📊",
-    title: "SIEM alert tuning & noise reduction",
-    summary: "Keeping important alerts loud and false positives quiet.",
-    tags: ["Splunk", "Detections", "SOC quality of life"],
-    headerLine:
-      "Focused on reducing alert fatigue while keeping coverage strong, especially around harmless test files like EICAR.",
-    pills: ["Alert hygiene", "Contextual tuning", "SOC workflows"],
-    diagram: "assets/siem-before-after.png", // 👉 before/after dashboard screenshot
-    code: `
-// Splunk SPL example for brute force detection
-index=security sourcetype="win*security" EventCode=4625
-| where User="Administrator" OR User="Root"
-| stats count dc(Source_Network_Address) as SrcIPs BY User, dest_host
-| where count > 15 AND SrcIPs > 1
-| search NOT [ | inputlookup trusted_subnets.csv | fields src_ip ]
-| eval Risk_Score = if(count > 50, "Critical", "High")
-| table _time, User, dest_host, count, Risk_Score
-    `.trim(),
-    notes: `
-<p>Inspired by environments where harmless test files caused constant pop-ups and noise.</p>
-<ul>
-  <li>Reviewed existing rules and dashboards to understand why false positives were firing.</li>
-  <li>Improved context, added suppression windows and adjusted thresholds.</li>
-  <li>Goal: analysts see fewer alerts, but each one is higher quality and easier to act on.</li>
-</ul>
-`
-  },
-  {
-    id: "merge",
-    icon: "🗂️",
-    title: "Merging JSON, XML &amp; CSV safely",
-    summary: "Standardising attributes and identifiers across different file formats.",
-    tags: ["Python", "Data cleaning", "Identifiers"],
-    headerLine:
-      "Tooling to merge three different sources into a single consistent dataset without losing track of identities.",
-    pills: ["Standardisation", "Dynamic identifiers", "Future ETL"],
-    diagram: "assets/merge-diagram.png", // 👉 diagram showing JSON/XML/CSV flowing into one table
-    code: `
-def build_identifier(record):
-    parts = [
-        record.get("first_name", ""),
-        record.get("last_name", ""),
-        record.get("postcode", "")
-    ]
-    return "_".join(p.lower().replace(" ", "") for p in parts if p)
-
-people = {}
-for rec in incoming_records:
-    ident = build_identifier(rec)
-    existing = people.get(ident, {})
-    existing.update(rec)
-    people[ident] = existing
-    `.trim(),
-    notes: `
-<p>Project to unify three different file formats into one person-centric view.</p>
-<ul>
-  <li>Standardised field names and added missing keys while keeping true missing values empty.</li>
-  <li>Used a dynamic identifier strategy so updates (like age or address) don’t break relationships.</li>
-  <li>Designed so the logic can later sit inside a proper ETL pipeline.</li>
-</ul>
-`
-  }
-];
-
-const csListEl = document.getElementById("csProjectList");
-const csEditorEl = document.getElementById("csEditor");
-let csActiveId = showcaseProjects[0].id;
-
-function renderProjectCards() {
-  csListEl.innerHTML = showcaseProjects
-    .map(p => {
-      const tagMarkup = p.tags
-        .map(t => `<span class="cs-tag-pill">${t}</span>`)
-        .join("");
-      return `
-        <button class="cs-card${p.id === csActiveId ? " active" : ""}" data-project="${p.id}">
-          <div class="cs-card-icon">${p.icon}</div>
-          <div class="cs-card-main">
-            <div class="cs-card-title">${p.title}</div>
-            <div class="cs-card-text">${p.summary}</div>
-            <div class="cs-card-tags">${tagMarkup}</div>
-          </div>
-        </button>
-      `;
-    })
-    .join("");
-
-  csListEl.querySelectorAll(".cs-card").forEach(card => {
-    card.addEventListener("click", () => {
-      csActiveId = card.getAttribute("data-project");
-      renderProjectCards();
-      renderEditor();
-    });
-  });
-}
-
-function renderEditor() {
-  const p = showcaseProjects.find(x => x.id === csActiveId);
-  if (!p) return;
-
-  const pillsMarkup = p.pills
-    .map(text => `<span class="cs-pill">${text}</span>`)
-    .join("");
-
-  const lines = p.code.split("\n");
-  const lineNumbers = lines.map((_, i) => `<div>${i + 1}</div>`).join("");
-
-  csEditorEl.innerHTML = `
-    <div class="cs-editor-header">
-      <div class="cs-editor-title">${p.title}</div>
-      <div class="cs-editor-sub">${p.headerLine}</div>
-      <div class="cs-editor-pills">${pillsMarkup}</div>
-    </div>
-    <div class="cs-toolbar">
-      <div class="cs-tabs">
-        <button class="cs-tab active" data-tab="code">Code</button>
-        <button class="cs-tab" data-tab="diagram">Diagram</button>
-        <button class="cs-tab" data-tab="notes">Notes</button>
-      </div>
-      <button class="cs-copy-btn" type="button" id="csCopyBtn">
-        <span>⧉</span><span>Copy code</span>
-      </button>
-    </div>
-    <div class="cs-editor-body">
-      <div class="cs-lines" id="csLines">
-        ${lineNumbers}
-      </div>
-      <div class="cs-content" id="csContent"></div>
-    </div>
-  `;
-
-    const contentEl = document.getElementById("csContent");
-  const tabs = csEditorEl.querySelectorAll(".cs-tab");
-  let diagramIndex = 0; // which picture we’re on
-
-  function showCode() {
-    const codeHTML = `<pre><code>${escapeHTML(p.code)}</code></pre>`;
-    contentEl.className = "cs-content cs-code";
-    contentEl.innerHTML = codeHTML;
-  }
-
-  function showDiagram() {
-    contentEl.className = "cs-content cs-diagram";
-
-    const imgs = p.diagrams || [];
-
-    if (!imgs.length) {
-      contentEl.innerHTML =
-        '<div class="cs-diagram-placeholder">Add diagram image paths for this project in the JavaScript.</div>';
-      return;
-    }
-
-    diagramIndex = 0;
-
-    const navHtml = imgs.length > 1
-      ? `
-        <div class="cs-diagram-nav">
-          <button type="button" id="csDiagPrev">Prev</button>
-          <span id="csDiagCounter">Image 1 of ${imgs.length}</span>
-          <button type="button" id="csDiagNext">Next</button>
-        </div>
-      `
-      : "";
-
-    contentEl.innerHTML = `
-      <div>
-        <img id="csDiagramImg" src="${imgs[0]}" alt="${p.title} diagram">
-        ${navHtml}
-      </div>
-    `;
-
-    if (imgs.length > 1) {
-      const imgEl = document.getElementById("csDiagramImg");
-      const counterEl = document.getElementById("csDiagCounter");
-
-      function updateDiagram() {
-        imgEl.src = imgs[diagramIndex];
-        counterEl.textContent = "Image " + (diagramIndex + 1) + " of
-
-
-  function showNotes() {
-    contentEl.className = "cs-content cs-notes";
-    contentEl.innerHTML = p.notes;
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      const tabName = tab.getAttribute("data-tab");
-      if (tabName === "code") showCode();
-      if (tabName === "diagram") showDiagram();
-      if (tabName === "notes") showNotes();
-    });
-  });
-
-  // Default view
-  showCode();
-
-  const copyBtn = document.getElementById("csCopyBtn");
-  if (copyBtn && navigator.clipboard) {
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(p.code).then(() => {
-        const span = copyBtn.querySelector("span:last-child");
-        const old = span.textContent;
-        span.textContent = "Copied!";
-        setTimeout(() => (span.textContent = old), 900);
-      });
-    });
-  }
-}
-
-// Simple parallax tilt on hover for elements with .tilt
-function addTiltEffect() {
-  document.querySelectorAll(".tilt").forEach(el => {
-    const strength = 10;
-    el.addEventListener("mousemove", e => {
-      const rect = el.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      const rotateX = (+strength * y).toFixed(2);
-      const rotateY = (-strength * x).toFixed(2);
-      el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-    el.addEventListener("mouseleave", () => {
-      el.style.transform = "rotateX(0deg) rotateY(0deg)";
-    });
-  });
-}
-
-// Initialise projects + tilt once DOM is ready
-renderProjectCards();
-renderEditor();
-addTiltEffect();
-</script>
-</body>
-</html>
+        scanner.scan_network('192.168.100.
